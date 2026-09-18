@@ -1,0 +1,7 @@
+@use "variables" as *;
+
+@mixin breakpoint-up($size) {
+  @media (width >= $size) {
+    @content;
+  }
+}

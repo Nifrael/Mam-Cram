@@ -1,0 +1,46 @@
+@use "@styles/config/variables" as *;
+@use "@styles/config/mixin" as *;
+
+@each $i in (1, 2, 3, 4, 5) {
+  h#{$i} {
+    font-size: var(--h#{$i});
+    color: var(--text-primary);
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+}
+
+h4,
+h5,
+p,
+a {
+  font-family: var(--font-text);
+}
+
+p,
+a {
+  font-size: var(--p);
+  color: var(--text-primary);
+}
+
+@include breakpoint-up($breakpoint-desktop) {
+  :root {
+    --scale: 1.25;
+  }
+}
+
+@include breakpoint-up($breakpoint-desktop-xl) {
+  :root {
+    --scale: 1.27;
+  }
+}
+
+@include breakpoint-up($breakpoint-desktop-xxl) {
+  :root {
+    --scale: 1.32;
+  }
+}
