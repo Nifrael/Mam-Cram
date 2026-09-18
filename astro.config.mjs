@@ -19,7 +19,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "Vollkorn",
       cssVariable: "--font-title",
-      weights: ["200", "400", "600"],
+      weights: ["400", "600"],
     },
     {
       provider: fontProviders.google(),
