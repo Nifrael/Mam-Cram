@@ -1,0 +1,32 @@
+---
+import { Font } from "astro:assets";
+import "@/styles/global.scss";
+import Navbar from "@/components/global/Navbar.astro";
+
+type Props = {
+  titre: string;
+  description: string;
+};
+
+const { titre, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{titre}</title>
+    <meta name="description" content={description} />
+
+    <Font cssVariable="--font-title" preload />
+    <Font cssVariable="--font-text" preload />
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+  </body>
+</html>
