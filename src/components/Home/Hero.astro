@@ -1,0 +1,137 @@
+---
+import Bouton from "@/components/Bouton.astro";
+import { Image } from "astro:assets";
+import Hero from "../../assets/images/Hero.jpg"
+
+const surtitre = "Atelier artisanal français";
+const titre = "Savoir-faire unique en macramé, bois flotté et matériaux naturels";
+const accroche =
+  "Des créations colorées, variées et confectionnées patiemment sur mesure au cœur de notre atelier côtier.";
+
+const garanties = [
+  "Coton 100% recyclé & certifié",
+  "Bois flotté d'échouage glané à la main",
+];
+---
+
+<section class="hero container">
+  <div class="texte">
+    <p class="surtitre">{surtitre}</p>
+    <h1>{titre}</h1>
+    <p class="accroche">{accroche}</p>
+
+    <div class="actions">
+      <Bouton href="/creations/">Découvrir les créations</Bouton>
+      <Bouton href="/contact/" variante="secondaire">
+        Demander une création sur mesure
+      </Bouton>
+    </div>
+
+    <ul class="garanties">
+      {garanties.map((garantie) => <li>{garantie}</li>)}
+    </ul>
+  </div>
+
+  <Image
+    class="visuel"
+    src={Hero}
+    alt="Suspension en macramé et bois flotté réalisée à la main dans l'atelier"
+    loading="eager"
+    fetchpriority="high"
+  />
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .hero {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block: var(--espace-l);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-rows: auto 1fr;
+      min-height: calc(100dvh - var(--hauteur-entete));
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      align-items: center;
+      gap: var(--espace-xxl);
+      padding-block: var(--espace-xl);
+    }
+  }
+
+  .texte {
+    display: grid;
+    gap: var(--espace-s);
+    align-content: center;
+    justify-items: start;
+    @include breakpoint-up($breakpoint-tablet) {
+      gap: var(--espace-m)
+    }
+  }
+
+  .surtitre {
+    margin: 0;
+    padding: var(--espace-s) var(--espace-m);
+    border-radius: var(--rayon-m);
+    background: var(--color-accent-inversed);
+    color: var(--color-accent);
+    font-size: var(--little-text);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .accroche {
+    margin: 0;
+    max-width: 40ch;
+    color: var(--color-text-secondary);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-m);
+    margin-block-start: var(--espace-s);
+  }
+
+  .garanties {
+    list-style: none;
+    margin: 0;
+    padding-block-start: var(--espace-m);
+    padding-inline: 0;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-m) var(--espace-l);
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+  .visuel {
+    width: 100%;
+    align-self: center;
+    aspect-ratio: 4 / 5;
+    max-height: 70dvh;
+    object-fit: cover;
+    object-position: bottom;
+    border-radius: var(--rayon-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      aspect-ratio: 16 / 10;
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      aspect-ratio: 3 / 4;
+    }
+  }
+</style>

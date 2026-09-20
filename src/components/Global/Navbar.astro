@@ -82,11 +82,10 @@ const instagram = "https://www.instagram.com/";
     align-items: center;
     justify-content: space-between;
     gap: var(--espace-m);
-    padding-block: var(--espace-m);
+    min-height: var(--hauteur-entete);
 
     @include breakpoint-up($breakpoint-desktop) {
-      padding-block: var(--espace-l);
-      gap: var(--espace-l)
+      gap: var(--espace-l);
     }
   }
 
