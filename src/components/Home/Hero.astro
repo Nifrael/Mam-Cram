@@ -1,5 +1,7 @@
 ---
 import Bouton from "@/components/Bouton.astro";
+import { Image } from "astro:assets";
+import Hero from "../../assets/images/Hero.jpg"
 
 const surtitre = "Atelier artisanal français";
 const titre = "Savoir-faire unique en macramé, bois flotté et matériaux naturels";
@@ -30,7 +32,13 @@ const garanties = [
     </ul>
   </div>
 
-  <div class="visuel" aria-hidden="true"></div>
+  <Image
+    class="visuel"
+    src={Hero}
+    alt="Suspension en macramé et bois flotté réalisée à la main dans l'atelier"
+    loading="eager"
+    fetchpriority="high"
+  />
 </section>
 
 <style lang="scss">
@@ -110,18 +118,20 @@ const garanties = [
   }
 
   .visuel {
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border);
-    border-radius: var(--rayon-m);
+    width: 100%;
+    align-self: center;
     aspect-ratio: 4 / 5;
+    max-height: 70dvh;
+    object-fit: cover;
+    object-position: bottom;
+    border-radius: var(--rayon-m);
 
     @include breakpoint-up($breakpoint-tablet) {
-      aspect-ratio: auto;
-      align-self: stretch;
+      aspect-ratio: 16 / 10;
     }
 
     @include breakpoint-up($breakpoint-desktop) {
-      max-height: 80dvh;
+      aspect-ratio: 3 / 4;
     }
   }
 </style>
