@@ -20,7 +20,7 @@ $sauge: #94a38e;
 $sauge-fonce: #748a70;
 
 $terre-clair: #726a62;
-$terre-fonce: #36302b;
+$terre-fonce: #453e39;
 
 // Fin des couleurs
 
@@ -34,20 +34,23 @@ $terre-fonce: #36302b;
   // Textes
   --color-text: #{$terre-fonce};
   --color-text-secondary: #{$terre-clair};
-  --color-text-inversed: #{$ecru}; 
+  --color-text-inversed: #{$ecru};
 
   // Actions
-  --color-action: #{$sauge-clair};
-  --color-action-hover: #{$sauge}; 
-  --color-action-text: #{$terre-fonce}; 
+  --color-action: #{$sauge-fonce};
+  --color-action-inversed: #{$sable};
+  --color-action-hover: #{$sauge-clair};
+  --color-action-text: #{$terre-fonce};
 
   // Traits et accents
   --color-accent: #{$sauge-fonce};
+  --color-accent-inversed: #{$sauge-clair};
   --color-border: #{$sable};
 
   // Échelle typographique
   --base-size: 1rem;
   --scale: 1.2;
+  --little-text: calc((var(--base-size) * 0.8));
   --p: calc(var(--base-size) * var(--scale));
   --h5: calc(var(--p) * var(--scale));
   --h4: calc(var(--h5) * var(--scale));
@@ -69,6 +72,15 @@ $terre-fonce: #36302b;
   --rayon-rond: 50%;
 
   // Conteneur
+  --hauteur-entete: 4.5rem;
   --largeur-max: 72rem;
   --gouttiere: var(--espace-m);
+}
+
+// L'en-tête est plus haut sur grand écran : le token suit, pour que
+// `calc(100dvh - var(--hauteur-entete))` reste juste partout.
+@media (width >= $breakpoint-desktop) {
+  :root {
+    --hauteur-entete: 6rem;
+  }
 }
