@@ -11,6 +11,7 @@ const { href, variante = "principal" } = Astro.props;
 
 <style lang="scss">
   @use "@styles/config/mixin" as *;
+  @use "@styles/config/variables" as *;
 
   .bouton {
     display: inline-block;
@@ -29,19 +30,27 @@ const { href, variante = "principal" } = Astro.props;
     background: var(--color-action);
     color: var(--color-text-inversed);
 
-
+    @include breakpoint-up($breakpoint-desktop) {
     &:hover {
       background: var(--color-action-hover);
       color: var(--color-text)
     }
+    }
+
+
+
   }
 
   .bouton-secondaire {
     background: var(--color-action-inversed);
     color: var(--color-action-text);
 
+
+
+    @include breakpoint-up($breakpoint-desktop) {
     &:hover {
       background: var(--color-action-hover);
+    }
     }
   }
 </style>
