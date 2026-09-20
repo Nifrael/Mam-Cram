@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import "@/styles/global.scss";
+import Navbar from "@/components/global/Navbar.astro";
 
 type Props = {
   titre: string;
@@ -25,6 +26,7 @@ const { titre, description } = Astro.props;
     <Font cssVariable="--font-text" preload />
   </head>
   <body>
+    <Navbar />
     <slot />
   </body>
 </html>
