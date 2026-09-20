@@ -18,7 +18,9 @@
     "esbuild": true
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@types/node": "^26.6.1",
-    "sass": "^1.104.1"
+    "sass": "^1.104.1",
+    "typescript": "^6.0.3"
   }
 }
