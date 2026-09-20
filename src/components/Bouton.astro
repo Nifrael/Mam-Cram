@@ -1,0 +1,47 @@
+---
+type Props = {
+  href: string;
+  variante?: "principal" | "secondaire";
+};
+
+const { href, variante = "principal" } = Astro.props;
+---
+
+<a class:list={["bouton", `bouton-${variante}`]} href={href}><slot /></a>
+
+<style lang="scss">
+  @use "@styles/config/mixin" as *;
+
+  .bouton {
+    display: inline-block;
+    padding: var(--espace-s) var(--espace-m);
+    border-radius: var(--rayon-m);
+    text-decoration: none;
+    text-align: center;
+    transition: 0.5s all ease-in-out;
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  .bouton-principal {
+    background: var(--color-action);
+    color: var(--color-text-inversed);
+
+
+    &:hover {
+      background: var(--color-action-hover);
+      color: var(--color-text)
+    }
+  }
+
+  .bouton-secondaire {
+    background: var(--color-action-inversed);
+    color: var(--color-action-text);
+
+    &:hover {
+      background: var(--color-action-hover);
+    }
+  }
+</style>
