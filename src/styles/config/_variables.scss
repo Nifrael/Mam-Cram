@@ -7,7 +7,45 @@ $breakpoint-desktop-xxl: 1440px;
 
 // Fin des breakpoints
 
+// Début des couleurs
+
+$blanc: #ffffff;
+
+$ecru: #f7f5f0;
+$ecru-fonce: #f4f1ea;
+$sable: #eae5dc;
+
+$sauge-clair: #e3ebe1;
+$sauge: #94a38e;
+$sauge-fonce: #748a70;
+
+$terre-clair: #726a62;
+$terre-fonce: #36302b;
+
+// Fin des couleurs
+
 :root {
+  // Fonds
+  --color-bg-primary: #{$ecru-fonce};
+  --color-bg-secondary: #{$ecru};
+  --color-bg-cards: #{$blanc};
+  --color-bg-inversed: #{$terre-fonce};
+
+  // Textes
+  --color-text: #{$terre-fonce};
+  --color-text-secondary: #{$terre-clair};
+  --color-text-inversed: #{$ecru}; 
+
+  // Actions
+  --color-action: #{$sauge-clair};
+  --color-action-hover: #{$sauge}; 
+  --color-action-text: #{$terre-fonce}; 
+
+  // Traits et accents
+  --color-accent: #{$sauge-fonce};
+  --color-border: #{$sable};
+
+  // Échelle typographique
   --base-size: 1rem;
   --scale: 1.2;
   --p: calc(var(--base-size) * var(--scale));
@@ -16,4 +54,21 @@ $breakpoint-desktop-xxl: 1440px;
   --h3: calc(var(--h4) * var(--scale));
   --h2: calc(var(--h3) * var(--scale));
   --h1: calc(var(--h2) * var(--scale));
+
+  // Espacements
+  --espace-xs: 0.25rem;
+  --espace-s: 0.5rem;
+  --espace-m: 1rem;
+  --espace-l: 2rem;
+  --espace-xl: 4rem;
+  --espace-xxl: 6rem;
+
+  // Rayons
+  --rayon-s: 4px;
+  --rayon-m: 8px;
+  --rayon-rond: 50%;
+
+  // Conteneur
+  --largeur-max: 72rem;
+  --gouttiere: var(--espace-m);
 }
