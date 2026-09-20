@@ -1,0 +1,131 @@
+---
+import CarteGamme from "@/components/Home/CarteGamme.astro";
+import type { Gamme } from "@/components/Home/CarteGamme.astro";
+
+const surtitre = "Catalogue de l'atelier";
+const titre = "Nos gammes";
+const accroche =
+  "Des accessoires du quotidien aux pièces architecturales, chaque création est confectionnée avec soin, nœud après nœud.";
+
+const gammes: Gamme[] = [
+  {
+    slug: "petites-douceurs",
+    badge: "Cadeaux & Enfance",
+    titre: "Petites Douceurs",
+    description:
+      "Porte-clés, anges, figurines, fleurs séchées et couronnes nominatives pour décorer avec délicatesse l'univers des tout-petits.",
+  },
+  {
+    slug: "accessoires-et-utiles",
+    badge: "Maison & Nomade",
+    titre: "Accessoires & Utiles",
+    description:
+      "Sacs, porte-gourdes tressés, nichoirs poétiques et suspensions pour suspendre et sublimer vos plantes favorites dans l'habitat.",
+  },
+  {
+    slug: "pieces-maitresses",
+    badge: "Créations d'Art",
+    titre: "Pièces Maîtresses",
+    description:
+      "Grandes étagères tressées, rideaux majestueux, hiboux sculptés, attrape-rêves et arbres de vie pour habiller vos grands volumes.",
+  },
+];
+---
+
+<section class="gammes container">
+  <header class="intro">
+    <div class="titres">
+      <p class="surtitre">{surtitre}</p>
+      <h2>{titre}</h2>
+      <p class="accroche">{accroche}</p>
+    </div>
+
+    <a class="lien-toutes" href="/creations/">
+      Explorer toutes les collections <span aria-hidden="true">→</span>
+    </a>
+  </header>
+
+  <ul class="liste">
+    {
+      gammes.map((gamme) => (
+        <li>
+          <CarteGamme gamme={gamme} />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .gammes {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block: var(--espace-xl);
+  }
+
+  .intro {
+    display: grid;
+    gap: var(--espace-m);
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: var(--espace-l);
+    }
+  }
+
+  .titres {
+    display: grid;
+    gap: var(--espace-s);
+  }
+
+  .surtitre {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: var(--base-size);
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .accroche {
+    margin: 0;
+    max-width: 50ch;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+  .lien-toutes {
+    color: var(--color-accent);
+    font-size: var(--base-size);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--espace-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--espace-l);
+    }
+  }
+</style>
