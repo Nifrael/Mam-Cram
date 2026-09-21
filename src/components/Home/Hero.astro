@@ -14,7 +14,8 @@ const garanties = [
 ];
 ---
 
-<section class="hero container">
+<section class="hero-bg">
+  <div class="hero container">
   <div class="texte">
     <p class="surtitre">{surtitre}</p>
     <h1>{titre}</h1>
@@ -39,12 +40,17 @@ const garanties = [
     loading="eager"
     fetchpriority="high"
   />
+  </div>
 </section>
 
 <style lang="scss">
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
+  .hero-bg {
+    border-bottom: 1px solid var(--color-border);
+  }
+  
   .hero {
     display: grid;
     gap: var(--espace-l);

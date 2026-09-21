@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import Hero from "../../assets/images/Hero.jpg"
+
+export type Gamme = {
+  slug: string;
+  badge: string;
+  titre: string;
+  description: string;
+};
+
+type Props = { gamme: Gamme };
+
+const { gamme } = Astro.props;
+---
+
+<article class="carte">
+  <div class="visuel">
+    <Image src={Hero} alt="" />
+    <p class="badge">{gamme.badge}</p>
+  </div>
+
+  <h3>{gamme.titre}</h3>
+  <p class="description">{gamme.description}</p>
+
+  <a class="lien" href={`/creations/${gamme.slug}/`}>
+    Voir la gamme <span class="visually-hidden">{gamme.titre}</span>
+    <span class="fleche" aria-hidden="true">→</span>
+  </a>
+</article>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .carte {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--espace-s);
+    height: 100%;
+    padding: var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+  }
+
+  .visuel {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    margin-block-end: var(--espace-s);
+    overflow: hidden;
+    background: var(--color-bg-primary);
+    border-radius: var(--rayon-s);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+    }
+  }
+
+  .badge {
+    position: absolute;
+    inset-block-start: var(--espace-m);
+    inset-inline-start: var(--espace-m);
+    margin: 0;
+    padding: var(--espace-xs) var(--espace-s);
+    background: var(--color-bg-cards);
+    color: var(--color-accent);
+    border-radius: var(--rayon-m);
+    font-size: var(--little-text);
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  .description {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+  .lien {
+    align-self: end;
+    margin-block-start: var(--espace-s);
+    color: var(--color-accent);
+    font-size: var(--base-size);
+    text-decoration: none;
+  }
+
+  .fleche {
+    display: inline-block;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      transition: transform 150ms ease;
+
+      .lien:hover & {
+        transform: translateX(var(--espace-xs));
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fleche {
+      transition: none;
+    }
+  }
+</style>
