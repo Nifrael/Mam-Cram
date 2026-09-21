@@ -32,28 +32,30 @@ const gammes: Gamme[] = [
 ];
 ---
 
-<section class="gammes container">
-  <header class="intro">
-    <div class="titres">
-      <p class="surtitre">{surtitre}</p>
-      <h2>{titre}</h2>
-      <p class="accroche">{accroche}</p>
-    </div>
+<section class="gammes">
+  <div class="contenu container">
+    <header class="intro">
+      <div class="titres">
+        <p class="surtitre">{surtitre}</p>
+        <h2>{titre}</h2>
+        <p class="accroche">{accroche}</p>
+      </div>
 
-    <a class="lien-toutes" href="/creations/">
-      Explorer toutes les collections <span aria-hidden="true">→</span>
-    </a>
-  </header>
+      <a class="lien-toutes" href="/creations/">
+        Explorer toutes les collections <span class="fleche" aria-hidden="true">→</span>
+      </a>
+    </header>
 
-  <ul class="liste">
-    {
-      gammes.map((gamme) => (
-        <li>
-          <CarteGamme gamme={gamme} />
-        </li>
-      ))
-    }
-  </ul>
+    <ul class="liste">
+      {
+        gammes.map((gamme) => (
+          <li>
+            <CarteGamme gamme={gamme} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </section>
 
 <style lang="scss">
@@ -61,6 +63,11 @@ const gammes: Gamme[] = [
   @use "@styles/config/mixin" as *;
 
   .gammes {
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contenu {
     display: grid;
     gap: var(--espace-l);
     padding-block: var(--espace-xl);
@@ -106,9 +113,23 @@ const gammes: Gamme[] = [
     color: var(--color-accent);
     font-size: var(--base-size);
     text-decoration: none;
+  }
 
-    &:hover {
-      text-decoration: underline;
+  .fleche {
+    display: inline-block;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      transition: transform 150ms ease;
+
+      .lien-toutes:hover & {
+        transform: translateX(var(--espace-xs));
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fleche {
+      transition: none;
     }
   }
 
