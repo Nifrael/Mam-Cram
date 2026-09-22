@@ -1,0 +1,236 @@
+---
+import Bouton from "@/components/Bouton.astro";
+
+const surtitre = "Vos envies prennent forme";
+const titre = "L'art du sur-mesure";
+const accroche =
+  "Vous rêvez d'une dimension exacte pour votre alcôve ou d'une nuance en harmonie avec vos textiles ? Co-créons votre pièce.";
+
+type Atout = {
+  titre: string;
+  description: string;
+  icone: string[];
+};
+
+const atouts: Atout[] = [
+  {
+    titre: "Sur commande",
+    description:
+      "Chaque pièce est nouée à la main avec patience selon votre demande spécifique et vos délais.",
+    icone: [
+      "M8 2v4",
+      "M16 2v4",
+      "M3 10h18",
+      "M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+    ],
+  },
+  {
+    titre: "Personnalisation",
+    description:
+      "Choix des teintes de cordes, dimensions adaptées à votre intérieur et prénoms brodés ou calligraphiés.",
+    icone: [
+      "M12 22a10 10 0 1 1 10-10 5 5 0 0 1-5 5h-1.5a1.5 1.5 0 0 0-1.06 2.56A1.5 1.5 0 0 1 13.5 22z",
+      "M8.5 8.5h.01",
+      "M13.5 6.5h.01",
+      "M16.5 10.5h.01",
+      "M7.5 13.5h.01",
+    ],
+  },
+  {
+    titre: "Pièces uniques",
+    description:
+      "Chaque branche de bois flotté glanée possède sa courbe singulière, rendant votre objet absolument inimitable.",
+    icone: [
+      "M11.02 3.61a1 1 0 0 1 1.96 0l1.2 3.6a2 2 0 0 0 1.27 1.27l3.6 1.2a1 1 0 0 1 0 1.9l-3.6 1.2a2 2 0 0 0-1.27 1.27l-1.2 3.6a1 1 0 0 1-1.96 0l-1.2-3.6a2 2 0 0 0-1.27-1.27l-3.6-1.2a1 1 0 0 1 0-1.9l3.6-1.2a2 2 0 0 0 1.27-1.27z",
+      "M5 18l.5 1.5L7 20l-1.5.5L5 22l-.5-1.5L3 20l1.5-.5z",
+    ],
+  },
+];
+
+const contact = {
+  icone: ["M7.9 20A9 9 0 1 0 4 16.1L2 22z"],
+  titre: "Un projet particulier ou un cadeau de naissance ?",
+  description:
+    "Échangeons directement par message ou téléphone pour imaginer les esquisses.",
+  libelleBouton: "Parler de mon projet",
+};
+---
+
+<section class="personnalisation" aria-labelledby="titre-personnalisation">
+  <div class="contenu container">
+    <header class="intro">
+      <p class="surtitre">{surtitre}</p>
+      <h2 id="titre-personnalisation">{titre}</h2>
+      <p class="accroche">{accroche}</p>
+    </header>
+
+    <ul class="liste">
+      {
+        atouts.map((atout) => (
+          <li class="atout">
+            <span class="pastille" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="icone">
+                {atout.icone.map((trace) => (
+                  <path d={trace} />
+                ))}
+              </svg>
+            </span>
+
+            <h3>{atout.titre}</h3>
+            <p class="description">{atout.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="appel">
+      <span class="pastille greener" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="icone">
+          {contact.icone.map((trace) => <path d={trace} />)}
+        </svg>
+      </span>
+
+      <div class="appel__textes">
+        <h3>{contact.titre}</h3>
+        <p class="description">{contact.description}</p>
+      </div>
+
+      <Bouton href="/contact/">{contact.libelleBouton}</Bouton>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .personnalisation {
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contenu {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block: var(--espace-xl);
+  }
+
+  .intro {
+    display: grid;
+    gap: var(--espace-s);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .surtitre {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: var(--base-size);
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: var(--h5);
+  }
+
+  .accroche {
+    margin: 0;
+    max-width: 55ch;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+  .description {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+  .liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--espace-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--espace-l);
+    }
+  }
+
+  .atout {
+    display: grid;
+    gap: var(--espace-s);
+    justify-items: center;
+    height: 100%;
+    padding: var(--espace-l) var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+    text-align: center;
+  }
+
+  .pastille {
+    display: grid;
+    place-items: center;
+    inline-size: 3em;
+    block-size: 3em;
+    background: var(--color-accent-inversed);
+    border-radius: var(--rayon-rond);
+  }
+  
+  .icone {
+    inline-size: 1.5em;
+    block-size: 1.5em;
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .greener {
+    background: var(--color-accent);
+
+    .icone {
+      stroke: var(--color-bg-cards);
+    }
+    
+  }
+
+  .appel {
+    display: grid;
+    gap: var(--espace-m);
+    justify-items: center;
+    padding: var(--espace-l) var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+    text-align: center;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--espace-l);
+      justify-items: start;
+      text-align: start;
+    }
+  }
+
+  .appel__textes {
+    display: grid;
+    gap: var(--espace-xs);
+  }
+
+  .appel h3 {
+    font-size: var(--p);
+  }
+</style>
