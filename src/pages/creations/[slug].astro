@@ -1,0 +1,121 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import EnTetePage from "@/components/UI/EnTetePage.astro";
+import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
+import CarteObjet from "@/components/Creations/CarteObjet.astro";
+import { gammesAffichees } from "@/lib/gammes";
+import { objetsDeLaGamme } from "@/lib/objets";
+
+// Une page par gamme visible, générée au build. Une gamme masquée
+// (visible: false) n'a pas de page : son adresse renvoie la 404.
+export const getStaticPaths = (async () => {
+  const gammes = gammesAffichees(await getCollection("gammes"));
+  const objets = await getCollection("objets");
+
+  return gammes.map((gamme) => ({
+    params: { slug: gamme.id },
+    props: { gamme, objets: objetsDeLaGamme(objets, gamme.id) },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = {
+  gamme: CollectionEntry<"gammes">;
+  objets: CollectionEntry<"objets">[];
+};
+
+const { gamme, objets } = Astro.props;
+const { titre, description } = gamme.data;
+---
+
+<Layout titre={`${titre} — MAM'CRAM`} description={description}>
+  <main class="container">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane">
+      <ol>
+        <li><a href="/creations/">Nos créations</a></li>
+        <li aria-current="page">{titre}</li>
+      </ol>
+    </nav>
+
+    <EnTetePage titre={titre} intro={description} />
+
+    {
+      objets.length > 0 ? (
+        <ul class="grille">
+          {objets.map((objet) => (
+            <li>
+              <CarteObjet objet={objet} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        // [À VALIDER] message quand une gamme n'a encore aucune pièce.
+        <p class="vide">De nouvelles pièces arrivent bientôt dans cette gamme.</p>
+      )
+    }
+
+    <div class="sur-mesure">
+      <AppelSurMesure />
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  // Liens en texte simple, séparés par une barre oblique.
+  .fil-ariane {
+    padding-block-start: var(--espace-m);
+    font-size: var(--little-text);
+
+    ol {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espace-s);
+    }
+
+    li {
+      color: var(--color-text-secondary);
+    }
+
+    li + li::before {
+      content: "/";
+      margin-inline-end: var(--espace-s);
+    }
+
+    a {
+      text-decoration: none;
+
+      @include breakpoint-up($breakpoint-desktop) {
+        &:hover {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+
+  // 2 colonnes dès le mobile : on voit plus de pièces par écran.
+  .grille {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espace-l) var(--espace-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--espace-xl) var(--espace-l);
+    }
+  }
+
+  .vide {
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+
+  .sur-mesure {
+    padding-block: var(--espace-xl);
+  }
+</style>
