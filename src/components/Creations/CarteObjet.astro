@@ -20,7 +20,6 @@ const statut = libelleStatut(objet.data.statut);
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
-  // Pas de page par objet : la carte montre la pièce, elle ne mène nulle part.
   .carte {
     display: grid;
     gap: var(--espace-xs);
@@ -34,7 +33,6 @@ const statut = libelleStatut(objet.data.statut);
     border-radius: var(--rayon-m);
   }
 
-  // h2 pour la hiérarchie de la page, mais taille d'un petit titre.
   .titre {
     font-size: var(--h5);
   }
