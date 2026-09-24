@@ -44,8 +44,6 @@ const inverse = index % 2 === 1;
     }
   }
 
-  // Un bloc sur deux, la photo passe à droite. L'ordre de lecture
-  // (photo puis texte) ne change pas pour les lecteurs d'écran.
   .bloc--inverse .photo {
     @include breakpoint-up($breakpoint-tablet) {
       order: 1;
