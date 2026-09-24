@@ -3,7 +3,10 @@ import Layout from "@/layouts/Layout.astro";
 import BlocGamme from "@/components/Creations/BlocGamme.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
-import { gammes } from "@/data/gammes";
+import { getCollection } from "astro:content";
+import { gammesAffichees } from "@/lib/gammes";
+
+const gammes = gammesAffichees(await getCollection("gammes"));
 
 const titre = "Nos créations,";
 const accent = "nouées à la main.";

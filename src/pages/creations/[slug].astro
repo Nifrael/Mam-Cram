@@ -8,8 +8,6 @@ import CarteObjet from "@/components/Creations/CarteObjet.astro";
 import { gammesAffichees } from "@/lib/gammes";
 import { objetsDeLaGamme } from "@/lib/objets";
 
-// Une page par gamme visible, générée au build. Une gamme masquée
-// (visible: false) n'a pas de page : son adresse renvoie la 404.
 export const getStaticPaths = (async () => {
   const gammes = gammesAffichees(await getCollection("gammes"));
   const objets = await getCollection("objets");
@@ -50,7 +48,6 @@ const { titre, description } = gamme.data;
           ))}
         </ul>
       ) : (
-        // [À VALIDER] message quand une gamme n'a encore aucune pièce.
         <p class="vide">De nouvelles pièces arrivent bientôt dans cette gamme.</p>
       )
     }
@@ -65,7 +62,6 @@ const { titre, description } = gamme.data;
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
-  // Liens en texte simple, séparés par une barre oblique.
   .fil-ariane {
     padding-block-start: var(--espace-m);
     font-size: var(--little-text);
@@ -97,7 +93,6 @@ const { titre, description } = gamme.data;
     }
   }
 
-  // 2 colonnes dès le mobile : on voit plus de pièces par écran.
   .grille {
     list-style: none;
     display: grid;
