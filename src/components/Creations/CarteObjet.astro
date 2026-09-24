@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { libelleStatut } from "@/lib/objets";
+
+type Props = { objet: CollectionEntry<"objets"> };
+
+const { objet } = Astro.props;
+const [photo] = objet.data.photos;
+const statut = libelleStatut(objet.data.statut);
+---
+
+<article class="carte">
+  <Image class="photo" src={photo.src} alt={photo.alt} />
+  <h2 class="titre">{objet.data.titre}</h2>
+  {statut && <p class="statut">{statut}</p>}
+</article>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  // Pas de page par objet : la carte montre la pièce, elle ne mène nulle part.
+  .carte {
+    display: grid;
+    gap: var(--espace-xs);
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    margin-block-end: var(--espace-xs);
+    border-radius: var(--rayon-m);
+  }
+
+  // h2 pour la hiérarchie de la page, mais taille d'un petit titre.
+  .titre {
+    font-size: var(--h5);
+  }
+
+  .statut {
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+  }
+</style>
