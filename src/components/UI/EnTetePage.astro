@@ -1,0 +1,111 @@
+---
+type Props = {
+  titre: string;
+  accent?: string;
+  intro: string;
+};
+
+const { titre, accent, intro } = Astro.props;
+---
+
+<header class="en-tete">
+  <div class="bloc">
+    <h1>
+      {titre}
+      {accent && <> <span class="accent">{accent}</span></>}
+    </h1>
+    <p class="intro">{intro}</p>
+  </div>
+
+  <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 5v14" />
+    <path d="m19 12-7 7-7-7" />
+  </svg>
+</header>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .en-tete {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    justify-items: center;
+    min-height: calc(100dvh - var(--hauteur-entete));
+    padding-block: var(--espace-xl) var(--espace-l);
+    text-align: center;
+  }
+
+  .bloc {
+    display: grid;
+    gap: var(--espace-s);
+    justify-items: center;
+  }
+
+  .accent {
+    display: block;
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  .intro {
+    max-width: 55ch;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+  .fleche {
+    inline-size: 1.5em;
+    block-size: 1.5em;
+    fill: none;
+    stroke: var(--color-text-secondary);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: rebond 1.6s ease-in-out 1s 3;
+    opacity: 50%;
+  }
+
+  @keyframes rebond {
+    50% {
+      transform: translateY(var(--espace-s));
+    }
+  }
+
+  @keyframes disparition {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .fleche {
+      animation:
+        rebond 1.6s ease-in-out 1s 3,
+        disparition linear both;
+    }
+
+    .en-tete .fleche {
+      animation-timeline: auto, scroll();
+      animation-range: normal, 0 var(--espace-xl);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fleche {
+      animation: none;
+    }
+
+    @supports (animation-timeline: scroll()) {
+      .fleche {
+        animation: disparition linear both;
+      }
+
+      .en-tete .fleche {
+        animation-timeline: scroll();
+        animation-range: 0 var(--espace-xl);
+      }
+    }
+  }
+</style>
