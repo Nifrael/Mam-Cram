@@ -1,6 +1,7 @@
 ---
 import CarteGamme from "@/components/Home/CarteGamme.astro";
 import type { Gamme } from "@/components/Home/CarteGamme.astro";
+import LienFleche from "@/components/UI/LienFleche.astro";
 
 const surtitre = "Catalogue de l'atelier";
 const titre = "Nos gammes";
@@ -41,9 +42,7 @@ const gammes: Gamme[] = [
         <p class="accroche">{accroche}</p>
       </div>
 
-      <a class="lien-toutes" href="/creations/">
-        Explorer toutes les collections <span class="fleche" aria-hidden="true">→</span>
-      </a>
+      <LienFleche href="/creations/">Explorer toutes les collections</LienFleche>
     </header>
 
     <ul class="liste">
@@ -109,29 +108,6 @@ const gammes: Gamme[] = [
     font-size: var(--base-size);
   }
 
-  .lien-toutes {
-    color: var(--color-accent);
-    font-size: var(--base-size);
-    text-decoration: none;
-  }
-
-  .fleche {
-    display: inline-block;
-
-    @include breakpoint-up($breakpoint-desktop) {
-      transition: transform 150ms ease;
-
-      .lien-toutes:hover & {
-        transform: translateX(var(--espace-xs));
-      }
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .fleche {
-      transition: none;
-    }
-  }
 
   .liste {
     list-style: none;
