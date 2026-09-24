@@ -1,7 +1,11 @@
 ---
 import CarteGamme from "@/components/Home/CarteGamme.astro";
-import { gammes } from "@/data/gammes";
+import type { CollectionEntry } from "astro:content";
 import LienFleche from "@/components/UI/LienFleche.astro";
+
+type Props = { gammes: CollectionEntry<"gammes">[] };
+
+const { gammes } = Astro.props;
 
 const surtitre = "Catalogue de l'atelier";
 const titre = "Nos gammes";

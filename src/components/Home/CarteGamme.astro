@@ -1,24 +1,24 @@
 ---
 import { Image } from 'astro:assets';
 import LienFleche from "@/components/UI/LienFleche.astro";
-import type { Gamme } from "@/data/gammes";
+import type { CollectionEntry } from "astro:content";
 
-type Props = { gamme: Gamme };
+type Props = { gamme: CollectionEntry<"gammes"> };
 
 const { gamme } = Astro.props;
 ---
 
 <article class="carte">
   <div class="visuel">
-    <Image src={gamme.photo} alt="" />
-    <p class="badge">{gamme.badge}</p>
+    <Image src={gamme.data.photo.src} alt="" />
+    <p class="badge">{gamme.data.badge}</p>
   </div>
 
-  <h3>{gamme.titre}</h3>
-  <p class="description">{gamme.description}</p>
+  <h3>{gamme.data.titre}</h3>
+  <p class="description">{gamme.data.description}</p>
 
-  <LienFleche href={`/creations/${gamme.slug}/`}>
-    Voir la gamme <span class="visually-hidden">{gamme.titre}</span>
+  <LienFleche href={`/creations/${gamme.id}/`}>
+    Voir la gamme <span class="visually-hidden">{gamme.data.titre}</span>
   </LienFleche>
 </article>
 
