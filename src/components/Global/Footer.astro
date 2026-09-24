@@ -1,6 +1,10 @@
 ---
 import { email, telephone, reseaux } from "@/data/coordonnees";
-import { gammes } from "@/data/gammes";
+import type { CollectionEntry } from "astro:content";
+
+type Props = { gammes: CollectionEntry<"gammes">[] };
+
+const { gammes } = Astro.props;
 
 const slogan = "Atelier d'artisanat d'art";
 const presentation =
@@ -8,8 +12,8 @@ const presentation =
 
 const navigation = [
   ...gammes.map((gamme) => ({
-    href: `/creations/${gamme.slug}/`,
-    texte: gamme.titre,
+    href: `/creations/${gamme.id}/`,
+    texte: gamme.data.titre,
   })),
   { href: "/notre-histoire/", texte: "Notre histoire" },
   { href: "/contact/", texte: "Contact" },
