@@ -1,0 +1,88 @@
+---
+import Bouton from "@/components/UI/Bouton.astro";
+
+type Props = {
+  niveauTitre?: 2 | 3;
+};
+
+const { niveauTitre = 2 } = Astro.props;
+const Titre = niveauTitre === 3 ? "h3" : "h2";
+
+const icone = ["M7.9 20A9 9 0 1 0 4 16.1L2 22z"];
+const titre = "Un projet particulier ou un cadeau de naissance ?";
+const description =
+  "Échangeons directement par message ou téléphone pour imaginer les esquisses.";
+const libelleBouton = "Parler de mon projet";
+---
+
+<div class="appel">
+  <span class="pastille" aria-hidden="true">
+    <svg viewBox="0 0 24 24" class="icone">
+      {icone.map((trace) => <path d={trace} />)}
+    </svg>
+  </span>
+
+  <div class="textes">
+    <Titre class="titre">{titre}</Titre>
+    <p class="description">{description}</p>
+  </div>
+
+  <Bouton href="/contact/">{libelleBouton}</Bouton>
+</div>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .appel {
+    display: grid;
+    gap: var(--espace-m);
+    justify-items: center;
+    padding: var(--espace-l) var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+    text-align: center;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--espace-l);
+      justify-items: start;
+      text-align: start;
+    }
+  }
+
+  .pastille {
+    display: grid;
+    place-items: center;
+    inline-size: 3em;
+    block-size: 3em;
+    background: var(--color-accent);
+    border-radius: var(--rayon-rond);
+  }
+
+  .icone {
+    inline-size: 1.5em;
+    block-size: 1.5em;
+    fill: none;
+    stroke: var(--color-bg-cards);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .textes {
+    display: grid;
+    gap: var(--espace-xs);
+  }
+
+  .titre {
+    font-size: var(--h5);
+  }
+
+  .description {
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+</style>
