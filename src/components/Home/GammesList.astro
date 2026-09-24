@@ -1,36 +1,12 @@
 ---
 import CarteGamme from "@/components/Home/CarteGamme.astro";
-import type { Gamme } from "@/components/Home/CarteGamme.astro";
+import { gammes } from "@/data/gammes";
 import LienFleche from "@/components/UI/LienFleche.astro";
 
 const surtitre = "Catalogue de l'atelier";
 const titre = "Nos gammes";
 const accroche =
   "Des accessoires du quotidien aux pièces architecturales, chaque création est confectionnée avec soin, nœud après nœud.";
-
-const gammes: Gamme[] = [
-  {
-    slug: "petites-douceurs",
-    badge: "Cadeaux & Enfance",
-    titre: "Petites Douceurs",
-    description:
-      "Porte-clés, anges, figurines, fleurs séchées et couronnes nominatives pour décorer avec délicatesse l'univers des tout-petits.",
-  },
-  {
-    slug: "accessoires-et-utiles",
-    badge: "Maison & Nomade",
-    titre: "Accessoires & Utiles",
-    description:
-      "Sacs, porte-gourdes tressés, nichoirs poétiques et suspensions pour suspendre et sublimer vos plantes favorites dans l'habitat.",
-  },
-  {
-    slug: "pieces-maitresses",
-    badge: "Créations d'Art",
-    titre: "Pièces Maîtresses",
-    description:
-      "Grandes étagères tressées, rideaux majestueux, hiboux sculptés, attrape-rêves et arbres de vie pour habiller vos grands volumes.",
-  },
-];
 ---
 
 <section class="gammes">
@@ -107,7 +83,6 @@ const gammes: Gamme[] = [
     color: var(--color-text-secondary);
     font-size: var(--base-size);
   }
-
 
   .liste {
     list-style: none;

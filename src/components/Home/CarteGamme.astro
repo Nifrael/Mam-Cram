@@ -1,14 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import Hero from "../../assets/images/Hero.jpg"
 import LienFleche from "@/components/UI/LienFleche.astro";
-
-export type Gamme = {
-  slug: string;
-  badge: string;
-  titre: string;
-  description: string;
-};
+import type { Gamme } from "@/data/gammes";
 
 type Props = { gamme: Gamme };
 
@@ -17,7 +10,7 @@ const { gamme } = Astro.props;
 
 <article class="carte">
   <div class="visuel">
-    <Image src={Hero} alt="" />
+    <Image src={gamme.photo} alt="" />
     <p class="badge">{gamme.badge}</p>
   </div>
 
@@ -77,7 +70,6 @@ const { gamme } = Astro.props;
     margin: 0;
   }
 
-  // Garde un espace entre la description et le lien « Voir la gamme ».
   .description {
     margin: 0 0 var(--espace-s);
     color: var(--color-text-secondary);
