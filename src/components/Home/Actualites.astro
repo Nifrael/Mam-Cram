@@ -1,0 +1,189 @@
+---
+import { Image } from "astro:assets";
+import { formaterDate, dateIso } from "@/lib/date";
+import LienFleche from "@/components/UI/LienFleche.astro";
+// Photo provisoire : chaque actualité aura sa propre photo.
+import photo from "../../assets/images/Hero.jpg";
+
+const surtitre = "La vie de l'atelier";
+const titre = "Dernières nouvelles";
+
+type Actualite = {
+  slug: string;
+  titre: string;
+  date: Date;
+  resume: string;
+};
+
+const actualites: Actualite[] = [
+  {
+    slug: "retour-de-glanage",
+    titre: "Retour de glanage : les trésors de nos côtes bretonnes",
+    date: new Date("2026-05-14"),
+    resume:
+      "Après les grandes marées de printemps, nous avons arpenté les criques pour dénicher des bois flottés aux formes singulières.",
+  },
+  {
+    slug: "nouvelle-collection-estivale",
+    titre: "Nouvelle collection estivale : teintes terre cuite et sauge",
+    date: new Date("2026-04-28"),
+    resume:
+      "Des nuances douces et solaires inspirées des paysages de garrigue et des herbes sauvages de l'été.",
+  },
+  {
+    slug: "marche-artisanat-ateliers-initiation",
+    titre: "Marché d'artisanat d'art & ateliers d'initiation",
+    date: new Date("2026-04-10"),
+    resume:
+      "Venez nous rencontrer et apprendre les premiers nœuds lors de nos prochaines sessions partagées au marché.",
+  },
+];
+
+const iconeCalendrier = [
+  "M8 2v4",
+  "M16 2v4",
+  "M3 10h18",
+  "M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+];
+---
+
+<section class="actualites" aria-labelledby="titre-actualites">
+  <div class="contenu container">
+    <header class="entete">
+      <div>
+        <p class="surtitre">{surtitre}</p>
+        <h2 id="titre-actualites">{titre}</h2>
+      </div>
+      <LienFleche href="/actualites/">Consulter toutes les actualités</LienFleche>
+    </header>
+
+    <ul class="liste">
+      {
+        actualites.map((actualite) => (
+          <li>
+            <article class="carte">
+              <Image class="photo" src={photo} alt="" />
+              <div class="corps">
+                <p class="date">
+                  <svg viewBox="0 0 24 24" class="icone" aria-hidden="true">
+                    {iconeCalendrier.map((trace) => (
+                      <path d={trace} />
+                    ))}
+                  </svg>
+                  <time datetime={dateIso(actualite.date)}>
+                    {formaterDate(actualite.date)}
+                  </time>
+                </p>
+                <h3>{actualite.titre}</h3>
+                <p class="resume">{actualite.resume}</p>
+                <LienFleche href={`/actualites/${actualite.slug}/`}>
+                  Lire l'article
+                  <span class="visually-hidden">{actualite.titre}</span>
+                </LienFleche>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .actualites {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contenu {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block: var(--espace-xl);
+  }
+
+  // Titre à gauche, lien « toutes les actualités » à droite quand il y a la place.
+  .entete {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: var(--espace-s) var(--espace-l);
+  }
+
+  .surtitre {
+    color: var(--color-accent);
+    font-size: var(--little-text);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .liste {
+    list-style: none;
+    display: grid;
+    gap: var(--espace-l);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .carte {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  // Le lien « Lire l'article » reste collé en bas, même si les titres
+  // n'ont pas la même longueur d'une carte à l'autre.
+  .corps {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--espace-s);
+    padding: var(--espace-m);
+  }
+
+  .date {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-s);
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+  }
+
+  .icone {
+    inline-size: 1.2em;
+    block-size: 1.2em;
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  h3 {
+    font-size: var(--h5);
+  }
+
+  // Résumé coupé à 2 lignes avec « … », comme sur la maquette.
+  .resume {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+</style>
