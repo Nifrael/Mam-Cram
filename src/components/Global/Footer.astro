@@ -1,0 +1,242 @@
+---
+import { email, telephone, reseaux } from "@/data/coordonnees";
+
+const slogan = "Atelier d'artisanat d'art";
+const presentation =
+  "Créations uniques et sur-mesure en macramé & bois flotté glané au fil des marées. Un art de vivre organique et poétique.";
+
+const navigation = [
+  { href: "/creations/petites-douceurs/", texte: "Petites Douceurs" },
+  { href: "/creations/accessoires-et-utiles/", texte: "Accessoires & Utiles" },
+  { href: "/creations/pieces-maitresses/", texte: "Pièces Maîtresses" },
+  { href: "/notre-histoire/", texte: "Notre histoire" },
+  { href: "/contact/", texte: "Contact" },
+];
+
+const icones = {
+  email: [
+    "M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
+    "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7",
+  ],
+  telephone: [
+    "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z",
+  ],
+  instagram: [
+    "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z",
+    "M9 13a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
+  ],
+  facebook: [
+    "M15 5a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
+    "M3 12a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
+    "M15 19a3 3 0 1 0 6 0a3 3 0 1 0-6 0",
+    "M8.59 13.51l6.83 3.98",
+    "M15.41 6.51l-6.82 3.98",
+  ],
+  leboncoin: [
+    "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
+    "M7 7.5a.5.5 0 1 0 1 0a.5.5 0 1 0-1 0",
+  ],
+};
+
+const listeReseaux = [
+  { ...reseaux.instagram, icone: icones.instagram },
+  { ...reseaux.facebook, icone: icones.facebook },
+  { ...reseaux.leboncoin, icone: icones.leboncoin },
+];
+
+const annee = new Date().getFullYear();
+---
+
+<footer class="pied">
+  <div class="colonnes container">
+    <div class="colonne">
+      <p class="marque">MAM'CRAM</p>
+      <p class="slogan">{slogan}</p>
+      <p class="presentation">{presentation}</p>
+      <ul class="liste">
+        <li>
+          <a class="lien" href={`mailto:${email}`}>
+            <svg viewBox="0 0 24 24" class="icone" aria-hidden="true">
+              {icones.email.map((trace) => <path d={trace} />)}
+            </svg>
+            {email}
+          </a>
+        </li>
+        <li>
+          <a class="lien" href={telephone.lien}>
+            <svg viewBox="0 0 24 24" class="icone" aria-hidden="true">
+              {icones.telephone.map((trace) => <path d={trace} />)}
+            </svg>
+            {telephone.affiche}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <nav class="colonne" aria-labelledby="titre-navigation-pied">
+      <h2 id="titre-navigation-pied" class="titre">Navigation & gammes</h2>
+      <ul class="liste">
+        {
+          navigation.map((lien) => (
+            <li>
+              <a class="lien" href={lien.href}>{lien.texte}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="colonne">
+      <h2 class="titre">Réseaux & infos</h2>
+      <ul class="liste">
+        {
+          listeReseaux.map((reseau) => (
+            <li>
+              <a class="lien" href={reseau.url} target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" class="icone" aria-hidden="true">
+                  {reseau.icone.map((trace) => (
+                    <path d={trace} />
+                  ))}
+                </svg>
+                {reseau.texte}
+                <span class="visually-hidden">(nouvel onglet)</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="legal">
+        <li><a class="lien" href="/mentions-legales/">Mentions légales</a></li>
+        <li>
+          <a class="lien" href="/politique-de-confidentialite/">
+            Politique de confidentialité
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="credits container">
+    © {annee} MAM'CRAM — Site réalisé par Julien Marchand
+  </p>
+</footer>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .pied {
+    background-color: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .colonnes {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block: var(--espace-xl) var(--espace-l);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .colonne {
+    display: grid;
+    align-content: start;
+    gap: var(--espace-s);
+  }
+
+  .marque {
+    font-family: var(--font-title);
+    font-size: var(--h5);
+    line-height: 1;
+    letter-spacing: 0.08em;
+  }
+
+  .slogan {
+    color: var(--color-accent);
+    font-size: var(--little-text);
+    font-weight: bold;
+  }
+
+  .presentation {
+    max-width: 40ch;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      max-width: 30ch;
+    }
+  }
+
+  .titre {
+    font-family: var(--font-text);
+    font-size: var(--little-text);
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .liste {
+    list-style: none;
+    display: grid;
+    gap: var(--espace-s);
+  }
+
+  .lien {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espace-s);
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+    text-decoration: none;
+    transition: 0.3s color ease-in-out;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  .icone {
+    flex-shrink: 0;
+    inline-size: 1.1em;
+    block-size: 1.1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .legal {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-s);
+    margin-block-start: var(--espace-m);
+    padding-block-start: var(--espace-m);
+    border-top: 1px solid var(--color-border);
+
+    .lien {
+      font-size: var(--little-text);
+    }
+
+    li + li::before {
+      content: "·";
+      margin-inline-end: var(--espace-s);
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .credits {
+    padding-block: var(--espace-s);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+    text-align: center;
+  }
+</style>

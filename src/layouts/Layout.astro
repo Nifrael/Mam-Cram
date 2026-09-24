@@ -2,6 +2,7 @@
 import { Font } from "astro:assets";
 import "@/styles/global.scss";
 import Navbar from "@/components/Global/Navbar.astro";
+import Footer from "@/components/Global/Footer.astro";
 
 type Props = {
   titre: string;
@@ -28,5 +29,6 @@ const { titre, description } = Astro.props;
   <body>
     <Navbar />
     <slot />
+    <Footer />
   </body>
 </html>
