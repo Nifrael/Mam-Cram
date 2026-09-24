@@ -1,0 +1,41 @@
+---
+type Props = {
+  href: string;
+};
+
+const { href } = Astro.props;
+---
+
+<a class="lien" href={href}>
+  <slot />
+  <span class="fleche" aria-hidden="true">→</span>
+</a>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .lien {
+    color: var(--color-accent);
+    font-size: var(--base-size);
+    text-decoration: none;
+  }
+
+  .fleche {
+    display: inline-block;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      transition: transform 150ms ease;
+
+      .lien:hover & {
+        transform: translateX(var(--espace-xs));
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fleche {
+      transition: none;
+    }
+  }
+</style>
