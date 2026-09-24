@@ -1,0 +1,124 @@
+---
+import Bouton from "@/components/UI/Bouton.astro";
+import { Image } from "astro:assets";
+import photo from "../../assets/images/Hero.jpg";
+
+const surtitre = "Les mains derrière MAM'CRAM";
+const titre = "Deux complices, un amour pour la matière et le temps ralenti";
+const paragraphes = [
+  "MAM'CRAM est née au détour de longues balades sur les grèves côtières, les yeux rivés sur les trésors rejetés par l'océan. Ce qui a commencé comme une fascination pour les textures patinées du bois flotté s'est métamorphosé en un atelier de création textile à quatre mains.",
+  "Loin des cadences industrielles, nous privilégions la lenteur féconde du nœud manuel : chaque millimètre de corde est serré à la juste tension pour conférer solidité, douceur et vibration poétique à vos espaces de vie.",
+];
+const citation =
+  "Chaque morceau de bois flotté raconte les marées avant de trouver son fil.";
+---
+
+<section class="histoire" aria-labelledby="titre-histoire">
+  <div class="contenu container">
+    <figure class="visuel">
+      <Image
+        class="photo"
+        src={photo}
+        alt="Jean-Luc et Christelle nouant une création en macramé dans leur atelier"
+        loading="lazy"
+      />
+      <figcaption class="citation">
+        <blockquote>
+          <p>« {citation} »</p>
+        </blockquote>
+        <p class="signature">— MAM'CRAM</p>
+      </figcaption>
+    </figure>
+
+    <div class="texte">
+      <p class="surtitre">{surtitre}</p>
+      <h2 id="titre-histoire">{titre}</h2>
+      {paragraphes.map((paragraphe) => <p class="paragraphe">{paragraphe}</p>)}
+      <Bouton href="/notre-histoire/" variante="secondaire">
+        Lire notre histoire complète <span aria-hidden="true">→</span>
+      </Bouton>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .histoire {
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contenu {
+    display: grid;
+    gap: var(--espace-xl);
+    padding-block: var(--espace-xl);
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: var(--espace-xxl);
+    }
+  }
+
+  .visuel {
+    position: relative;
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--rayon-m);
+  }
+
+  .citation {
+    position: absolute;
+    inset-inline: var(--espace-m);
+    bottom: calc(var(--espace-l) * -1);
+    display: grid;
+    gap: var(--espace-s);
+    padding: var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      inset-inline: auto calc(var(--espace-m) * -1);
+      bottom: calc(var(--espace-m) * -1);
+      max-width: 60%;
+    }
+  }
+
+  blockquote {
+    margin: 0;
+
+    p {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-weight: bold;
+    }
+  }
+
+  .signature,
+  .surtitre {
+    color: var(--color-accent);
+    font-size: var(--little-text);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .texte {
+    display: grid;
+    gap: var(--espace-m);
+    justify-items: start;
+  }
+
+  .paragraphe {
+    max-width: 60ch;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+</style>
