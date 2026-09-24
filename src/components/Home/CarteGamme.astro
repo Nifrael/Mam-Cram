@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Hero from "../../assets/images/Hero.jpg"
+import LienFleche from "@/components/UI/LienFleche.astro";
 
 export type Gamme = {
   slug: string;
@@ -23,10 +24,9 @@ const { gamme } = Astro.props;
   <h3>{gamme.titre}</h3>
   <p class="description">{gamme.description}</p>
 
-  <a class="lien" href={`/creations/${gamme.slug}/`}>
+  <LienFleche href={`/creations/${gamme.slug}/`}>
     Voir la gamme <span class="visually-hidden">{gamme.titre}</span>
-    <span class="fleche" aria-hidden="true">→</span>
-  </a>
+  </LienFleche>
 </article>
 
 <style lang="scss">
@@ -77,35 +77,11 @@ const { gamme } = Astro.props;
     margin: 0;
   }
 
+  // Garde un espace entre la description et le lien « Voir la gamme ».
   .description {
-    margin: 0;
+    margin: 0 0 var(--espace-s);
     color: var(--color-text-secondary);
     font-size: var(--base-size);
   }
 
-  .lien {
-    align-self: end;
-    margin-block-start: var(--espace-s);
-    color: var(--color-accent);
-    font-size: var(--base-size);
-    text-decoration: none;
-  }
-
-  .fleche {
-    display: inline-block;
-
-    @include breakpoint-up($breakpoint-desktop) {
-      transition: transform 150ms ease;
-
-      .lien:hover & {
-        transform: translateX(var(--espace-xs));
-      }
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .fleche {
-      transition: none;
-    }
-  }
 </style>
