@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import LienFleche from "@/components/UI/LienFleche.astro";
-import type { Gamme } from "@/data/gammes";
+import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  gamme: Gamme;
+  gamme: CollectionEntry<"gammes">;
   index: number;
 };
 
@@ -15,16 +15,16 @@ const inverse = index % 2 === 1;
 <article class:list={["bloc", { "bloc--inverse": inverse }]}>
   <Image
     class="photo"
-    src={gamme.photo}
-    alt={gamme.altPhoto}
+    src={gamme.data.photo.src}
+    alt={gamme.data.photo.alt}
     loading={index === 0 ? "eager" : "lazy"}
   />
 
   <div class="texte">
-    <h2>{gamme.titre}</h2>
-    <p class="description">{gamme.description}</p>
-    <LienFleche href={`/creations/${gamme.slug}/`}>
-      Voir les créations <span class="visually-hidden">{gamme.titre}</span>
+    <h2>{gamme.data.titre}</h2>
+    <p class="description">{gamme.data.description}</p>
+    <LienFleche href={`/creations/${gamme.id}/`}>
+      Voir les créations <span class="visually-hidden">{gamme.data.titre}</span>
     </LienFleche>
   </div>
 </article>
