@@ -1,14 +1,16 @@
 ---
 import { email, telephone, reseaux } from "@/data/coordonnees";
+import { gammes } from "@/data/gammes";
 
 const slogan = "Atelier d'artisanat d'art";
 const presentation =
   "Créations uniques et sur-mesure en macramé & bois flotté glané au fil des marées. Un art de vivre organique et poétique.";
 
 const navigation = [
-  { href: "/creations/petites-douceurs/", texte: "Petites Douceurs" },
-  { href: "/creations/accessoires-et-utiles/", texte: "Accessoires & Utiles" },
-  { href: "/creations/pieces-maitresses/", texte: "Pièces Maîtresses" },
+  ...gammes.map((gamme) => ({
+    href: `/creations/${gamme.slug}/`,
+    texte: gamme.titre,
+  })),
   { href: "/notre-histoire/", texte: "Notre histoire" },
   { href: "/contact/", texte: "Contact" },
 ];
