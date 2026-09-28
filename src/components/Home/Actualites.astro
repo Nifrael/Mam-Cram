@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { formaterDate, dateIso } from "@/lib/date";
 import LienFleche from "@/components/UI/LienFleche.astro";
+import Icone from "@/components/UI/Icone.astro";
 // Photo provisoire : chaque actualité aura sa propre photo.
 import photo from "../../assets/images/Hero.jpg";
 
@@ -39,12 +40,6 @@ const actualites: Actualite[] = [
   },
 ];
 
-const iconeCalendrier = [
-  "M8 2v4",
-  "M16 2v4",
-  "M3 10h18",
-  "M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-];
 ---
 
 <section class="actualites" aria-labelledby="titre-actualites">
@@ -65,11 +60,7 @@ const iconeCalendrier = [
               <Image class="photo" src={photo} alt="" />
               <div class="corps">
                 <p class="date">
-                  <svg viewBox="0 0 24 24" class="icone" aria-hidden="true">
-                    {iconeCalendrier.map((trace) => (
-                      <path d={trace} />
-                    ))}
-                  </svg>
+                  <Icone nom="calendrier" />
                   <time datetime={dateIso(actualite.date)}>
                     {formaterDate(actualite.date)}
                   </time>
@@ -163,14 +154,10 @@ const iconeCalendrier = [
     font-size: var(--little-text);
   }
 
-  .icone {
+  .date :global(.icone) {
     inline-size: 1.2em;
     block-size: 1.2em;
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 1.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    color: var(--color-accent);
   }
 
   h3 {
