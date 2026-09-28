@@ -1,13 +1,13 @@
 ---
 type Props = {
-  href: string;
   variante?: "principal" | "secondaire";
-};
+} & ({ href: string } | { type: "submit" | "button" });
 
-const { href, variante = "principal" } = Astro.props;
+const { variante = "principal", ...attributs } = Astro.props;
+const Balise = "href" in attributs ? "a" : "button";
 ---
 
-<a class:list={["bouton", `bouton-${variante}`]} href={href}><slot /></a>
+<Balise class:list={["bouton", `bouton-${variante}`]} {...attributs}><slot /></Balise>
 
 <style lang="scss">
   @use "@styles/config/mixin" as *;
@@ -15,6 +15,9 @@ const { href, variante = "principal" } = Astro.props;
 
   .bouton {
     display: inline-block;
+    border: none;
+    font: inherit;
+    cursor: pointer;
     padding: var(--espace-s) var(--espace-m);
     border-radius: var(--rayon-m);
     text-decoration: none;
@@ -36,17 +39,12 @@ const { href, variante = "principal" } = Astro.props;
       color: var(--color-text)
     }
     }
-
-
-
   }
 
   .bouton-secondaire {
     background: var(--color-action-inversed);
     color: var(--color-action-text);
-
-
-
+    
     @include breakpoint-up($breakpoint-desktop) {
     &:hover {
       background: var(--color-action-hover);
