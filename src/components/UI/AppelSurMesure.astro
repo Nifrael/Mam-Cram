@@ -1,5 +1,6 @@
 ---
 import Bouton from "@/components/UI/Bouton.astro";
+import Icone from "@/components/UI/Icone.astro";
 
 type Props = {
   niveauTitre?: 2 | 3;
@@ -8,7 +9,6 @@ type Props = {
 const { niveauTitre = 2 } = Astro.props;
 const Titre = niveauTitre === 3 ? "h3" : "h2";
 
-const icone = ["M7.9 20A9 9 0 1 0 4 16.1L2 22z"];
 const titre = "Un projet particulier ou un cadeau de naissance ?";
 const description =
   "Échangeons directement par message ou téléphone pour imaginer les esquisses.";
@@ -16,10 +16,8 @@ const libelleBouton = "Parler de mon projet";
 ---
 
 <div class="appel">
-  <span class="pastille" aria-hidden="true">
-    <svg viewBox="0 0 24 24" class="icone">
-      {icone.map((trace) => <path d={trace} />)}
-    </svg>
+  <span class="pastille">
+    <Icone nom="bulle" />
   </span>
 
   <div class="textes">
@@ -62,14 +60,10 @@ const libelleBouton = "Parler de mon projet";
     border-radius: var(--rayon-rond);
   }
 
-  .icone {
+  .pastille :global(.icone) {
     inline-size: 1.5em;
     block-size: 1.5em;
-    fill: none;
-    stroke: var(--color-bg-cards);
-    stroke-width: 1.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    color: var(--color-bg-cards);
   }
 
   .textes {
