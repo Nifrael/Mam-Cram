@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import EnTetePage from "@/components/UI/EnTetePage.astro";
+import Coordonnees from "@/components/Contact/Coordonnees.astro";
+import FormulaireContact from "@/components/Contact/FormulaireContact.astro";
+
+// [À VALIDER] textes repris de la maquette, dont l'engagement « sous 48 heures ».
+const titre = "Un mot doux, une envie sur-mesure";
+const accent = "ou une simple question.";
+const intro =
+  "Chaque création demande du temps et de l'écoute. Que ce soit pour un projet sur-mesure en macramé, une question sur nos bois flottés glanés ou un échange autour de votre intérieur, nous vous répondons avec joie sous 48 heures.";
+---
+
+<Layout
+  titre="Contact — MAM'CRAM"
+  description="Contactez MAM'CRAM pour une création sur-mesure en macramé et bois flotté, un cadeau de naissance ou une question sur une pièce."
+>
+  <main class="container">
+    <EnTetePage titre={titre} accent={accent} intro={intro} />
+
+    <div class="contenu">
+      <Coordonnees />
+      <FormulaireContact />
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  // Mobile : coordonnées puis formulaire. Grand écran : côte à côte,
+  // le formulaire prend la place principale.
+  .contenu {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block-end: var(--espace-xl);
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--espace-xl);
+    }
+  }
+</style>

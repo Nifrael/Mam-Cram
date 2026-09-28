@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import LienFleche from "@/components/UI/LienFleche.astro";
+
+// [À VALIDER]
+const titre = "Merci pour votre message";
+const texte =
+  "Nous l'avons bien reçu et nous vous répondons sous 48 heures, le temps de bien réfléchir à votre demande.";
+---
+
+<Layout
+  titre="Message envoyé — MAM'CRAM"
+  description="Confirmation de l'envoi de votre message à MAM'CRAM."
+  indexable={false}
+>
+  <main class="merci container">
+    <h1>{titre}</h1>
+    <p class="texte">{texte}</p>
+    <LienFleche href="/creations/">Découvrir nos créations</LienFleche>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .merci {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: var(--espace-m);
+    min-height: calc(100dvh - var(--hauteur-entete));
+    padding-block: var(--espace-xl);
+    text-align: center;
+  }
+
+  .texte {
+    max-width: 55ch;
+    color: var(--color-text-secondary);
+  }
+</style>
