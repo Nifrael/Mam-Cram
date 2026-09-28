@@ -9,9 +9,10 @@ import { gammesAffichees } from "@/lib/gammes";
 type Props = {
   titre: string;
   description: string;
+  indexable?: boolean;
 };
 
-const { titre, description } = Astro.props;
+const { titre, description, indexable = true } = Astro.props;
 
 const gammes = gammesAffichees(await getCollection("gammes"));
 ---
@@ -26,6 +27,7 @@ const gammes = gammesAffichees(await getCollection("gammes"));
 
     <title>{titre}</title>
     <meta name="description" content={description} />
+    {!indexable && <meta name="robots" content="noindex" />}
 
     <Font cssVariable="--font-title" preload />
     <Font cssVariable="--font-text" preload />
