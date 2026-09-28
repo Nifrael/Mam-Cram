@@ -1,0 +1,47 @@
+---
+import Bulle from "@/assets/icones/bulle.svg";
+import Calendrier from "@/assets/icones/calendrier.svg";
+import Email from "@/assets/icones/email.svg";
+import Etincelles from "@/assets/icones/etincelles.svg";
+import Etiquette from "@/assets/icones/etiquette.svg";
+import Facebook from "@/assets/icones/facebook.svg";
+import FlecheBas from "@/assets/icones/fleche-bas.svg";
+import Instagram from "@/assets/icones/instagram.svg";
+import Palette from "@/assets/icones/palette.svg";
+import Telephone from "@/assets/icones/telephone.svg";
+
+const icones = {
+  bulle: Bulle,
+  calendrier: Calendrier,
+  email: Email,
+  etincelles: Etincelles,
+  etiquette: Etiquette,
+  facebook: Facebook,
+  "fleche-bas": FlecheBas,
+  instagram: Instagram,
+  palette: Palette,
+  telephone: Telephone,
+};
+
+export type NomIcone = keyof typeof icones;
+
+type Props = { nom: NomIcone };
+
+const { nom } = Astro.props;
+const Svg = icones[nom];
+---
+
+<Svg class="icone" aria-hidden="true" />
+
+<style lang="scss">
+  :where(.icone) {
+    flex-shrink: 0;
+    inline-size: 1em;
+    block-size: 1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

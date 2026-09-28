@@ -3,6 +3,8 @@ import { Font } from "astro:assets";
 import "@/styles/global.scss";
 import Navbar from "@/components/Global/Navbar.astro";
 import Footer from "@/components/Global/Footer.astro";
+import { getCollection } from "astro:content";
+import { gammesAffichees } from "@/lib/gammes";
 
 type Props = {
   titre: string;
@@ -10,6 +12,8 @@ type Props = {
 };
 
 const { titre, description } = Astro.props;
+
+const gammes = gammesAffichees(await getCollection("gammes"));
 ---
 
 <!doctype html>
@@ -29,6 +33,6 @@ const { titre, description } = Astro.props;
   <body>
     <Navbar />
     <slot />
-    <Footer />
+    <Footer gammes={gammes} />
   </body>
 </html>
