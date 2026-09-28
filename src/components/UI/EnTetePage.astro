@@ -1,4 +1,6 @@
 ---
+import Icone from "@/components/UI/Icone.astro";
+
 type Props = {
   titre: string;
   accent?: string;
@@ -17,10 +19,7 @@ const { titre, accent, intro } = Astro.props;
     <p class="intro">{intro}</p>
   </div>
 
-  <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 5v14" />
-    <path d="m19 12-7 7-7-7" />
-  </svg>
+  <Icone nom="fleche-bas" />
 </header>
 
 <style lang="scss">
@@ -55,14 +54,11 @@ const { titre, accent, intro } = Astro.props;
     font-size: var(--base-size);
   }
 
-  .fleche {
+  .en-tete > :global(.icone) {
     inline-size: 1.5em;
     block-size: 1.5em;
-    fill: none;
-    stroke: var(--color-text-secondary);
+    color: var(--color-text-secondary);
     stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
     animation: rebond 1.6s ease-in-out 1s 3;
     opacity: 50%;
   }
@@ -80,29 +76,29 @@ const { titre, accent, intro } = Astro.props;
   }
 
   @supports (animation-timeline: scroll()) {
-    .fleche {
+    .en-tete > :global(.icone) {
       animation:
         rebond 1.6s ease-in-out 1s 3,
         disparition linear both;
     }
 
-    .en-tete .fleche {
+    .en-tete > :global(.icone) {
       animation-timeline: auto, scroll();
       animation-range: normal, 0 var(--espace-xl);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .fleche {
+    .en-tete > :global(.icone) {
       animation: none;
     }
 
     @supports (animation-timeline: scroll()) {
-      .fleche {
+      .en-tete > :global(.icone) {
         animation: disparition linear both;
       }
 
-      .en-tete .fleche {
+      .en-tete > :global(.icone) {
         animation-timeline: scroll();
         animation-range: 0 var(--espace-xl);
       }
