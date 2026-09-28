@@ -1,0 +1,104 @@
+---
+import { email, telephone, reseaux } from "@/data/coordonnees";
+import Icone, { type NomIcone } from "@/components/UI/Icone.astro";
+
+type Moyen = {
+  icone: NomIcone;
+  intitule: string;
+  texte: string;
+  href: string;
+  externe?: boolean;
+};
+
+const moyens: Moyen[] = [
+  { icone: "email", intitule: "Email", texte: email, href: `mailto:${email}` },
+  {
+    icone: "telephone",
+    intitule: "Téléphone",
+    texte: telephone.affiche,
+    href: telephone.lien,
+  },
+  {
+    icone: "instagram",
+    intitule: "Instagram",
+    texte: reseaux.instagram.texte,
+    href: reseaux.instagram.url,
+    externe: true,
+  },
+];
+---
+
+<section class="coordonnees" aria-labelledby="titre-coordonnees">
+  <h2 id="titre-coordonnees" class="titre">Nous joindre directement</h2>
+
+  <ul class="liste">
+    {
+      moyens.map((moyen) => (
+        <li class="moyen">
+          <span class="intitule">{moyen.intitule}</span>
+          <a
+            class="lien"
+            href={moyen.href}
+            {...(moyen.externe && { target: "_blank", rel: "noopener" })}
+          >
+            <Icone nom={moyen.icone} />
+            {moyen.texte}
+            {moyen.externe && <span class="visually-hidden">(nouvel onglet)</span>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .coordonnees {
+    display: grid;
+    align-content: start;
+    gap: var(--espace-m);
+  }
+
+  .titre {
+    font-size: var(--h4);
+  }
+
+  .liste {
+    list-style: none;
+    display: grid;
+    gap: var(--espace-m);
+  }
+
+  .moyen {
+    display: grid;
+    gap: var(--espace-xs);
+  }
+
+  .intitule {
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .lien {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--espace-s);
+    font-size: var(--p);
+    text-decoration: none;
+    transition: 0.3s color ease-in-out;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  .lien :global(.icone) {
+    color: var(--color-accent);
+  }
+</style>
