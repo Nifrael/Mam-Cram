@@ -65,7 +65,7 @@ const annee = new Date().getFullYear();
     </nav>
 
     <div class="colonne">
-      <h2 class="titre">Réseaux & infos</h2>
+      <h2 class="titre">Réseaux</h2>
       <ul class="liste">
         {
           listeReseaux.map((reseau) => (
@@ -79,21 +79,20 @@ const annee = new Date().getFullYear();
           ))
         }
       </ul>
-
-      <ul class="legal">
-        <li><a class="lien" href="/mentions-legales/">Mentions légales</a></li>
-        <li>
-          <a class="lien" href="/politique-de-confidentialite/">
-            Politique de confidentialité
-          </a>
-        </li>
-      </ul>
     </div>
   </div>
 
-  <p class="credits container">
-    © {annee} MAM'CRAM — Site réalisé par Julien Marchand
-  </p>
+  <div class="bas container">
+    <ul class="legal">
+      <li><a class="lien" href="/mentions-legales/">Mentions légales</a></li>
+      <li>
+        <a class="lien" href="/politique-de-confidentialite/">
+          Politique de confidentialité
+        </a>
+      </li>
+    </ul>
+    <p class="credits">© {annee} MAM'CRAM — Site réalisé par Julien Marchand</p>
+  </div>
 </footer>
 
 <style lang="scss">
@@ -108,7 +107,7 @@ const annee = new Date().getFullYear();
   .colonnes {
     display: grid;
     gap: var(--espace-l);
-    padding-block: var(--espace-xl) var(--espace-l);
+    padding-block: var(--espace-l) var(--espace-l);
 
     @include breakpoint-up($breakpoint-tablet) {
       grid-template-columns: repeat(3, 1fr);
@@ -180,14 +179,21 @@ const annee = new Date().getFullYear();
     block-size: 1.1em;
   }
 
+  .bas {
+    display: grid;
+    justify-items: center;
+    gap: var(--espace-xs);
+    padding-block: var(--espace-m);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
   .legal {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: var(--espace-s);
-    margin-block-start: var(--espace-m);
-    padding-block-start: var(--espace-m);
-    border-top: 1px solid var(--color-border);
 
     .lien {
       font-size: var(--little-text);
@@ -201,10 +207,7 @@ const annee = new Date().getFullYear();
   }
 
   .credits {
-    padding-block: var(--espace-s);
-    border-top: 1px solid var(--color-border);
     color: var(--color-text-secondary);
     font-size: var(--little-text);
-    text-align: center;
   }
 </style>

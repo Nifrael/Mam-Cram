@@ -27,3 +27,6 @@ pnpm-debug.log*
 AGENTS.md
 CLAUDE.md
 design/
+
+#Config
+.prettierrc.json
