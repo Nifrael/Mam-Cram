@@ -1,5 +1,6 @@
 ---
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
+import Icone, { type NomIcone } from "@/components/UI/Icone.astro";
 
 const surtitre = "Vos envies prennent forme";
 const titre = "L'art du sur-mesure";
@@ -9,7 +10,7 @@ const accroche =
 type Atout = {
   titre: string;
   description: string;
-  icone: string[];
+  icone: NomIcone;
 };
 
 const atouts: Atout[] = [
@@ -17,33 +18,19 @@ const atouts: Atout[] = [
     titre: "Sur commande",
     description:
       "Chaque pièce est nouée à la main avec patience selon votre demande spécifique et vos délais.",
-    icone: [
-      "M8 2v4",
-      "M16 2v4",
-      "M3 10h18",
-      "M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z",
-    ],
+    icone: "calendrier",
   },
   {
     titre: "Personnalisation",
     description:
       "Choix des teintes de cordes, dimensions adaptées à votre intérieur et prénoms brodés ou calligraphiés.",
-    icone: [
-      "M12 22a10 10 0 1 1 10-10 5 5 0 0 1-5 5h-1.5a1.5 1.5 0 0 0-1.06 2.56A1.5 1.5 0 0 1 13.5 22z",
-      "M8.5 8.5h.01",
-      "M13.5 6.5h.01",
-      "M16.5 10.5h.01",
-      "M7.5 13.5h.01",
-    ],
+    icone: "palette",
   },
   {
     titre: "Pièces uniques",
     description:
       "Chaque branche de bois flotté glanée possède sa courbe singulière, rendant votre objet absolument inimitable.",
-    icone: [
-      "M11.02 3.61a1 1 0 0 1 1.96 0l1.2 3.6a2 2 0 0 0 1.27 1.27l3.6 1.2a1 1 0 0 1 0 1.9l-3.6 1.2a2 2 0 0 0-1.27 1.27l-1.2 3.6a1 1 0 0 1-1.96 0l-1.2-3.6a2 2 0 0 0-1.27-1.27l-3.6-1.2a1 1 0 0 1 0-1.9l3.6-1.2a2 2 0 0 0 1.27-1.27z",
-      "M5 18l.5 1.5L7 20l-1.5.5L5 22l-.5-1.5L3 20l1.5-.5z",
-    ],
+    icone: "etincelles",
   },
 ];
 ---
@@ -60,12 +47,8 @@ const atouts: Atout[] = [
       {
         atouts.map((atout) => (
           <li class="atout">
-            <span class="pastille" aria-hidden="true">
-              <svg viewBox="0 0 24 24" class="icone">
-                {atout.icone.map((trace) => (
-                  <path d={trace} />
-                ))}
-              </svg>
+            <span class="pastille">
+              <Icone nom={atout.icone} />
             </span>
 
             <h3>{atout.titre}</h3>
@@ -166,13 +149,9 @@ const atouts: Atout[] = [
     border-radius: var(--rayon-rond);
   }
 
-  .icone {
+  .pastille :global(.icone) {
     inline-size: 1.5em;
     block-size: 1.5em;
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 1.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    color: var(--color-accent);
   }
 </style>
