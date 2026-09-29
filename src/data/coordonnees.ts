@@ -1,3 +1,5 @@
+import type { NomIcone } from "@/components/UI/Icone.astro";
+
 export const email = "contact@mamcram.fr";
 
 export const telephone = {
@@ -13,3 +15,10 @@ export const reseaux = {
   facebook: { url: "https://www.facebook.com/", texte: "Facebook" },
   leboncoin: { url: "https://www.leboncoin.fr/", texte: "Le Bon Coin" },
 };
+
+/** Réseaux avec leur icône, dans l'ordre d'affichage (pied de page et menu mobile). */
+export const listeReseaux: { url: string; texte: string; icone: NomIcone }[] = [
+  { ...reseaux.instagram, icone: "instagram" },
+  { ...reseaux.facebook, icone: "facebook" },
+  { ...reseaux.leboncoin, icone: "etiquette" },
+];

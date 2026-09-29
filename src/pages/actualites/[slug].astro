@@ -1,0 +1,104 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import FilAriane from "@/components/UI/FilAriane.astro";
+import LienFleche from "@/components/UI/LienFleche.astro";
+import Icone from "@/components/UI/Icone.astro";
+import { formaterDate, dateIso } from "@/lib/date";
+
+export const getStaticPaths = (async () => {
+  const actualites = await getCollection("actualites");
+
+  return actualites.map((actualite) => ({
+    params: { slug: actualite.id },
+    props: { actualite },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = { actualite: CollectionEntry<"actualites"> };
+
+const { actualite } = Astro.props;
+const { titre, date, resume, photo } = actualite.data;
+// `render` transforme le corps Markdown de l'actualité en composant affichable.
+const { Content } = await render(actualite);
+---
+
+<Layout titre={`${titre} — MAM'CRAM`} description={resume}>
+  <main class="container">
+    <FilAriane parent={{ href: "/actualites/", texte: "Actualités" }} courant={titre} />
+
+    <article class="article">
+      <header class="entete">
+        <p class="date">
+          <Icone nom="calendrier" />
+          <time datetime={dateIso(date)}>{formaterDate(date)}</time>
+        </p>
+        <h1>{titre}</h1>
+      </header>
+
+      {/* Photo visible dès l'arrivée sur la page : chargée tout de suite, pas en différé. */}
+      <Image class="photo" src={photo.src} alt={photo.alt} loading="eager" />
+
+      <div class="texte">
+        <Content />
+      </div>
+
+      <footer>
+        <LienFleche href="/actualites/">Toutes les actualités</LienFleche>
+      </footer>
+    </article>
+  </main>
+</Layout>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .article {
+    display: grid;
+    gap: var(--espace-l);
+    max-width: 65ch; // largeur de lecture confortable, comme les intros (55ch)
+    margin-inline: auto;
+    padding-block: var(--espace-l) var(--espace-xl);
+  }
+
+  .entete {
+    display: grid;
+    gap: var(--espace-s);
+  }
+
+  .date {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-s);
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+  }
+
+  .date :global(.icone) {
+    inline-size: 1.2em;
+    block-size: 1.2em;
+    color: var(--color-accent);
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--rayon-m);
+  }
+
+  // Le HTML du Markdown n'a pas les classes du composant : :global() est
+  // nécessaire pour l'atteindre, limité aux éléments sous .texte.
+  .texte {
+    display: grid;
+    gap: var(--espace-m);
+
+    :global(h2) {
+      margin-block-start: var(--espace-m);
+      font-size: var(--h4);
+    }
+  }
+</style>

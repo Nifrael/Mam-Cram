@@ -40,4 +40,16 @@ const objets = defineCollection({
     }),
 });
 
-export const collections = { gammes, objets };
+// Le texte de l'article est le corps du fichier Markdown, sous le frontmatter.
+const actualites = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/actualites" }),
+  schema: ({ image }) =>
+    z.object({
+      titre: z.string(),
+      date: z.coerce.date(),
+      resume: z.string(),
+      photo: photo(image),
+    }),
+});
+
+export const collections = { gammes, objets, actualites };

@@ -1,0 +1,88 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { formaterDate, dateIso } from "@/lib/date";
+import LienFleche from "@/components/UI/LienFleche.astro";
+import Icone from "@/components/UI/Icone.astro";
+
+type Props = {
+  actualite: CollectionEntry<"actualites">;
+  // h3 sous une section de l'accueil, h2 directement sous le h1 de la page actualités.
+  niveauTitre?: 2 | 3;
+};
+
+const { actualite, niveauTitre = 2 } = Astro.props;
+const { titre, date, resume, photo } = actualite.data;
+const Titre = niveauTitre === 3 ? "h3" : "h2";
+---
+
+<article class="carte">
+  <Image class="photo" src={photo.src} alt={photo.alt} />
+  <div class="corps">
+    <p class="date">
+      <Icone nom="calendrier" />
+      <time datetime={dateIso(date)}>{formaterDate(date)}</time>
+    </p>
+    <Titre class="titre">{titre}</Titre>
+    <p class="resume">{resume}</p>
+    <LienFleche href={`/actualites/${actualite.id}/`}>
+      Lire l'article
+      <span class="visually-hidden">{titre}</span>
+    </LienFleche>
+  </div>
+</article>
+
+<style lang="scss">
+  .carte {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  // Le lien « Lire l'article » reste collé en bas, même si les titres
+  // n'ont pas la même longueur d'une carte à l'autre.
+  .corps {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--espace-s);
+    padding: var(--espace-m);
+  }
+
+  .date {
+    display: flex;
+    align-items: center;
+    gap: var(--espace-s);
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+  }
+
+  .date :global(.icone) {
+    inline-size: 1.2em;
+    block-size: 1.2em;
+    color: var(--color-accent);
+  }
+
+  .titre {
+    font-size: var(--h5);
+  }
+
+  // Résumé coupé à 2 lignes avec « … », comme sur la maquette.
+  .resume {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+</style>

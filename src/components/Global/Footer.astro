@@ -1,7 +1,7 @@
 ---
-import { email, telephone, reseaux } from "@/data/coordonnees";
+import { email, telephone, listeReseaux } from "@/data/coordonnees";
 import type { CollectionEntry } from "astro:content";
-import Icone, { type NomIcone } from "@/components/UI/Icone.astro";
+import Icone from "@/components/UI/Icone.astro";
 
 type Props = { gammes: CollectionEntry<"gammes">[] };
 
@@ -18,12 +18,6 @@ const navigation = [
   })),
   { href: "/notre-histoire/", texte: "Notre histoire" },
   { href: "/contact/", texte: "Contact" },
-];
-
-const listeReseaux: { url: string; texte: string; icone: NomIcone }[] = [
-  { ...reseaux.instagram, icone: "instagram" },
-  { ...reseaux.facebook, icone: "facebook" },
-  { ...reseaux.leboncoin, icone: "etiquette" },
 ];
 
 const annee = new Date().getFullYear();

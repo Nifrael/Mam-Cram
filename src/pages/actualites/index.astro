@@ -1,0 +1,64 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import EnTetePage from "@/components/UI/EnTetePage.astro";
+import CarteActualite from "@/components/Actualites/CarteActualite.astro";
+import { getCollection } from "astro:content";
+import { actualitesParDate } from "@/lib/actualites";
+
+const actualites = actualitesParDate(await getCollection("actualites"));
+
+// [À VALIDER]
+const titre = "La vie de l'atelier,";
+const accent = "au fil des saisons.";
+const intro =
+  "Glanages, nouvelles créations, marchés et ateliers : les nouvelles de MAM'CRAM, racontées depuis l'atelier.";
+---
+
+<Layout
+  titre="Actualités — MAM'CRAM"
+  description="Les nouvelles de l'atelier MAM'CRAM : nouvelles créations en macramé et bois flotté, marchés d'artisans et ateliers d'initiation."
+>
+  <main class="container">
+    <EnTetePage titre={titre} accent={accent} intro={intro} />
+
+    {
+      actualites.length > 0 ? (
+        <ul class="grille">
+          {actualites.map((actualite) => (
+            <li>
+              <CarteActualite actualite={actualite} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="vide">Les premières nouvelles de l'atelier arrivent bientôt.</p>
+      )
+    }
+  </main>
+</Layout>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .grille {
+    list-style: none;
+    display: grid;
+    gap: var(--espace-l);
+    padding-block-end: var(--espace-xl);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .vide {
+    padding-block-end: var(--espace-xl);
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+</style>

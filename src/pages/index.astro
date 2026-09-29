@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { gammesAffichees } from "@/lib/gammes";
+import { actualitesParDate } from "@/lib/actualites";
 import Hero from "@/components/Home/Hero.astro";
 import GammesList from "@/components/Home/GammesList.astro";
 import Personnalisation from "@/components/Home/Personnalisation.astro";
@@ -9,6 +10,8 @@ import Histoire from "@/components/Home/Histoire.astro";
 import Actualites from "@/components/Home/Actualites.astro";
 
 const gammes = gammesAffichees(await getCollection("gammes"));
+// Les trois plus récentes seulement ; les autres sont sur la page Actualités.
+const actualites = actualitesParDate(await getCollection("actualites")).slice(0, 3);
 ---
 
 <Layout
@@ -20,6 +23,6 @@ const gammes = gammesAffichees(await getCollection("gammes"));
     <GammesList gammes={gammes} />
     <Personnalisation />
     <Histoire />
-    <Actualites />
+    {actualites.length > 0 && <Actualites actualites={actualites} />}
   </main>
 </Layout>
