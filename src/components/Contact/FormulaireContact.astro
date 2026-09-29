@@ -1,5 +1,9 @@
 ---
+import { URL_SITE, WEB3FORMS_CLE } from "astro:env/server";
 import Bouton from "@/components/UI/Bouton.astro";
+
+// Web3Forms exige une adresse complète pour la redirection après envoi.
+const pageMerci = new URL("/contact/merci/", URL_SITE).href;
 
 const typesDeDemande = [
   "Projet sur-mesure",
@@ -11,27 +15,29 @@ const typesDeDemande = [
 
 {
   /*
-    Netlify Forms : au déploiement, Netlify repère `data-netlify` dans le HTML
-    généré et reçoit les envois. `action` = page affichée après l'envoi.
-    `netlify-honeypot` : champ piège invisible, rempli seulement par les robots.
+    Web3Forms : le formulaire est envoyé directement à leur service, qui le
+    transmet par email puis redirige vers `redirect`. Aucun JavaScript, et le
+    même code fonctionne quel que soit l'hébergeur.
   */
 }
 <form
   class="formulaire"
-  name="contact"
   method="POST"
-  action="/contact/merci/"
-  data-netlify="true"
-  netlify-honeypot="champ-piege"
+  action="https://api.web3forms.com/submit"
   aria-labelledby="titre-formulaire"
 >
+  <input type="hidden" name="access_key" value={WEB3FORMS_CLE} />
+  <input type="hidden" name="subject" value="Nouveau message depuis le site MAM'CRAM" />
+  <input type="hidden" name="from_name" value="Site MAM'CRAM" />
+  <input type="hidden" name="redirect" value={pageMerci} />
   <h2 id="titre-formulaire" class="titre">Envoyez-nous un message</h2>
   <p class="aide">Tous les champs sont obligatoires.</p>
 
+  {/* Champ piège : invisible, coché seulement par les robots. `botcheck` est le nom attendu par Web3Forms. */}
   <p class="visually-hidden">
     <label>
-      Ne pas remplir ce champ
-      <input name="champ-piege" tabindex="-1" autocomplete="off" />
+      Ne pas cocher cette case
+      <input type="checkbox" name="botcheck" tabindex="-1" />
     </label>
   </p>
 
@@ -42,7 +48,7 @@ const typesDeDemande = [
 
   <div class="champ">
     <label for="email">Adresse email</label>
-    {/* `name="email"` : Netlify s'en sert comme adresse de réponse dans l'email reçu. */}
+    {/* `name="email"` : Web3Forms s'en sert comme adresse de réponse dans l'email reçu. */}
     <input id="email" name="email" type="email" autocomplete="email" required />
   </div>
 
