@@ -13,6 +13,17 @@ export default defineConfig({
       },
     },
   },
+  // Images responsives pour tout le site : chaque <Image> reçoit plusieurs tailles
+  // (srcset) et le navigateur télécharge celle qui correspond à l'écran, au lieu
+  // de la photo originale en 4000 px.
+  image: {
+    layout: "constrained",
+  },
+  // CSS écrit directement dans chaque page : une requête bloquante de moins avant
+  // l'affichage. Le CSS du site est léger, le perdre du cache coûte peu.
+  build: {
+    inlineStylesheets: "always",
+  },
   env: {
     schema: {
       WEB3FORMS_CLE: envField.string({ context: "server", access: "public" }),
