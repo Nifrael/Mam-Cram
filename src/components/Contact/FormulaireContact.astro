@@ -142,7 +142,9 @@ const typesDeDemande = [
 
   // Bordure en texte secondaire : le trait sable de la charte est trop pâle
   // pour qu'on repère le champ (contraste 3:1 exigé pour les contours de champs).
-  input,
+  // Les radios et la case piège sont exclus : cachés par .visually-hidden, ils
+  // prenaient quand même `width: 100%` et faisaient déborder la page à droite.
+  input:not([type="radio"], [type="checkbox"]),
   textarea {
     width: 100%;
     padding: var(--espace-s);
