@@ -1,6 +1,7 @@
 ---
-import { reseaux } from "@/data/coordonnees";
+import { email, reseaux, listeReseaux } from "@/data/coordonnees";
 import Icone from "@/components/UI/Icone.astro";
+import Bouton from "@/components/UI/Bouton.astro";
 
 const liens = [
   { href: "/", texte: "Accueil" },
@@ -10,6 +11,15 @@ const liens = [
   { href: "/contact/", texte: "Contact" },
 ];
 
+// "page" sur la page exacte, "true" dans une sous-page de la rubrique
+// (une gamme dans Créations, un article dans Actualités).
+const pageActuelle = Astro.url.pathname;
+const ariaCurrent = (href: string) => {
+  if (pageActuelle === href) return "page";
+  if (href !== "/" && pageActuelle.startsWith(href)) return "true";
+  return undefined;
+};
+
 const instagram = reseaux.instagram.url;
 ---
 
@@ -17,30 +27,59 @@ const instagram = reseaux.instagram.url;
   <div class="navbar container">
     <a class="logo" href="/">MAM'CRAM</a>
 
-    <nav id="menu-principal" aria-label="Navigation principale">
-      <ul>
-        {
-          liens.map((lien) => (
-            <li>
-              <a href={lien.href}>{lien.texte}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <div id="menu-principal" class="panneau">
+      <nav aria-label="Navigation principale">
+        <ul class="liens">
+          {
+            liens.map((lien) => (
+              <li>
+                <a href={lien.href} aria-current={ariaCurrent(lien.href)}>
+                  {lien.texte}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      {/* Visible seulement dans le menu mobile : sur grand écran, ces liens sont dans la page et le pied de page. */}
+      <div class="panneau__bas">
+        <Bouton href="/contact/">Parler de mon projet</Bouton>
+        <ul class="reseaux">
+          {
+            listeReseaux.map((reseau) => (
+              <li>
+                <a href={reseau.url} target="_blank" rel="noopener">
+                  <Icone nom={reseau.icone} />
+                  {reseau.texte}
+                  <span class="visually-hidden">(nouvel onglet)</span>
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href={`mailto:${email}`}>
+              <Icone nom="email" />
+              {email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <a class="reseau" href={instagram} target="_blank" rel="noopener">
       <span class="visually-hidden">Instagram (nouvel onglet)</span>
       <Icone nom="instagram" />
     </a>
 
+    {/* « Menu » plutôt que « Ouvrir le menu » : aria-expanded annonce déjà s'il est ouvert ou fermé. */}
     <button
       type="button"
       id="bascule-menu"
       aria-controls="menu-principal"
       aria-expanded="false"
     >
-      <span class="visually-hidden">Ouvrir le menu</span>
+      <span class="visually-hidden">Menu</span>
       <span class="trait" aria-hidden="true"></span>
     </button>
   </div>
@@ -48,22 +87,40 @@ const instagram = reseaux.instagram.url;
 
 <script>
   const bascule = document.getElementById("bascule-menu");
-  const menu = document.getElementById("menu-principal");
+  const panneau = document.getElementById("menu-principal");
+  // Même valeur que $breakpoint-tablet : au-delà, le menu est affiché en ligne.
+  const ecranMobile = window.matchMedia("(width < 768px)");
 
-  const fermer = () => {
-    bascule?.setAttribute("aria-expanded", "false");
-    menu?.classList.remove("opened");
+  const definirOuvert = (ouvert: boolean) => {
+    bascule?.setAttribute("aria-expanded", String(ouvert));
+    panneau?.classList.toggle("ouvert", ouvert);
+    // La page derrière le menu devient inerte : ni clic ni tabulation,
+    // le focus reste dans l'en-tête sans piège à coder.
+    document
+      .querySelectorAll("body > :not(header)")
+      .forEach((element) => element.toggleAttribute("inert", ouvert));
   };
 
   bascule?.addEventListener("click", () => {
-    const ouvert = bascule.getAttribute("aria-expanded") === "true";
-    bascule.setAttribute("aria-expanded", String(!ouvert));
-    menu?.classList.toggle("opened", !ouvert);
+    definirOuvert(bascule.getAttribute("aria-expanded") !== "true");
   });
 
   document.addEventListener("keydown", (evenement) => {
-    if (evenement.key === "Escape") fermer();
+    if (evenement.key === "Escape" && panneau?.classList.contains("ouvert")) {
+      definirOuvert(false);
+      bascule?.focus();
+    }
   });
+
+  // Passage en grand écran menu ouvert (rotation de tablette) : on referme,
+  // sinon la page resterait inerte alors que le bouton a disparu.
+  ecranMobile.addEventListener("change", (evenement) => {
+    if (!evenement.matches) definirOuvert(false);
+  });
+
+  // Bouton « retour » du navigateur : la page revient de son cache telle
+  // qu'on l'a quittée, menu ouvert compris.
+  window.addEventListener("pageshow", () => definirOuvert(false));
 </script>
 
 <style lang="scss">
@@ -74,6 +131,11 @@ const instagram = reseaux.instagram.url;
     position: relative;
     background: var(--color-bg-secondary);
     border-bottom: 1px solid var(--color-border);
+  }
+
+  // Menu ouvert : la page derrière ne défile plus.
+  :global(html:has(#bascule-menu[aria-expanded="true"])) {
+    overflow: hidden;
   }
 
   .navbar {
@@ -162,7 +224,6 @@ const instagram = reseaux.instagram.url;
     }
   }
 
-
   button[aria-expanded="true"] .trait {
     background: transparent;
 
@@ -175,48 +236,96 @@ const instagram = reseaux.instagram.url;
     }
   }
 
-
-  nav {
+  // Mobile : panneau qui occupe tout l'écran sous la navbar.
+  // `visibility` plutôt que `display: none` : elle se prête à une transition,
+  // et un élément caché ainsi sort quand même de la tabulation.
+  .panneau {
     position: absolute;
-    inset-inline: 0;
     top: 100%;
+    inset-inline: 0;
     z-index: 1;
-    display: none;
-    padding: var(--espace-m);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--espace-l);
+    height: calc(100dvh - var(--hauteur-entete));
+    // Sur un téléphone à l'horizontale, le contenu défile dans le panneau.
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--espace-l) var(--gouttiere);
     background: var(--color-bg-secondary);
-    border-bottom: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--espace-s)));
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s;
 
-    &.opened {
-      display: block;
+    &.ouvert {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
     }
 
     @include breakpoint-up($breakpoint-tablet) {
       position: static;
       display: block;
+      height: auto;
+      overflow: visible;
       padding: 0;
-      border: none;
       background: none;
+      border: none;
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 
-  ul {
+  .liens {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--espace-m);
+    display: grid;
 
     @include breakpoint-up($breakpoint-tablet) {
-      flex-direction: row;
+      display: flex;
       gap: var(--espace-l);
     }
   }
 
-  ul a {
-    color: var(--color-text-secondary);
+  .liens a {
+    display: block;
+    padding-block: var(--espace-s);
+    font-family: var(--font-title);
+    font-size: var(--h3);
+    line-height: 1.2;
+    color: var(--color-text);
     text-decoration: none;
     transition: 0.5s color ease-in-out;
+
+    // En grand, l'accent sauge atteint le contraste AA (texte large).
+    &[aria-current] {
+      color: var(--color-accent);
+      font-style: italic;
+    }
+
+    @include breakpoint-up($breakpoint-tablet) {
+      padding-block: 0;
+      font-family: var(--font-text);
+      font-size: inherit;
+      color: var(--color-text-secondary);
+
+      // En petit, l'accent sauge manque de contraste pour du texte : on
+      // fonce le texte et on garde le sauge pour le soulignement.
+      &[aria-current] {
+        color: var(--color-text);
+        font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-underline-offset: var(--espace-xs);
+      }
+    }
 
     @include breakpoint-up($breakpoint-desktop) {
       &:hover {
@@ -225,8 +334,47 @@ const instagram = reseaux.instagram.url;
     }
   }
 
+  .panneau__bas {
+    display: grid;
+    gap: var(--espace-l);
+    padding-block-start: var(--espace-l);
+    border-top: 1px solid var(--color-border);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      display: none;
+    }
+  }
+
+  .reseaux {
+    list-style: none;
+    display: grid;
+    gap: var(--espace-s);
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--espace-s);
+      padding-block: var(--espace-xs);
+      color: var(--color-text-secondary);
+      font-size: var(--base-size);
+      text-decoration: none;
+    }
+
+    :global(.icone) {
+      inline-size: 1.1em;
+      block-size: 1.1em;
+    }
+  }
+
   a:focus-visible,
   button:focus-visible {
     @include focus-visible;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panneau {
+      transform: none;
+      transition: visibility 0s;
+    }
   }
 </style>
