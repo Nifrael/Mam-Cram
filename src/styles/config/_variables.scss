@@ -22,6 +22,8 @@ $sauge-fonce: #748a70;
 $terre-clair: #726a62;
 $terre-fonce: #453e39;
 
+$terracotta: #a84a32;
+
 // Fin des couleurs
 
 :root {
@@ -46,6 +48,9 @@ $terre-fonce: #453e39;
   --color-accent: #{$sauge-fonce};
   --color-accent-inversed: #{$sauge-clair};
   --color-border: #{$sable};
+
+  // États
+  --color-error: #{$terracotta};
 
   // Échelle typographique
   --base-size: 1rem;

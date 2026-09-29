@@ -1,0 +1,202 @@
+---
+import { URL_SITE, WEB3FORMS_CLE } from "astro:env/server";
+import Bouton from "@/components/UI/Bouton.astro";
+
+// Web3Forms exige une adresse complète pour la redirection après envoi.
+const pageMerci = new URL("/contact/merci/", URL_SITE).href;
+
+const typesDeDemande = [
+  "Projet sur-mesure",
+  "Cadeau de naissance",
+  "Question sur une pièce",
+  "Autre demande",
+];
+---
+
+{
+  /*
+    Web3Forms : le formulaire est envoyé directement à leur service, qui le
+    transmet par email puis redirige vers `redirect`. Aucun JavaScript, et le
+    même code fonctionne quel que soit l'hébergeur.
+  */
+}
+<form
+  class="formulaire"
+  method="POST"
+  action="https://api.web3forms.com/submit"
+  aria-labelledby="titre-formulaire"
+>
+  <input type="hidden" name="access_key" value={WEB3FORMS_CLE} />
+  <input type="hidden" name="subject" value="Nouveau message depuis le site MAM'CRAM" />
+  <input type="hidden" name="from_name" value="Site MAM'CRAM" />
+  <input type="hidden" name="redirect" value={pageMerci} />
+  <h2 id="titre-formulaire" class="titre">Envoyez-nous un message</h2>
+  <p class="aide">Tous les champs sont obligatoires.</p>
+
+  {/* Champ piège : invisible, coché seulement par les robots. `botcheck` est le nom attendu par Web3Forms. */}
+  <p class="visually-hidden">
+    <label>
+      Ne pas cocher cette case
+      <input type="checkbox" name="botcheck" tabindex="-1" />
+    </label>
+  </p>
+
+  <div class="champ">
+    <label for="nom">Nom et prénom</label>
+    <input id="nom" name="nom" type="text" autocomplete="name" required />
+  </div>
+
+  <div class="champ">
+    <label for="email">Adresse email</label>
+    {/* `name="email"` : Web3Forms s'en sert comme adresse de réponse dans l'email reçu. */}
+    <input id="email" name="email" type="email" autocomplete="email" required />
+  </div>
+
+  <fieldset class="champ">
+    <legend>Type de demande</legend>
+    <div class="choix">
+      {
+        typesDeDemande.map((type, index) => (
+          <label class="option">
+            <input
+              class="visually-hidden"
+              type="radio"
+              name="type-de-demande"
+              value={type}
+              checked={index === 0}
+            />
+            {type}
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <div class="champ">
+    <label for="message">Votre message</label>
+    <p id="aide-message" class="aide">
+      Pour un projet sur-mesure : dimensions souhaitées, teintes, prénom à
+      intégrer, date…
+    </p>
+    <textarea
+      id="message"
+      name="message"
+      rows="6"
+      aria-describedby="aide-message"
+      required></textarea>
+  </div>
+
+  <div class="envoi">
+    <Bouton type="submit">Envoyer mon message</Bouton>
+    <p class="aide">
+      Vos coordonnées servent uniquement à vous répondre.{" "}
+      <a href="/politique-de-confidentialite/">Politique de confidentialité</a>
+    </p>
+  </div>
+</form>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .formulaire {
+    display: grid;
+    gap: var(--espace-m);
+    padding: var(--espace-l) var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      padding: var(--espace-l);
+    }
+  }
+
+  .titre {
+    font-size: var(--h4);
+  }
+
+  .aide {
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+  }
+
+  .champ {
+    display: grid;
+    gap: var(--espace-xs);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  label,
+  legend {
+    font-size: var(--base-size);
+  }
+
+  legend {
+    margin-block-end: var(--espace-xs);
+    padding: 0;
+  }
+
+  // Bordure en texte secondaire : le trait sable de la charte est trop pâle
+  // pour qu'on repère le champ (contraste 3:1 exigé pour les contours de champs).
+  input,
+  textarea {
+    width: 100%;
+    padding: var(--espace-s);
+    font: inherit;
+    color: var(--color-text);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-text-secondary);
+    border-radius: var(--rayon-s);
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+
+    // :user-invalid ne s'active qu'après une saisie ou une tentative d'envoi,
+    // pas au chargement de la page : on ne signale pas une erreur trop tôt.
+    &:user-invalid {
+      border-color: var(--color-error);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  // Types de demande : de vrais boutons radio (clavier et lecteurs d'écran),
+  // affichés en pastilles. :has() stylise l'étiquette selon l'état de son input.
+  .choix {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-s);
+  }
+
+  .option {
+    padding: var(--espace-xs) var(--espace-m);
+    font-size: var(--little-text);
+    color: var(--color-action-text);
+    background: var(--color-action-inversed);
+    border-radius: var(--rayon-m);
+    cursor: pointer;
+    transition: 0.3s background ease-in-out;
+
+    &:has(:checked) {
+      color: var(--color-text-inversed);
+      background: var(--color-action);
+    }
+
+    &:has(:focus-visible) {
+      @include focus-visible;
+    }
+  }
+
+  .envoi {
+    display: grid;
+    justify-items: start;
+    gap: var(--espace-s);
+  }
+</style>
