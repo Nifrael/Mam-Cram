@@ -1,0 +1,51 @@
+---
+type Props = {
+  parent: { href: string; texte: string };
+  courant: string;
+};
+
+const { parent, courant } = Astro.props;
+---
+
+<nav class="fil-ariane" aria-label="Fil d'Ariane">
+  <ol>
+    <li><a href={parent.href}>{parent.texte}</a></li>
+    <li aria-current="page">{courant}</li>
+  </ol>
+</nav>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .fil-ariane {
+    padding-block-start: var(--espace-m);
+    font-size: var(--little-text);
+
+    ol {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--espace-s);
+    }
+
+    li {
+      color: var(--color-text-secondary);
+    }
+
+    li + li::before {
+      content: "/";
+      margin-inline-end: var(--espace-s);
+    }
+
+    a {
+      text-decoration: none;
+
+      @include breakpoint-up($breakpoint-desktop) {
+        &:hover {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+</style>

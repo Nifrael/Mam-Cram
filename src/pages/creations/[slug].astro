@@ -5,6 +5,7 @@ import Layout from "@/layouts/Layout.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
 import CarteObjet from "@/components/Creations/CarteObjet.astro";
+import FilAriane from "@/components/UI/FilAriane.astro";
 import { gammesAffichees } from "@/lib/gammes";
 import { objetsDeLaGamme } from "@/lib/objets";
 
@@ -29,12 +30,7 @@ const { titre, description } = gamme.data;
 
 <Layout titre={`${titre} — MAM'CRAM`} description={description}>
   <main class="container">
-    <nav class="fil-ariane" aria-label="Fil d'Ariane">
-      <ol>
-        <li><a href="/creations/">Nos créations</a></li>
-        <li aria-current="page">{titre}</li>
-      </ol>
-    </nav>
+    <FilAriane parent={{ href: "/creations/", texte: "Nos créations" }} courant={titre} />
 
     <EnTetePage titre={titre} intro={description} />
 
@@ -61,37 +57,6 @@ const { titre, description } = gamme.data;
 <style lang="scss">
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
-
-  .fil-ariane {
-    padding-block-start: var(--espace-m);
-    font-size: var(--little-text);
-
-    ol {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--espace-s);
-    }
-
-    li {
-      color: var(--color-text-secondary);
-    }
-
-    li + li::before {
-      content: "/";
-      margin-inline-end: var(--espace-s);
-    }
-
-    a {
-      text-decoration: none;
-
-      @include breakpoint-up($breakpoint-desktop) {
-        &:hover {
-          color: var(--color-accent);
-        }
-      }
-    }
-  }
 
   .grille {
     list-style: none;

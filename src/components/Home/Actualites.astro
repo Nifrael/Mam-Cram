@@ -1,45 +1,14 @@
 ---
-import { Image } from "astro:assets";
-import { formaterDate, dateIso } from "@/lib/date";
+import type { CollectionEntry } from "astro:content";
 import LienFleche from "@/components/UI/LienFleche.astro";
-import Icone from "@/components/UI/Icone.astro";
-// Photo provisoire : chaque actualité aura sa propre photo.
-import photo from "../../assets/images/Hero.jpg";
+import CarteActualite from "@/components/Actualites/CarteActualite.astro";
+
+type Props = { actualites: CollectionEntry<"actualites">[] };
+
+const { actualites } = Astro.props;
 
 const surtitre = "La vie de l'atelier";
 const titre = "Dernières nouvelles";
-
-type Actualite = {
-  slug: string;
-  titre: string;
-  date: Date;
-  resume: string;
-};
-
-const actualites: Actualite[] = [
-  {
-    slug: "retour-de-glanage",
-    titre: "Retour de glanage : les trésors de nos côtes bretonnes",
-    date: new Date("2026-05-14"),
-    resume:
-      "Après les grandes marées de printemps, nous avons arpenté les criques pour dénicher des bois flottés aux formes singulières.",
-  },
-  {
-    slug: "nouvelle-collection-estivale",
-    titre: "Nouvelle collection estivale : teintes terre cuite et sauge",
-    date: new Date("2026-04-28"),
-    resume:
-      "Des nuances douces et solaires inspirées des paysages de garrigue et des herbes sauvages de l'été.",
-  },
-  {
-    slug: "marche-artisanat-ateliers-initiation",
-    titre: "Marché d'artisanat d'art & ateliers d'initiation",
-    date: new Date("2026-04-10"),
-    resume:
-      "Venez nous rencontrer et apprendre les premiers nœuds lors de nos prochaines sessions partagées au marché.",
-  },
-];
-
 ---
 
 <section class="actualites" aria-labelledby="titre-actualites">
@@ -56,23 +25,7 @@ const actualites: Actualite[] = [
       {
         actualites.map((actualite) => (
           <li>
-            <article class="carte">
-              <Image class="photo" src={photo} alt="" />
-              <div class="corps">
-                <p class="date">
-                  <Icone nom="calendrier" />
-                  <time datetime={dateIso(actualite.date)}>
-                    {formaterDate(actualite.date)}
-                  </time>
-                </p>
-                <h3>{actualite.titre}</h3>
-                <p class="resume">{actualite.resume}</p>
-                <LienFleche href={`/actualites/${actualite.slug}/`}>
-                  Lire l'article
-                  <span class="visually-hidden">{actualite.titre}</span>
-                </LienFleche>
-              </div>
-            </article>
+            <CarteActualite actualite={actualite} niveauTitre={3} />
           </li>
         ))
       }
@@ -119,58 +72,5 @@ const actualites: Actualite[] = [
     @include breakpoint-up($breakpoint-tablet) {
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-
-  .carte {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100%;
-    overflow: hidden;
-    background: var(--color-bg-cards);
-    border: 1px solid var(--color-border);
-    border-radius: var(--rayon-m);
-  }
-
-  .photo {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-  }
-
-  // Le lien « Lire l'article » reste collé en bas, même si les titres
-  // n'ont pas la même longueur d'une carte à l'autre.
-  .corps {
-    display: grid;
-    grid-template-rows: auto auto 1fr auto;
-    gap: var(--espace-s);
-    padding: var(--espace-m);
-  }
-
-  .date {
-    display: flex;
-    align-items: center;
-    gap: var(--espace-s);
-    color: var(--color-text-secondary);
-    font-size: var(--little-text);
-  }
-
-  .date :global(.icone) {
-    inline-size: 1.2em;
-    block-size: 1.2em;
-    color: var(--color-accent);
-  }
-
-  h3 {
-    font-size: var(--h5);
-  }
-
-  // Résumé coupé à 2 lignes avec « … », comme sur la maquette.
-  .resume {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    color: var(--color-text-secondary);
-    font-size: var(--base-size);
   }
 </style>
