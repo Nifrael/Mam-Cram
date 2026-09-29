@@ -129,8 +129,15 @@ const instagram = reseaux.instagram.url;
 
   header {
     position: relative;
+    // `view-transition-name` isole l'en-tête dans sa propre couche : sans ce
+    // z-index, un élément de la page (la flèche animée des en-têtes de page)
+    // pourrait passer par-dessus le menu mobile ouvert.
+    z-index: 1;
     background: var(--color-bg-secondary);
     border-bottom: 1px solid var(--color-border);
+    // Nommé à part pour la transition de page : identique d'une page à
+    // l'autre, il reste immobile pendant que le contenu fait son fondu.
+    view-transition-name: en-tete;
   }
 
   // Menu ouvert : la page derrière ne défile plus.

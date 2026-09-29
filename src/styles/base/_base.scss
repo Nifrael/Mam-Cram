@@ -49,6 +49,15 @@ svg {
   @include focus-visible;
 }
 
+// Fondu entre deux pages, géré par le navigateur, sans JavaScript.
+// Les navigateurs qui ne le connaissent pas changent de page normalement.
+// Désactivé si l'utilisateur a demandé moins d'animations.
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
 .container {
   @include container;
 }
