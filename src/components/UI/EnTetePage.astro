@@ -19,7 +19,10 @@ const { titre, accent, intro } = Astro.props;
     <p class="intro">{intro}</p>
   </div>
 
-  <Icone nom="fleche-bas" />
+  {/* Deux éléments, deux animations : le span s'efface au scroll, l'icône rebondit. */}
+  <span class="fleche">
+    <Icone nom="fleche-bas" />
+  </span>
 </header>
 
 <style lang="scss">
@@ -54,13 +57,13 @@ const { titre, accent, intro } = Astro.props;
     font-size: var(--base-size);
   }
 
-  .en-tete > :global(.icone) {
+  .fleche > :global(.icone) {
     inline-size: 1.5em;
     block-size: 1.5em;
     color: var(--color-text-secondary);
     stroke-width: 1.5;
-    animation: rebond 1.6s ease-in-out 1s 3;
     opacity: 50%;
+    animation: rebond 1.6s ease-in-out 1s 3;
   }
 
   @keyframes rebond {
@@ -75,33 +78,25 @@ const { titre, accent, intro } = Astro.props;
     }
   }
 
+  // Fondu lié au scroll, écrit en propriétés détaillées et jamais avec le
+  // raccourci `animation` : au build, le minifieur fusionnait `animation` et
+  // `animation-timeline` en une seule déclaration que les navigateurs rejettent
+  // (animation-timeline n'est pas autorisé dans le raccourci).
   @supports (animation-timeline: scroll()) {
-    .en-tete > :global(.icone) {
-      animation:
-        rebond 1.6s ease-in-out 1s 3,
-        disparition linear both;
-    }
-
-    .en-tete > :global(.icone) {
-      animation-timeline: auto, scroll();
-      animation-range: normal, 0 var(--espace-xl);
+    .fleche {
+      animation-name: disparition;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll();
+      animation-range: 0 var(--espace-xl);
     }
   }
 
+  // Moins d'animations demandé : plus de rebond. Le fondu au scroll reste,
+  // il ne fait rien bouger.
   @media (prefers-reduced-motion: reduce) {
-    .en-tete > :global(.icone) {
+    .fleche > :global(.icone) {
       animation: none;
-    }
-
-    @supports (animation-timeline: scroll()) {
-      .en-tete > :global(.icone) {
-        animation: disparition linear both;
-      }
-
-      .en-tete > :global(.icone) {
-        animation-timeline: scroll();
-        animation-range: 0 var(--espace-xl);
-      }
     }
   }
 </style>
