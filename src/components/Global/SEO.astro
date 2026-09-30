@@ -9,7 +9,8 @@ type Props = {
   description: string;
   indexable?: boolean;
   type?: "website" | "article";
-  image?: { src: ImageMetadata; alt: string };
+  // `string` : les photos des actualités viennent de Sanity (URL distante).
+  image?: { src: ImageMetadata | string; alt: string };
   donneesStructurees?: JsonLd;
 };
 

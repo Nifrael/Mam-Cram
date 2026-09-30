@@ -28,6 +28,9 @@ export default defineConfig({
   // de la photo originale en 4000 px.
   image: {
     layout: "constrained",
+    // ESSAI SANITY : Astro a le droit de télécharger les photos de Sanity au
+    // build pour les optimiser. Les visiteurs ne contactent que notre site.
+    domains: ["cdn.sanity.io"],
   },
   // CSS écrit directement dans chaque page : une requête bloquante de moins avant
   // l'affichage. Le CSS du site est léger, le perdre du cache coûte peu.
@@ -40,6 +43,8 @@ export default defineConfig({
       URL_SITE: envField.string({ context: "server", access: "public", url: true }),
       // Interrupteur d'indexation : false tant que le site est en test (fausses données).
       INDEXATION: envField.boolean({ context: "server", access: "public", default: false }),
+      // Identifiant du projet Sanity (public, visible dans les URL des photos).
+      SANITY_PROJET: envField.string({ context: "server", access: "public" }),
     },
   },
   fonts: [

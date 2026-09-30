@@ -13,7 +13,7 @@ type Props = {
   description: string;
   indexable?: boolean;
   type?: "website" | "article";
-  image?: { src: ImageMetadata; alt: string };
+  image?: { src: ImageMetadata | string; alt: string };
   donneesStructurees?: JsonLd;
 };
 

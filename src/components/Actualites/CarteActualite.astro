@@ -17,7 +17,7 @@ const Titre = niveauTitre === 3 ? "h3" : "h2";
 ---
 
 <article class="carte">
-  <Image class="photo" src={photo.src} alt={photo.alt} />
+  <Image class="photo" src={photo.src} width={photo.largeur} height={photo.hauteur} alt={photo.alt} />
   <div class="corps">
     <p class="date">
       <Icone nom="calendrier" />

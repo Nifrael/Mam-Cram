@@ -54,7 +54,15 @@ const donneesStructurees = graphe(
       </header>
 
       {/* Photo visible dès l'arrivée sur la page : chargée tout de suite, pas en différé. */}
-      <Image class="photo" src={photo.src} alt={photo.alt} loading="eager" fetchpriority="high" />
+      <Image
+        class="photo"
+        src={photo.src}
+        width={photo.largeur}
+        height={photo.hauteur}
+        alt={photo.alt}
+        loading="eager"
+        fetchpriority="high"
+      />
 
       <div class="texte">
         <Content />
