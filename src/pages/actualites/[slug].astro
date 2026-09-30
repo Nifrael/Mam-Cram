@@ -39,7 +39,14 @@ const { Content } = await render(actualite);
       </header>
 
       {/* Photo visible dès l'arrivée sur la page : chargée tout de suite, pas en différé. */}
-      <Image class="photo" src={photo.src} alt={photo.alt} loading="eager" />
+      <Image
+        class="photo"
+        src={photo.src}
+        width={photo.largeur}
+        height={photo.hauteur}
+        alt={photo.alt}
+        loading="eager"
+      />
 
       <div class="texte">
         <Content />
