@@ -198,6 +198,13 @@ const pastilles = [
   .reseaux-entete a {
     display: flex;
     color: var(--color-text-secondary);
+    transition: 0.5s color ease-in-out;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
   }
 
   .reseaux-entete :global(.icone) {
