@@ -52,4 +52,15 @@ const actualites = defineCollection({
     }),
 });
 
-export const collections = { gammes, objets, actualites };
+// Pages légales : un fichier Markdown par page, lu par la page du même nom
+// dans src/pages/. Le texte est le corps Markdown.
+const pagesLegales = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/pages-legales" }),
+  schema: z.object({
+    titre: z.string(),
+    description: z.string(),
+    miseAJour: z.coerce.date(),
+  }),
+});
+
+export const collections = { gammes, objets, actualites, pagesLegales };
