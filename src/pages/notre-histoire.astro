@@ -1,18 +1,48 @@
 ---
+import { getEntry, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
 
-const titre = "L'art du fil et de l'onde,";
-const accent = "façonné par les marées.";
-const intro =
-  "Au cœur des PO, MAM'CRAM est né d'une rencontre entre la patience infinie du tissage à la main et la beauté brute du bois flotté échoué sur nos grèves catalanes.";
+const page = await getEntry("histoire", "notre-histoire");
+// Fichier Markdown supprimé ou renommé : le build s'arrête avec un message clair.
+if (!page) throw new Error("src/content/histoire/notre-histoire.md est introuvable.");
+
+const { titre, accent, intro, description } = page.data;
+// `render` transforme le corps Markdown en composant affichable.
+const { Content } = await render(page);
 ---
 
-<Layout
-  titre="Notre histoire — MAM'CRAM"
-  description="L'histoire de MAM'CRAM : Jean-Luc et Christelle, un atelier de macramé et de bois flotté né sur les grèves catalanes, dans les Pyrénées-Orientales."
->
+<Layout titre="Notre histoire, atelier de macramé et bois flotté — MAM'CRAM" description={description}>
   <main class="container">
     <EnTetePage titre={titre} accent={accent} intro={intro} />
+
+    <div class="texte">
+      <Content />
+    </div>
   </main>
 </Layout>
+
+<style lang="scss">
+  // Structure seulement : la mise en forme attend la maquette validée.
+  // Le HTML du Markdown n'a pas les classes du composant : :global() est
+  // nécessaire pour l'atteindre, limité aux éléments sous .texte.
+  .texte {
+    display: grid;
+    gap: var(--espace-m);
+    max-width: 50rem;
+    margin-inline: auto;
+    padding-block: var(--espace-l) var(--espace-xl);
+
+    :global(h2) {
+      font-size: var(--h4);
+    }
+
+    :global(* + h2) {
+      margin-block-start: var(--espace-m);
+    }
+
+    :global(p) {
+      color: var(--color-text-secondary);
+    }
+  }
+</style>

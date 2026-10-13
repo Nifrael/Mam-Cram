@@ -1,12 +1,14 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import FilAriane from "@/components/UI/FilAriane.astro";
 import LienFleche from "@/components/UI/LienFleche.astro";
 import Icone from "@/components/UI/Icone.astro";
 import { formaterDate, dateIso } from "@/lib/date";
+import { article, graphe } from "@/lib/donnees-structurees";
+import { nomDuSite, formatPartage } from "@/data/seo";
 
 export const getStaticPaths = (async () => {
   const actualites = await getCollection("actualites");
@@ -23,9 +25,22 @@ const { actualite } = Astro.props;
 const { titre, date, resume, photo } = actualite.data;
 // `render` transforme le corps Markdown de l'actualité en composant affichable.
 const { Content } = await render(actualite);
+
+// Même image recadrée que celle des aperçus de partage (le fichier est réutilisé).
+const imagePartage = await getImage({ src: photo.src, ...formatPartage });
+const donneesStructurees = graphe(
+  article({
+    titre,
+    description: resume,
+    url: new URL(Astro.url.pathname, Astro.site),
+    datePublication: date,
+    image: new URL(imagePartage.src, Astro.site).href,
+    editeur: { nom: nomDuSite, url: new URL("/", Astro.site) },
+  }),
+);
 ---
 
-<Layout titre={`${titre} — MAM'CRAM`} description={resume}>
+<Layout titre={`${titre} — MAM'CRAM`} description={resume} image={photo} type="article" donneesStructurees={donneesStructurees}>
   <main class="container">
     <FilAriane parent={{ href: "/actualites/", texte: "Actualités" }} courant={titre} />
 
@@ -39,7 +54,7 @@ const { Content } = await render(actualite);
       </header>
 
       {/* Photo visible dès l'arrivée sur la page : chargée tout de suite, pas en différé. */}
-      <Image class="photo" src={photo.src} alt={photo.alt} loading="eager" />
+      <Image class="photo" src={photo.src} alt={photo.alt} loading="eager" fetchpriority="high" />
 
       <div class="texte">
         <Content />
