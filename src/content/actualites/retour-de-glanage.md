@@ -1,6 +1,6 @@
 ---
 # [À VALIDER] Actualité d'exemple, à remplacer par les vraies nouvelles de l'atelier.
-titre: "Retour de glanage : les trésors de nos côtes bretonnes"
+titre: "Retour de glanage : les trésors de nos côtes catalanes"
 date: 2026-05-14
 resume: Après les grandes marées de printemps, nous avons arpenté les criques pour dénicher des bois flottés aux formes singulières.
 photo:
