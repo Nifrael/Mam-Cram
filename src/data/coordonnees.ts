@@ -20,5 +20,5 @@ export const reseaux = {
 export const listeReseaux: { url: string; texte: string; icone: NomIcone }[] = [
   { ...reseaux.instagram, icone: "instagram" },
   { ...reseaux.facebook, icone: "facebook" },
-  { ...reseaux.leboncoin, icone: "etiquette" },
+  { ...reseaux.leboncoin, icone: "leboncoin" },
 ];

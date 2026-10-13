@@ -1,7 +1,7 @@
 ---
 type Props = {
   variante?: "principal" | "secondaire";
-} & ({ href: string } | { type: "submit" | "button" });
+} & ({ href: string; target?: string; rel?: string } | { type: "submit" | "button" });
 
 const { variante = "principal", ...attributs } = Astro.props;
 const Balise = "href" in attributs ? "a" : "button";

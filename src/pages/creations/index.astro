@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import BlocGamme from "@/components/Creations/BlocGamme.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
+import BoutiqueLeBonCoin from "@/components/UI/BoutiqueLeBonCoin.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
 import { getCollection } from "astro:content";
 import { gammesAffichees } from "@/lib/gammes";
@@ -31,6 +32,10 @@ const intro =
       }
     </ul>
 
+    <div class="boutique">
+      <BoutiqueLeBonCoin />
+    </div>
+
     <div class="sur-mesure">
       <AppelSurMesure />
     </div>
@@ -55,6 +60,10 @@ const intro =
     @include breakpoint-up($breakpoint-tablet) {
       padding-block: var(--espace-xl);
     }
+  }
+
+  .boutique {
+    padding-block-end: var(--espace-l);
   }
 
   .sur-mesure {
