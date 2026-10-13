@@ -26,10 +26,10 @@ type Props = {
 };
 
 const { gamme, objets } = Astro.props;
-const { titre, description } = gamme.data;
+const { titre, description, photo } = gamme.data;
 ---
 
-<Layout titre={`${titre} — MAM'CRAM`} description={description}>
+<Layout titre={`${titre} en macramé et bois flotté — MAM'CRAM`} description={description} image={photo}>
   <main class="container">
     <FilAriane parent={{ href: "/creations/", texte: "Nos créations" }} courant={titre} />
 

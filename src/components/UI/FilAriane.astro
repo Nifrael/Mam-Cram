@@ -1,11 +1,24 @@
 ---
+import { filAriane, graphe, versJsonLd } from "@/lib/donnees-structurees";
+
 type Props = {
   parent: { href: string; texte: string };
   courant: string;
 };
 
 const { parent, courant } = Astro.props;
+
+// Le fil d'Ariane décrit la même chose pour les moteurs de recherche : les données
+// sont déjà ici, on les réutilise plutôt que de les redire dans chaque page.
+const donneesStructurees = graphe(
+  filAriane({
+    parent: { nom: parent.texte, url: new URL(parent.href, Astro.site) },
+    courant: { nom: courant, url: new URL(Astro.url.pathname, Astro.site) },
+  }),
+);
 ---
+
+<script type="application/ld+json" set:html={versJsonLd(donneesStructurees)} />
 
 <nav class="fil-ariane" aria-label="Fil d'Ariane">
   <ol>
