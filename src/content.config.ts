@@ -63,4 +63,16 @@ const pagesLegales = defineCollection({
   }),
 });
 
-export const collections = { gammes, objets, actualites, pagesLegales };
+// Page « Notre histoire » : un seul fichier Markdown. Les champs alimentent l'en-tête
+// de la page et ses balises SEO ; le corps Markdown en est le texte.
+const histoire = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/histoire" }),
+  schema: z.object({
+    titre: z.string(),
+    accent: z.string(),
+    intro: z.string(),
+    description: z.string(),
+  }),
+});
+
+export const collections = { gammes, objets, actualites, pagesLegales, histoire };

@@ -2,9 +2,19 @@
 import { defineConfig, envField } from "astro/config";
 import { fontProviders } from "astro/config";
 import { fileURLToPath } from "node:url";
+import { loadEnv } from "vite";
+import sitemap from "@astrojs/sitemap";
+
+// astro.config.mjs est lu avant le build : `astro:env` n'y existe pas encore.
+// loadEnv lit le fichier .env et les variables de l'hébergeur (process.env).
+const { URL_SITE } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
+  // Adresse du site : sert au sitemap, et plus tard aux URL canoniques.
+  site: URL_SITE,
+  // Le sitemap liste les pages indexables ; la page de remerciement n'a rien à faire dedans.
+  integrations: [sitemap({ filter: (page) => !page.includes("/contact/merci") })],
   vite: {
     resolve: {
       alias: {
@@ -28,6 +38,8 @@ export default defineConfig({
     schema: {
       WEB3FORMS_CLE: envField.string({ context: "server", access: "public" }),
       URL_SITE: envField.string({ context: "server", access: "public", url: true }),
+      // Interrupteur d'indexation : false tant que le site est en test (fausses données).
+      INDEXATION: envField.boolean({ context: "server", access: "public", default: false }),
     },
   },
   fonts: [
