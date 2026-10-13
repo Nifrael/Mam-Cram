@@ -1,0 +1,15 @@
+---
+import { getEntry, render } from "astro:content";
+import PageLegale from "@/layouts/PageLegale.astro";
+
+const page = await getEntry("pagesLegales", "mentions-legales");
+// Fichier Markdown supprimé ou renommé : le build s'arrête avec un message clair.
+if (!page) throw new Error("src/content/pages-legales/mentions-legales.md est introuvable.");
+
+// `render` transforme le corps Markdown en composant affichable.
+const { Content } = await render(page);
+---
+
+<PageLegale page={page}>
+  <Content />
+</PageLegale>

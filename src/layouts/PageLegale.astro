@@ -1,0 +1,159 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import LienFleche from "@/components/UI/LienFleche.astro";
+import { formaterDate, dateIso } from "@/lib/date";
+
+// Gabarit commun aux pages légales : il enveloppe Layout et reçoit le texte
+// (le corps Markdown de la page) dans son <slot />.
+type Props = { page: CollectionEntry<"pagesLegales"> };
+
+const { titre, description, miseAJour } = Astro.props.page.data;
+---
+
+<Layout titre={`${titre} — MAM'CRAM`} description={description}>
+  <main class="container">
+    <article class="page">
+      <header class="entete">
+        <p class="surtitre">Informations légales</p>
+        <h1>{titre}</h1>
+        <p class="date">
+          Dernière mise à jour : <time datetime={dateIso(miseAJour)}>{formaterDate(miseAJour)}</time>
+        </p>
+      </header>
+
+      <div class="texte">
+        <slot />
+      </div>
+
+      <footer class="pied">
+        <p>Une question sur ces informations ?</p>
+        <LienFleche href="/contact/">Nous écrire</LienFleche>
+      </footer>
+    </article>
+  </main>
+</Layout>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .page {
+    display: grid;
+    gap: var(--espace-l);
+    max-width: 50rem;
+    margin-inline: auto;
+    padding-block: var(--espace-xl);
+  }
+
+  .entete {
+    display: grid;
+    gap: var(--espace-s);
+    justify-items: center;
+    text-align: center;
+  }
+
+  // Même surtitre que les sections de l'accueil.
+  .surtitre {
+    color: var(--color-accent);
+    font-size: var(--base-size);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  // Un cran sous le h1 des autres pages : « confidentialité » est un mot long
+  // qui déborderait sur téléphone à la taille --h1.
+  h1 {
+    font-size: var(--h2);
+  }
+
+  .date {
+    color: var(--color-text-secondary);
+    font-size: var(--little-text);
+  }
+
+  // Même carte que le formulaire de contact et les encarts du site.
+  // Le HTML du Markdown n'a pas les classes du composant : :global() est
+  // nécessaire pour l'atteindre, limité aux éléments sous .texte.
+  .texte {
+    display: grid;
+    gap: var(--espace-m);
+    padding: var(--espace-l) var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      padding: var(--espace-xl);
+    }
+
+    :global(h2) {
+      font-size: var(--h5);
+    }
+
+    // Un filet sépare chaque rubrique de la précédente.
+    :global(* + h2) {
+      margin-block-start: var(--espace-m);
+      padding-block-start: var(--espace-l);
+      border-top: 1px solid var(--color-border);
+    }
+
+    :global(p),
+    :global(li) {
+      color: var(--color-text-secondary);
+      font-size: var(--base-size);
+
+      // Justifié à partir de la tablette seulement : sur téléphone, les lignes
+      // sont trop courtes et la justification creuse de grands blancs entre
+      // les mots. La césure automatique (possible grâce à lang="fr") limite
+      // ces blancs sur les lignes plus longues.
+      @include breakpoint-up($breakpoint-tablet) {
+        text-align: justify;
+        hyphens: auto;
+      }
+    }
+
+    :global(strong) {
+      color: var(--color-text);
+    }
+
+    // Le reset global retire le padding des listes : sans lui, les puces
+    // sortiraient de la carte.
+    :global(ul) {
+      display: grid;
+      gap: var(--espace-xs);
+      padding-inline-start: var(--espace-m);
+    }
+
+    :global(li::marker) {
+      color: var(--color-accent);
+    }
+
+    :global(a) {
+      color: var(--color-text);
+      text-decoration-color: var(--color-accent);
+      text-underline-offset: var(--espace-xs);
+      transition: 0.3s color ease-in-out;
+
+      @include breakpoint-up($breakpoint-desktop) {
+        &:hover {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+
+  .pied {
+    display: grid;
+    gap: var(--espace-xs);
+    justify-items: center;
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+    text-align: center;
+  }
+
+  .pied p {
+    font-size: inherit;
+  }
+</style>
