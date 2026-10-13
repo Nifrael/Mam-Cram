@@ -20,7 +20,11 @@ const ariaCurrent = (href: string) => {
   return undefined;
 };
 
-const instagram = reseaux.instagram.url;
+// Les deux réseaux visibles en permanence à côté du menu : Instagram et la boutique.
+const pastilles = [
+  { ...reseaux.instagram, icone: "instagram" as const },
+  { ...reseaux.leboncoin, icone: "leboncoin" as const },
+];
 ---
 
 <header>
@@ -67,10 +71,18 @@ const instagram = reseaux.instagram.url;
       </div>
     </div>
 
-    <a class="reseau" href={instagram} target="_blank" rel="noopener">
-      <span class="visually-hidden">Instagram (nouvel onglet)</span>
-      <Icone nom="instagram" />
-    </a>
+    <ul class="reseaux-entete">
+      {
+        pastilles.map((reseau) => (
+          <li>
+            <a href={reseau.url} target="_blank" rel="noopener">
+              <span class="visually-hidden">{reseau.texte} (nouvel onglet)</span>
+              <Icone nom={reseau.icone} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
     {/* « Menu » plutôt que « Ouvrir le menu » : aria-expanded annonce déjà s'il est ouvert ou fermé. */}
     <button
@@ -172,9 +184,10 @@ const instagram = reseaux.instagram.url;
     }
   }
 
-  .reseau {
+  .reseaux-entete {
     display: flex;
-    color: var(--color-text-secondary);
+    gap: var(--espace-s);
+    list-style: none;
     margin-inline-start: auto;
 
     @include breakpoint-up($breakpoint-tablet) {
@@ -182,7 +195,19 @@ const instagram = reseaux.instagram.url;
     }
   }
 
-  .reseau :global(.icone) {
+  .reseaux-entete a {
+    display: flex;
+    color: var(--color-text-secondary);
+    transition: 0.5s color ease-in-out;
+
+    @include breakpoint-up($breakpoint-desktop) {
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  .reseaux-entete :global(.icone) {
     inline-size: 1.375rem;
     block-size: 1.375rem;
     stroke-width: 1.5;
