@@ -7,4 +7,6 @@ export default defineCliConfig({
   },
   // Adresse du Studio en ligne : https://mamcram.sanity.studio
   studioHost: "mamcram",
+  // Identifiant du Studio déployé : évite la question à chaque `sanity deploy`.
+  deployment: { appId: "cc81pputz95wwcs8vppvmjh2" },
 });
