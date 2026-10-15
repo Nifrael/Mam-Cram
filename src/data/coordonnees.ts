@@ -10,10 +10,13 @@ export const telephone = {
 export const reseaux = {
   instagram: {
     url: "https://www.instagram.com/mamcram66/",
-    texte: "Instagram @mamcram66",
+    texte: "Instagram",
   },
   facebook: { url: "https://www.facebook.com/", texte: "Facebook" },
-  leboncoin: { url: "https://www.leboncoin.fr/", texte: "Le Bon Coin" },
+  leboncoin: {
+    url: "https://www.leboncoin.fr/profile/1e85dd81-24e9-4cc1-bb58-620994ec1fc5/offers",
+    texte: "Le Bon Coin",
+  },
 };
 
 /** Réseaux avec leur icône, dans l'ordre d'affichage (pied de page et menu mobile). */
