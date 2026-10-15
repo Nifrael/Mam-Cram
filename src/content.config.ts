@@ -9,7 +9,7 @@ const photo = (image: SchemaContext["image"]) =>
   });
 
 const gammes = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/gammes" }),
+  loader: glob({ pattern: "*.yaml", base: "./src/content/gammes" }),
   schema: ({ image }) =>
     z.object({
       titre: z.string(),
@@ -22,7 +22,7 @@ const gammes = defineCollection({
 });
 
 const objets = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/objets" }),
+  loader: glob({ pattern: "*.yaml", base: "./src/content/objets" }),
   schema: ({ image }) =>
     z.object({
       titre: z.string(),

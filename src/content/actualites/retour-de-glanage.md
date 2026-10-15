@@ -4,7 +4,7 @@ titre: "Retour de glanage : les trésors de nos côtes catalanes"
 date: 2026-05-14
 resume: Après les grandes marées de printemps, nous avons arpenté les criques pour dénicher des bois flottés aux formes singulières.
 photo:
-  src: ../../assets/images/Hero.jpg
+  src: ./retour-de-glanage/photo.jpg
   alt: Bois flottés ramassés sur une plage, posés sur le sable
 ---
 
