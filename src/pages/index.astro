@@ -44,8 +44,8 @@ const donneesStructurees = graphe(
   <main>
     <Hero />
     <GammesList gammes={gammes} />
+    {actualites.length > 0 && <Actualites actualites={actualites} />}
     <Personnalisation />
     <Histoire />
-    {actualites.length > 0 && <Actualites actualites={actualites} />}
   </main>
 </Layout>
