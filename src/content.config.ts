@@ -32,7 +32,6 @@ const objets = defineCollection({
       dimensions: z.string(),
       matieres: z.array(z.string()),
       personnalisable: z.boolean().default(false),
-      pieceUnique: z.boolean().default(false),
       statut: z.enum(["disponible", "sur-commande", "epuise"]),
       prix: z.number().positive().optional(),
       lienStripe: z.url().optional(),
