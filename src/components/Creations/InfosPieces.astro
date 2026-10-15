@@ -1,0 +1,28 @@
+---
+import { reseaux } from "@/data/coordonnees";
+import LienFleche from "@/components/UI/LienFleche.astro";
+
+// Ligne discrète au-dessus des créations : toutes les pièces sont uniques, et
+// l'achat se fait sur Le Bon Coin (le bandeau complet est en bas de page).
+// [À VALIDER] textes rédigés par Claude
+const unicite = "Chaque pièce est faite main : aucune n'est strictement identique à une autre.";
+const libelleLien = "Les pièces disponibles sont sur notre boutique Le Bon Coin";
+---
+
+<div class="infos">
+  <p class="unicite">{unicite}</p>
+  <LienFleche href={reseaux.leboncoin.url} externe>{libelleLien}</LienFleche>
+</div>
+
+<style lang="scss">
+  .infos {
+    display: grid;
+    gap: var(--espace-xs);
+    padding-block-end: var(--espace-l);
+    text-align: center;
+  }
+
+  .unicite {
+    color: var(--color-text-secondary);
+  }
+</style>
