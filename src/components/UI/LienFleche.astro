@@ -1,17 +1,14 @@
 ---
 type Props = {
   href: string;
-  // Lien vers un autre site : ouvert dans un nouvel onglet, annoncé aux lecteurs d'écran.
-  externe?: boolean;
 };
 
-const { href, externe = false } = Astro.props;
+const { href } = Astro.props;
 ---
 
-<a class="lien" href={href} {...(externe && { target: "_blank", rel: "noopener" })}>
+<a class="lien" href={href}>
   {/* Espace explicite : selon la façon dont le texte est écrit, Astro peut supprimer celui du code. */}
   <slot />{" "}<span class="fleche" aria-hidden="true">→</span>
-  {externe && <span class="visually-hidden">(nouvel onglet)</span>}
 </a>
 
 <style lang="scss">

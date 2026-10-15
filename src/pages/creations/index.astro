@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import BlocGamme from "@/components/Creations/BlocGamme.astro";
-import InfosPieces from "@/components/Creations/InfosPieces.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
 import BoutiqueLeBonCoin from "@/components/UI/BoutiqueLeBonCoin.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
@@ -23,7 +22,7 @@ const intro =
   <main class="container">
     <EnTetePage titre={titre} accent={accent} intro={intro} />
 
-    <InfosPieces />
+    <BoutiqueLeBonCoin variante="compacte" />
 
     <ul class="liste">
       {

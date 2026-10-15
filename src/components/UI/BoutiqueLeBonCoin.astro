@@ -3,24 +3,34 @@ import { reseaux } from "@/data/coordonnees";
 import Bouton from "@/components/UI/Bouton.astro";
 import Icone from "@/components/UI/Icone.astro";
 
+type Props = {
+  // « compacte » : au-dessus des créations, sans titre (le bandeau complet, avec
+  // son titre, reste en bas de page) et avec la phrase sur l'unicité des pièces.
+  variante?: "complete" | "compacte";
+};
+
+const { variante = "complete" } = Astro.props;
+const compacte = variante === "compacte";
+
 // [À VALIDER] textes rédigés par Claude
 const titre = "Une pièce vous plaît ?";
-const description =
-  "Nos créations disponibles sont en vente sur notre boutique Le Bon Coin : c'est là-bas que se fait l'achat.";
-const libelleBouton = "Voir la boutique sur Le Bon Coin";
+const description = compacte
+  ? "Chaque pièce est faite main : aucune n'est strictement identique à une autre. Les pièces disponibles sont sur notre boutique Le Bon Coin."
+  : "Nos créations disponibles sont en vente sur notre boutique Le Bon Coin : c'est là-bas que se fait l'achat.";
+const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur Le Bon Coin";
 ---
 
-<div class="boutique">
+<div class:list={["boutique", { "boutique--compacte": compacte }]}>
   <span class="pastille">
     <Icone nom="leboncoin" />
   </span>
 
   <div class="textes">
-    <h2 class="titre">{titre}</h2>
+    {!compacte && <h2 class="titre">{titre}</h2>}
     <p class="description">{description}</p>
   </div>
 
-  <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener">
+  <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener" variante={compacte ? "secondaire" : "principal"}>
     {libelleBouton}
     <span class="visually-hidden">(nouvel onglet)</span>
   </Bouton>
@@ -46,6 +56,31 @@ const libelleBouton = "Voir la boutique sur Le Bon Coin";
       gap: var(--espace-l);
       justify-items: start;
       text-align: start;
+    }
+  }
+
+  // Version compacte : pastille et texte côte à côte dès le mobile, bouton en dessous ;
+  // sur une seule ligne en grand écran, comme le bandeau complet.
+  .boutique--compacte {
+    grid-template-columns: auto 1fr;
+    justify-items: start;
+    gap: var(--espace-s) var(--espace-m);
+    padding: var(--espace-m);
+    margin-block-end: var(--espace-l);
+    text-align: start;
+
+    :global(.bouton) {
+      grid-column: 1 / -1;
+      justify-self: stretch;
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: auto 1fr auto;
+
+      :global(.bouton) {
+        grid-column: auto;
+        justify-self: end;
+      }
     }
   }
 
