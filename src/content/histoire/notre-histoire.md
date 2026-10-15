@@ -1,16 +1,16 @@
 ---
-# [À VALIDER PAR LE CLIENT] Structure et textes rédigés par Claude, sans information biographique inventée : à remplacer par le récit de Jean-Luc et Christelle.
+# [À VALIDER PAR LE CLIENT] Structure et textes rédigés par Claude, sans information biographique inventée : à remplacer par le récit des clients (sans leurs prénoms : ils ne souhaitent pas être nommés).
 titre: "L'art du fil et de l'onde,"
 accent: "façonné par les marées."
 intro: "Au cœur des PO, MAM'CRAM est né d'une rencontre entre la patience infinie du tissage à la main et la beauté brute du bois flotté échoué sur nos grèves catalanes."
-description: "L'histoire de MAM'CRAM : Jean-Luc et Christelle, un atelier de macramé et de bois flotté né sur les grèves catalanes, dans les Pyrénées-Orientales."
+description: "L'histoire de MAM'CRAM : deux complices, un atelier de macramé et de bois flotté né sur les grèves catalanes, dans les Pyrénées-Orientales."
 ---
 
 <!-- À VALIDER PAR LE CLIENT -->
 
 ## L'atelier
 
-MAM'CRAM est l'atelier de Jean-Luc et Christelle, deux complices qui créent à quatre mains des pièces en macramé et en bois flotté. [À VALIDER]
+MAM'CRAM, c'est notre atelier : nous sommes deux complices qui créons à quatre mains des pièces en macramé et en bois flotté. [À VALIDER]
 
 Chaque création est nouée à la main, sans cadence industrielle : la corde est serrée à la juste tension pour que la pièce soit solide, douce et agréable à regarder. [À VALIDER]
 
