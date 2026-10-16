@@ -1,0 +1,11 @@
+titre: Rideaux personnalisés
+gamme: pieces-maitresses
+resume: Des rideaux personnalisés avec une touche de macramé
+photos:
+  - src: ./rideaux-personnalises/photos/0/src.jpg
+    alt: Rideaux avec une touche de macramé
+dimensions: 60 cm
+matieres: []
+personnalisable: false
+misEnAvant: false
+statut: disponible

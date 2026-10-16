@@ -1,11 +1,13 @@
-# [À VALIDER] Objet d'exemple, à remplacer par les vraies créations.
 titre: Porte-gourde tressé
 gamme: accessoires-et-utiles
 resume: Un porte-gourde à emporter en balade, noué serré pour durer.
 photos:
-  - src: ./porte-gourde/photo-1.jpg
-    alt: Porte-gourde en macramé couleur sable
+  - src: ./porte-gourde/photos/0/src.jpg
+    alt: Porte gourde en macramé
 dimensions: Hauteur 25 cm
-matieres: [Coton macramé, Bois flotté]
+matieres:
+  - Coton macramé
+  - Bois flotté
 personnalisable: false
+misEnAvant: false
 statut: disponible

@@ -1,11 +1,13 @@
-# [À VALIDER] Objet d'exemple, à remplacer par les vraies créations.
 titre: Arbre de vie
 gamme: pieces-maitresses
 resume: Un arbre de vie en macramé, tendu dans un cercle de bois flotté.
 photos:
-  - src: ./arbre-de-vie/photo-1.jpg
-    alt: Arbre de vie en macramé dans un cercle de bois
+  - src: ./arbre-de-vie/photos/0/src.jpg
+    alt: Arbre de vie en macramé
 dimensions: Diamètre 60 cm
-matieres: [Coton macramé, Bois flotté]
+matieres:
+  - Coton macramé
+  - Bois flotté
 personnalisable: true
+misEnAvant: false
 statut: sur-commande
