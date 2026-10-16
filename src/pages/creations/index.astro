@@ -6,13 +6,14 @@ import BoutiqueLeBonCoin from "@/components/UI/BoutiqueLeBonCoin.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
 import { getCollection } from "astro:content";
 import { gammesAffichees } from "@/lib/gammes";
+import { fetesDeSaison } from "@/data/saisons";
 
 const gammes = gammesAffichees(await getCollection("gammes"));
 
 const titre = "Nos créations,";
 const accent = "nouées à la main.";
 const intro =
-  "Trois familles de pièces, toutes nouées à la main dans notre atelier, du petit cadeau de naissance à la grande tenture. Au fil des saisons, nos thématiques de fête (Noël, Halloween, Saint-Valentin, Pâques) viennent compléter la collection."; // [À VALIDER] texte rédigé par Claude
+  `Trois familles de pièces, toutes nouées à la main dans notre atelier, du petit cadeau de naissance à la grande tenture. Au fil des saisons, nos thématiques de fête (${fetesDeSaison}) viennent compléter la collection.`; // [À VALIDER] texte rédigé par Claude
 ---
 
 <Layout
@@ -21,6 +22,8 @@ const intro =
 >
   <main class="container">
     <EnTetePage titre={titre} accent={accent} intro={intro} />
+
+    <BoutiqueLeBonCoin variante="compacte" />
 
     <ul class="liste">
       {

@@ -7,8 +7,8 @@ const { href } = Astro.props;
 ---
 
 <a class="lien" href={href}>
-  <slot />
-  <span class="fleche" aria-hidden="true">→</span>
+  {/* Espace explicite : selon la façon dont le texte est écrit, Astro peut supprimer celui du code. */}
+  <slot />{" "}<span class="fleche" aria-hidden="true">→</span>
 </a>
 
 <style lang="scss">

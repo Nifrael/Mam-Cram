@@ -64,7 +64,7 @@ export default config({
         dimensions: fields.text({ label: "Dimensions", validation: { isRequired: true } }),
         matieres: fields.array(fields.text({ label: "Matière" }), { label: "Matières", itemLabel: (props) => props.value }),
         personnalisable: fields.checkbox({ label: "Personnalisable" }),
-        pieceUnique: fields.checkbox({ label: "Pièce unique" }),
+        misEnAvant: fields.checkbox({ label: "Mettre en avant", description: "Affichée en tête de sa gamme." }),
         statut: fields.select({
           label: "Statut",
           options: [

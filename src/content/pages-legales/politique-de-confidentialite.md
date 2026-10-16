@@ -11,7 +11,7 @@ Cette page explique quelles informations nous recueillons sur ce site, pourquoi,
 
 ## Qui est responsable de vos données ?
 
-Le responsable du traitement est **MAM'CRAM**, représenté par [À COMPLÉTER : nom de l'exploitant]. Vous pouvez nous joindre à contact@mamcram.fr [À VALIDER] ou via la page [Contact](/contact/).
+Le responsable du traitement est **MAM'CRAM**, représenté par [À COMPLÉTER : nom de l'exploitant]. Vous pouvez nous joindre à mamcram66@orange.fr ou via la page [Contact](/contact/).
 
 ## Quelles données recueillons-nous ?
 
@@ -62,7 +62,7 @@ Vous pouvez à tout moment :
 - demander la **limitation** de leur traitement ou vous y **opposer** ;
 - demander leur **portabilité**, c'est-à-dire les récupérer dans un format réutilisable.
 
-Pour exercer ces droits, écrivez-nous à contact@mamcram.fr [À VALIDER] ou via la page [Contact](/contact/). Nous vous répondons dans un délai maximum d'un mois. Nous pouvons vous demander un justificatif d'identité en cas de doute.
+Pour exercer ces droits, écrivez-nous à mamcram66@orange.fr ou via la page [Contact](/contact/). Nous vous répondons dans un délai maximum d'un mois. Nous pouvons vous demander un justificatif d'identité en cas de doute.
 
 Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la **CNIL** : <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">cnil.fr/fr/plaintes<span class="visually-hidden"> (nouvel onglet)</span></a> ou par courrier à CNIL, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.
 

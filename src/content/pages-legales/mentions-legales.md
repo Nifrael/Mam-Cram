@@ -13,8 +13,8 @@ Le site mamcram.fr est édité par **MAM'CRAM**, entreprise artisanale individue
 
 - **Exploitant** : [À COMPLÉTER : prénom et nom de l'exploitant déclaré]
 - **Adresse** : [À COMPLÉTER : adresse professionnelle]
-- **Téléphone** : 06 12 34 56 78 [À VALIDER]
-- **Email** : contact@mamcram.fr [À VALIDER]
+- **Téléphone** : 06 74 15 24 12
+- **Email** : mamcram66@orange.fr
 - **SIRET** : [À COMPLÉTER]
 - **Immatriculation** : [À COMPLÉTER : numéro au Répertoire des métiers]
 - **TVA** : [À COMPLÉTER : « TVA non applicable, article 293 B du CGI » si l'entreprise est en franchise en base]
@@ -31,7 +31,7 @@ Site conçu et réalisé par Julien Marchand.
 
 Le site est hébergé par :
 
-[À COMPLÉTER : nom de l'hébergeur définitif, adresse postale et téléphone ou site web]
+**Cloudflare, Inc.**, 101 Townsend Street, San Francisco, CA 94107, États-Unis — [cloudflare.com](https://www.cloudflare.com/)
 
 ## Propriété intellectuelle
 

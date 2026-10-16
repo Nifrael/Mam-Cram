@@ -1,6 +1,7 @@
 ---
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
 import Icone, { type NomIcone } from "@/components/UI/Icone.astro";
+import { fetesDeSaison } from "@/data/saisons";
 
 const surtitre = "Vos envies prennent forme";
 const titre = "L'art du sur-mesure";
@@ -16,8 +17,7 @@ type Atout = {
 const atouts: Atout[] = [
   {
     titre: "Sur commande",
-    description:
-      "Chaque pièce est nouée à la main avec patience selon votre demande spécifique et vos délais. Nous nous adaptons au fil des saisons et des fêtes : Noël, Halloween, Saint-Valentin, Pâques.",
+    description: `Chaque pièce est nouée à la main avec patience selon votre demande spécifique et vos délais. Nous nous adaptons au fil des saisons et des fêtes : ${fetesDeSaison}.`,
     icone: "calendrier",
   },
   {
