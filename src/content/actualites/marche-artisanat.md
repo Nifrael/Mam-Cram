@@ -1,13 +1,13 @@
 ---
 # [À VALIDER] Actualité d'exemple, à remplacer par les vraies nouvelles de l'atelier.
-titre: "Marché d'artisanat d'art & ateliers d'initiation"
+titre: "Retrouvez-nous au marché d'artisanat d'art"
 date: 2026-04-10
-resume: Venez nous rencontrer et apprendre les premiers nœuds lors de nos prochaines sessions partagées au marché.
+resume: Venez découvrir nos créations de près et discuter de vos projets avec nous au prochain marché.
 photo:
-  src: ./marche-artisanat-ateliers-initiation/photo.jpg
+  src: ./marche-artisanat/photo.jpg
   alt: Stand de créations en macramé sur un marché d'artisans
 ---
 
-[À VALIDER] Venez nous rencontrer et apprendre les premiers nœuds lors de nos prochaines sessions partagées au marché.
+[À VALIDER] Venez découvrir nos créations de près et discuter de vos projets avec nous au prochain marché.
 
-Les ateliers durent une heure, le matériel est fourni et chacun repart avec sa création.
+Vous pourrez toucher les cordes, choisir vos couleurs et repartir avec une idée de pièce sur mesure.
