@@ -61,19 +61,8 @@ export default config({
           itemLabel: (props) => props.fields.alt.value || "Photo",
           validation: { length: { min: 1 } },
         }),
-        dimensions: fields.text({ label: "Dimensions", validation: { isRequired: true } }),
-        matieres: fields.array(fields.text({ label: "Matière" }), { label: "Matières", itemLabel: (props) => props.value }),
         personnalisable: fields.checkbox({ label: "Personnalisable" }),
         misEnAvant: fields.checkbox({ label: "Mettre en avant", description: "Affichée en tête de sa gamme." }),
-        statut: fields.select({
-          label: "Statut",
-          options: [
-            { label: "Disponible", value: "disponible" },
-            { label: "Sur commande", value: "sur-commande" },
-            { label: "Épuisé", value: "epuise" },
-          ],
-          defaultValue: "disponible",
-        }),
       },
     }),
     actualites: collection({

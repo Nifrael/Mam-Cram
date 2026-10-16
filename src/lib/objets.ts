@@ -12,14 +12,3 @@ export function objetsDeLaGamme(objets: Objet[], idGamme: string): Objet[] {
         a.data.titre.localeCompare(b.data.titre, "fr"),
     );
 }
-
-const libellesStatut: Record<Objet["data"]["statut"], string | null> = {
-  disponible: null,
-  "sur-commande": "Sur commande",
-  epuise: "Épuisé",
-};
-
-/** Texte à afficher sous l'objet ; rien quand il est simplement disponible. */
-export function libelleStatut(statut: Objet["data"]["statut"]): string | null {
-  return libellesStatut[statut];
-}

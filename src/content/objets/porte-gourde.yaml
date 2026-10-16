@@ -4,10 +4,5 @@ resume: Un porte-gourde à emporter en balade, noué serré pour durer.
 photos:
   - src: ./porte-gourde/photos/0/src.jpg
     alt: Porte gourde en macramé
-dimensions: Hauteur 25 cm
-matieres:
-  - Coton macramé
-  - Bois flotté
 personnalisable: false
 misEnAvant: false
-statut: disponible

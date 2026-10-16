@@ -4,8 +4,5 @@ resume: Petits sapins de Noël
 photos:
   - src: ./sapins-de-noel/photos/0/src.jpg
     alt: Sapins de Noël en macramé
-dimensions: 10 cm
-matieres: []
 personnalisable: false
 misEnAvant: false
-statut: disponible

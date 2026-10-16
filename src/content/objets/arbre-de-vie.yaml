@@ -4,10 +4,5 @@ resume: Un arbre de vie en macramé, tendu dans un cercle de bois flotté.
 photos:
   - src: ./arbre-de-vie/photos/0/src.jpg
     alt: Arbre de vie en macramé
-dimensions: Diamètre 60 cm
-matieres:
-  - Coton macramé
-  - Bois flotté
 personnalisable: true
 misEnAvant: false
-statut: sur-commande
