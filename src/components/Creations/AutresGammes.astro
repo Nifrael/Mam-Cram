@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = { gammes: CollectionEntry<"gammes">[] };
+
+const { gammes } = Astro.props;
+---
+
+<nav class="autres" aria-labelledby="titre-autres-gammes">
+  <h2 id="titre-autres-gammes" class="titre">Découvrir nos autres gammes</h2>
+  <ul class="liste">
+    {
+      gammes.map((gamme) => (
+        <li>
+          <a class="lien" href={`/creations/${gamme.id}/`}>
+            {gamme.data.titre}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .autres {
+    display: grid;
+    gap: var(--espace-m);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .titre {
+    font-size: var(--h4);
+  }
+
+  // Pastilles qui passent à la ligne selon la place disponible.
+  .liste {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espace-s);
+  }
+
+  .lien {
+    display: block;
+    padding: var(--espace-s) var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+    font-size: var(--base-size);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-action-hover);
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+</style>
