@@ -4,6 +4,8 @@ import CarteGamme from "@/components/Creations/CarteGamme.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
 import BoutiqueLeBonCoin from "@/components/UI/BoutiqueLeBonCoin.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
+import LienFleche from "@/components/UI/LienFleche.astro";
+import { reseaux } from "@/data/coordonnees";
 import { getCollection } from "astro:content";
 import { gammesAffichees } from "@/lib/gammes";
 
@@ -20,8 +22,10 @@ const intro =
   description="Toutes les gammes de MAM'CRAM : petites douceurs, accessoires du quotidien, pièces maîtresses et créations de saison en macramé et bois flotté, faites main."
 >
   <main class="container">
-    <EnTetePage titre={titre} accent={accent} intro={intro}>
-      <BoutiqueLeBonCoin variante="compacte" />
+    <EnTetePage surtitre="Pièces uniques, faites main" titre={titre} accent={accent} intro={intro}>
+      <LienFleche href={reseaux.leboncoin.url} externe slot="action">
+        Voir les pièces disponibles sur Le Bon Coin
+      </LienFleche>
     </EnTetePage>
 
     <ul class="liste">

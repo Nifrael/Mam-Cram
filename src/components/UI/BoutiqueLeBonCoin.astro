@@ -3,40 +3,24 @@ import { reseaux } from "@/data/coordonnees";
 import Bouton from "@/components/UI/Bouton.astro";
 import Icone from "@/components/UI/Icone.astro";
 
-type Props = {
-  // « compacte » : glissée dans l'en-tête des pages créations, sans carte ni titre
-  // (le bandeau complet, avec son titre, reste en bas de page), avec la phrase sur
-  // l'unicité des pièces.
-  variante?: "complete" | "compacte";
-};
-
-const { variante = "complete" } = Astro.props;
-const compacte = variante === "compacte";
-
 // [À VALIDER] textes rédigés par Claude
 const titre = "Une pièce vous plaît ?";
-const description = compacte
-  ? "Chaque pièce est faite main : aucune n'est strictement identique à une autre. Les pièces disponibles sont sur notre boutique Le Bon Coin."
-  : "Nos créations disponibles sont en vente sur notre boutique Le Bon Coin : c'est là-bas que se fait l'achat.";
-const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur Le Bon Coin";
+const description =
+  "Nos créations disponibles sont en vente sur notre boutique Le Bon Coin : c'est là-bas que se fait l'achat.";
 ---
 
-<div class:list={["boutique", { "boutique--compacte": compacte }]}>
-  {
-    !compacte && (
-      <span class="pastille">
-        <Icone nom="leboncoin" />
-      </span>
-    )
-  }
+<div class="boutique">
+  <span class="pastille">
+    <Icone nom="leboncoin" />
+  </span>
 
   <div class="textes">
-    {!compacte && <h2 class="titre">{titre}</h2>}
+    <h2 class="titre">{titre}</h2>
     <p class="description">{description}</p>
   </div>
 
-  <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener" variante={compacte ? "secondaire" : "principal"}>
-    {libelleBouton}
+  <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener">
+    Voir la boutique sur Le Bon Coin
     <span class="visually-hidden">(nouvel onglet)</span>
   </Bouton>
 </div>
@@ -61,25 +45,6 @@ const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur 
       gap: var(--espace-l);
       justify-items: start;
       text-align: start;
-    }
-  }
-
-  // Version compacte : sans carte, elle se fond dans l'en-tête de la page.
-  // Phrase puis bouton, centrés, le bouton restant bien visible.
-  .boutique--compacte {
-    gap: var(--espace-s);
-    padding: 0;
-    background: none;
-    border: none;
-
-    @include breakpoint-up($breakpoint-desktop) {
-      grid-template-columns: none;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .description {
-      max-width: 55ch;
     }
   }
 

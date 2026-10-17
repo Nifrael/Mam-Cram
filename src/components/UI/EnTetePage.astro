@@ -3,37 +3,68 @@ type Props = {
   titre: string;
   accent?: string;
   intro: string;
+  surtitre?: string;
 };
 
-const { titre, accent, intro } = Astro.props;
+const { titre, accent, intro, surtitre } = Astro.props;
 ---
 
 <header class="en-tete">
-  <h1>
-    {titre}
-    {accent && <> <span class="accent">{accent}</span></>}
-  </h1>
-  <p class="intro">{intro}</p>
-  <slot />
+  <div class="textes">
+    {surtitre && <p class="surtitre">{surtitre}</p>}
+    <h1>
+      {titre}
+      {accent && <> <span class="accent">{accent}</span></>}
+    </h1>
+    <p class="intro">{intro}</p>
+  </div>
+
+  {/* Lien secondaire facultatif, à droite du texte sur grand écran. */}
+  {
+    Astro.slots.has("action") && (
+      <div class="action">
+        <slot name="action" />
+      </div>
+    )
+  }
 </header>
 
 <style lang="scss">
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
-  // En-tête compact : le contenu de la page (photos, formulaire…) doit
-  // apparaître dès le premier écran, surtout sur téléphone.
+  // En-tête compact, aligné à gauche comme les sections de l'accueil, et
+  // séparé du contenu par un filet pour que la page respire.
   .en-tete {
     display: grid;
-    gap: var(--espace-s);
-    justify-items: center;
+    gap: var(--espace-m);
     padding-block: var(--espace-l);
-    text-align: center;
+    margin-block-end: var(--espace-l);
+    border-bottom: 1px solid var(--color-border);
 
     @include breakpoint-up($breakpoint-tablet) {
-      gap: var(--espace-m);
-      padding-block: var(--espace-xl) var(--espace-l);
+      padding-block-start: var(--espace-xl);
+      margin-block-end: var(--espace-xl);
     }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: var(--espace-l);
+    }
+  }
+
+  .textes {
+    display: grid;
+    gap: var(--espace-s);
+  }
+
+  .surtitre {
+    color: var(--color-accent);
+    font-size: var(--little-text);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   // Taille --h2 sur mobile pour que les titres longs (page Contact) ne
