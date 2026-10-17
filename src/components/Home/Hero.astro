@@ -93,8 +93,15 @@ const garanties = [
     text-transform: uppercase;
   }
 
+  // Phrase longue : à la taille --h1, elle occupait tout le premier écran
+  // du téléphone. Taille --h2 sur mobile, --h1 à partir de la tablette.
   h1 {
     margin: 0;
+    font-size: var(--h2);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      font-size: var(--h1);
+    }
   }
 
   .accroche {
