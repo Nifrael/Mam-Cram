@@ -11,7 +11,7 @@ const [photo] = objet.data.photos;
 
 <article class="carte">
   <div class="visuel">
-    <Image class="photo" src={photo.src} alt={photo.alt} sizes="(min-width: 1152px) 24rem, (min-width: 768px) 33vw, 50vw" />
+    <Image class="photo" src={photo.src} alt={photo.alt} sizes="(min-width: 1152px) 17rem, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" />
     {personnalisable && <p class="badge">Personnalisable</p>}
   </div>
   <h2 class="titre">{titre}</h2>
@@ -36,7 +36,8 @@ const [photo] = objet.data.photos;
   .photo {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    // Carré : le format des photos prises au téléphone, sans recadrage serré.
+    aspect-ratio: 1;
     object-fit: cover;
     border-radius: var(--rayon-m);
   }

@@ -85,6 +85,10 @@ const { titre, description, photo } = gamme.data;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--espace-xl) var(--espace-l);
     }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .vide {
