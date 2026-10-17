@@ -1,8 +1,7 @@
 ---
-import CarteGamme from "@/components/Home/CarteGamme.astro";
+import CarteGamme from "@/components/Creations/CarteGamme.astro";
 import type { CollectionEntry } from "astro:content";
 import LienFleche from "@/components/UI/LienFleche.astro";
-import { fetesDeSaison } from "@/data/saisons";
 
 type Props = { gammes: CollectionEntry<"gammes">[] };
 
@@ -11,7 +10,7 @@ const { gammes } = Astro.props;
 const surtitre = "Catalogue de l'atelier";
 const titre = "Nos gammes";
 const accroche =
-  `Des accessoires du quotidien aux pièces architecturales, chaque création est confectionnée avec soin, nœud après nœud. Et, selon les saisons, des thématiques de fête : ${fetesDeSaison}.`; // [À VALIDER] texte rédigé par Claude
+  "Des accessoires du quotidien aux pièces architecturales, chaque création est confectionnée avec soin, nœud après nœud. Et, au fil des saisons, des gammes de fête."; // [À VALIDER] texte rédigé par Claude
 ---
 
 <section class="gammes">

@@ -1,35 +1,34 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import BlocGamme from "@/components/Creations/BlocGamme.astro";
+import CarteGamme from "@/components/Creations/CarteGamme.astro";
 import EnTetePage from "@/components/UI/EnTetePage.astro";
 import BoutiqueLeBonCoin from "@/components/UI/BoutiqueLeBonCoin.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
 import { getCollection } from "astro:content";
 import { gammesAffichees } from "@/lib/gammes";
-import { fetesDeSaison } from "@/data/saisons";
 
 const gammes = gammesAffichees(await getCollection("gammes"));
 
 const titre = "Nos créations,";
 const accent = "nouées à la main.";
 const intro =
-  `Trois familles de pièces, toutes nouées à la main dans notre atelier, du petit cadeau de naissance à la grande tenture. Au fil des saisons, nos thématiques de fête (${fetesDeSaison}) viennent compléter la collection.`; // [À VALIDER] texte rédigé par Claude
+  "Du petit cadeau de naissance à la grande tenture, toutes nos pièces sont nouées à la main dans notre atelier. Au fil des saisons, de nouvelles gammes viennent compléter la collection."; // [À VALIDER] texte rédigé par Claude
 ---
 
 <Layout
   titre="Nos créations en macramé et bois flotté — MAM'CRAM"
-  description="Les trois gammes de MAM'CRAM : petites douceurs, accessoires du quotidien et pièces maîtresses en macramé et bois flotté, faites main."
+  description="Toutes les gammes de MAM'CRAM : petites douceurs, accessoires du quotidien, pièces maîtresses et créations de saison en macramé et bois flotté, faites main."
 >
   <main class="container">
-    <EnTetePage titre={titre} accent={accent} intro={intro} />
-
-    <BoutiqueLeBonCoin variante="compacte" />
+    <EnTetePage titre={titre} accent={accent} intro={intro}>
+      <BoutiqueLeBonCoin variante="compacte" />
+    </EnTetePage>
 
     <ul class="liste">
       {
-        gammes.map((gamme, index) => (
+        gammes.map((gamme) => (
           <li>
-            <BlocGamme gamme={gamme} index={index} />
+            <CarteGamme gamme={gamme} niveauTitre={2} />
           </li>
         ))
       }
@@ -49,24 +48,24 @@ const intro =
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
+  // Même grille que les gammes de l'accueil : 1, 2 puis 3 colonnes.
   .liste {
     list-style: none;
-  }
-
-  li {
-    padding-block: var(--espace-l);
-
-    & + li {
-      border-top: 1px solid var(--color-border);
-    }
+    display: grid;
+    gap: var(--espace-m);
 
     @include breakpoint-up($breakpoint-tablet) {
-      padding-block: var(--espace-xl);
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--espace-l);
     }
   }
 
   .boutique {
-    padding-block-end: var(--espace-l);
+    padding-block: var(--espace-xl) var(--espace-l);
   }
 
   .sur-mesure {

@@ -3,9 +3,14 @@ import { Image } from 'astro:assets';
 import LienFleche from "@/components/UI/LienFleche.astro";
 import type { CollectionEntry } from "astro:content";
 
-type Props = { gamme: CollectionEntry<"gammes"> };
+type Props = {
+  gamme: CollectionEntry<"gammes">;
+  // h3 sous une section de l'accueil, h2 directement sous le h1 de la page créations.
+  niveauTitre?: 2 | 3;
+};
 
-const { gamme } = Astro.props;
+const { gamme, niveauTitre = 3 } = Astro.props;
+const Titre = niveauTitre === 2 ? "h2" : "h3";
 ---
 
 <article class="carte">
@@ -14,7 +19,7 @@ const { gamme } = Astro.props;
     <p class="badge">{gamme.data.badge}</p>
   </div>
 
-  <h3>{gamme.data.titre}</h3>
+  <Titre class="titre">{gamme.data.titre}</Titre>
   <p class="description">{gamme.data.description}</p>
 
   <LienFleche href={`/creations/${gamme.id}/`}>
@@ -66,8 +71,9 @@ const { gamme } = Astro.props;
     font-size: var(--little-text);
   }
 
-  h3 {
+  .titre {
     margin: 0;
+    font-size: var(--h3);
   }
 
   .description {
