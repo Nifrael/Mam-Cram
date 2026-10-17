@@ -1,0 +1,10 @@
+titre: Halloween
+badge: Saison
+description: >-
+  Araignées, citrouilles, squelettes Découvrez nos créations en macramé pour
+  Halloween!
+photo:
+  src: ./halloween/photo/src.jpg
+  alt: Araignées et squelettes en macramé pour Halloween
+ordre: 1
+visible: true

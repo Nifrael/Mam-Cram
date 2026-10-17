@@ -1,8 +1,0 @@
-# [À VALIDER] Objet d'exemple, à remplacer par les vraies créations.
-titre: Couronne au prénom
-gamme: petites-douceurs
-resume: Couronne de fleurs avec le prénom de l'enfant.
-photos:
-  - src: ./couronne-prenom/photo-1.jpg
-    alt: Couronne de fleurs portant un prénom
-personnalisable: true
