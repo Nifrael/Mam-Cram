@@ -10,7 +10,7 @@ const { gamme } = Astro.props;
 
 <article class="carte">
   <div class="visuel">
-    <Image src={gamme.data.photo.src} alt="" />
+    <Image src={gamme.data.photo.src} alt="" sizes="(min-width: 1024px) 24rem, (min-width: 768px) 50vw, 100vw" />
     <p class="badge">{gamme.data.badge}</p>
   </div>
 

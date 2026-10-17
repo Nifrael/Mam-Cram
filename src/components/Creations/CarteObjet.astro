@@ -9,7 +9,7 @@ const [photo] = objet.data.photos;
 ---
 
 <article class="carte">
-  <Image class="photo" src={photo.src} alt={photo.alt} />
+  <Image class="photo" src={photo.src} alt={photo.alt} sizes="(min-width: 1152px) 24rem, (min-width: 768px) 33vw, 50vw" />
   <h2 class="titre">{objet.data.titre}</h2>
 </article>
 
