@@ -1,6 +1,4 @@
 ---
-import Icone from "@/components/UI/Icone.astro";
-
 type Props = {
   titre: string;
   accent?: string;
@@ -11,37 +9,41 @@ const { titre, accent, intro } = Astro.props;
 ---
 
 <header class="en-tete">
-  <div class="bloc">
-    <h1>
-      {titre}
-      {accent && <> <span class="accent">{accent}</span></>}
-    </h1>
-    <p class="intro">{intro}</p>
-  </div>
-
-  <span class="fleche">
-    <Icone nom="fleche-bas" />
-  </span>
+  <h1>
+    {titre}
+    {accent && <> <span class="accent">{accent}</span></>}
+  </h1>
+  <p class="intro">{intro}</p>
+  <slot />
 </header>
 
 <style lang="scss">
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
+  // En-tête compact : le contenu de la page (photos, formulaire…) doit
+  // apparaître dès le premier écran, surtout sur téléphone.
   .en-tete {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    align-items: center;
-    justify-items: center;
-    min-height: calc(100dvh - var(--hauteur-entete));
-    padding-block: var(--espace-xl) var(--espace-l);
-    text-align: center;
-  }
-
-  .bloc {
     display: grid;
     gap: var(--espace-s);
     justify-items: center;
+    padding-block: var(--espace-l);
+    text-align: center;
+
+    @include breakpoint-up($breakpoint-tablet) {
+      gap: var(--espace-m);
+      padding-block: var(--espace-xl) var(--espace-l);
+    }
+  }
+
+  // Taille --h2 sur mobile pour que les titres longs (page Contact) ne
+  // remplissent pas l'écran, --h1 à partir de la tablette.
+  h1 {
+    font-size: var(--h2);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      font-size: var(--h1);
+    }
   }
 
   .accent {
@@ -54,48 +56,5 @@ const { titre, accent, intro } = Astro.props;
     max-width: 55ch;
     color: var(--color-text-secondary);
     font-size: var(--base-size);
-  }
-
-  .fleche > :global(.icone) {
-    inline-size: 1.5em;
-    block-size: 1.5em;
-    color: var(--color-text-secondary);
-    stroke-width: 1.5;
-    opacity: 50%;
-    animation: rebond 1.6s ease-in-out 1s 3;
-  }
-
-  @keyframes rebond {
-    50% {
-      transform: translateY(var(--espace-s));
-    }
-  }
-
-  @keyframes disparition {
-    to {
-      opacity: 0;
-    }
-  }
-
-  // Fondu lié au scroll, écrit en propriétés détaillées et jamais avec le
-  // raccourci `animation` : au build, le minifieur fusionnait `animation` et
-  // `animation-timeline` en une seule déclaration que les navigateurs rejettent
-  // (animation-timeline n'est pas autorisé dans le raccourci).
-  @supports (animation-timeline: scroll()) {
-    .fleche {
-      animation-name: disparition;
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      animation-timeline: scroll();
-      animation-range: 0 var(--espace-xl);
-    }
-  }
-
-  // Moins d'animations demandé : plus de rebond. Le fondu au scroll reste,
-  // il ne fait rien bouger.
-  @media (prefers-reduced-motion: reduce) {
-    .fleche > :global(.icone) {
-      animation: none;
-    }
   }
 </style>
