@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { gammesAffichees } from "@/lib/gammes";
+import { gammesAffichees, apercuGammes } from "@/lib/gammes";
 import { actualitesParDate } from "@/lib/actualites";
 import { entreprise, siteWeb, graphe } from "@/lib/donnees-structurees";
 import { nomDuSite } from "@/data/seo";
@@ -12,7 +12,7 @@ import Personnalisation from "@/components/Home/Personnalisation.astro";
 import Histoire from "@/components/Home/Histoire.astro";
 import Actualites from "@/components/Home/Actualites.astro";
 
-const gammes = gammesAffichees(await getCollection("gammes"));
+const { apercu, restantes } = apercuGammes(gammesAffichees(await getCollection("gammes")));
 // Les trois plus récentes seulement ; les autres sont sur la page Actualités.
 const actualites = actualitesParDate(await getCollection("actualites")).slice(0, 3);
 
@@ -43,7 +43,7 @@ const donneesStructurees = graphe(
 >
   <main>
     <Hero />
-    <GammesList gammes={gammes} />
+    <GammesList gammes={apercu} restantes={restantes} />
     {actualites.length > 0 && <Actualites actualites={actualites} />}
     <Histoire />
     <Personnalisation />
