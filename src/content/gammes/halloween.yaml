@@ -1,10 +1,8 @@
 titre: Halloween
 badge: Saison
-description: >-
-  Araignées, citrouilles, squelettes… Découvrez nos créations en macramé pour
-  Halloween !
+description: "Araignées, citrouilles, squelettes… Découvrez nos créations en macramé pour Halloween\_!"
 photo:
   src: ./halloween/photo/src.jpg
   alt: Araignées et squelettes en macramé pour Halloween
-ordre: 1
+ordre: 9
 visible: true
