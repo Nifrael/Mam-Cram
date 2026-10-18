@@ -9,7 +9,7 @@ Cette page explique quelles informations nous recueillons sur ce site, pourquoi,
 
 ## Qui est responsable de vos données ?
 
-Le responsable du traitement est **MAM'CRAM**, représenté par [À COMPLÉTER : nom de l'exploitant]. Vous pouvez nous joindre à mamcram66@orange.fr ou via la page [Contact](/contact/).
+Le responsable du traitement est **MAM'CRAM**, représenté par Jean-Luc Le Roy. Vous pouvez nous joindre à mamcram66@orange.fr ou via la page [Contact](/contact/).
 
 ## Quelles données recueillons-nous ?
 

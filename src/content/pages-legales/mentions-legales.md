@@ -1,5 +1,4 @@
 ---
-# Chaque [À COMPLÉTER] attend une information que seul le client connaît.
 titre: Mentions légales
 description: "Mentions légales du site MAM'CRAM : éditeur, hébergeur, propriété intellectuelle et responsabilité."
 miseAJour: 2026-10-13
@@ -19,7 +18,7 @@ Le site mamcram.fr est édité par **MAM'CRAM**, entreprise artisanale individue
 
 ## Direction de la publication
 
-Le directeur de la publication est [À COMPLÉTER : nom], en qualité d'exploitant de MAM'CRAM.
+Le directeur de la publication est Jean-Luc Le Roy, en qualité d'exploitant de MAM'CRAM.
 
 ## Conception et réalisation
 
