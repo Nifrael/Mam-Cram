@@ -20,10 +20,11 @@ const ariaCurrent = (href: string) => {
   return undefined;
 };
 
-// Les deux réseaux visibles en permanence à côté du menu : Instagram et la boutique.
+// Les réseaux visibles à côté du menu. La boutique n'y est que sur mobile :
+// en plus grand, elle devient le lien « Boutique » du menu.
 const pastilles = [
-  { ...reseaux.instagram, icone: "instagram" as const },
-  { ...reseaux.leboncoin, icone: "leboncoin" as const },
+  { ...reseaux.instagram, icone: "instagram" as const, mobileSeulement: false },
+  { ...reseaux.leboncoin, icone: "leboncoin" as const, mobileSeulement: true },
 ];
 ---
 
@@ -43,12 +44,25 @@ const pastilles = [
               </li>
             ))
           }
+          {/* Masqué dans le menu mobile, qui a déjà son bouton « Voir la boutique ». */}
+          <li class="lien-boutique">
+            <a href={reseaux.leboncoin.url} target="_blank" rel="noopener">
+              Boutique{" "}<span aria-hidden="true">↗</span>
+              <span class="visually-hidden">sur Le Bon Coin (nouvel onglet)</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
       {/* Visible seulement dans le menu mobile : sur grand écran, ces liens sont dans la page et le pied de page. */}
       <div class="panneau__bas">
-        <Bouton href="/contact/">Parler de mon projet</Bouton>
+        <div class="actions">
+          <Bouton href="/contact/">Parler de mon projet</Bouton>
+          <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener" variante="secondaire">
+            Voir la boutique
+            <span class="visually-hidden">sur Le Bon Coin (nouvel onglet)</span>
+          </Bouton>
+        </div>
         <ul class="reseaux">
           {
             listeReseaux.map((reseau) => (
@@ -74,7 +88,7 @@ const pastilles = [
     <ul class="reseaux-entete">
       {
         pastilles.map((reseau) => (
-          <li>
+          <li class:list={{ "mobile-seulement": reseau.mobileSeulement }}>
             <a href={reseau.url} target="_blank" rel="noopener">
               <span class="visually-hidden">{reseau.texte} (nouvel onglet)</span>
               <Icone nom={reseau.icone} />
@@ -192,6 +206,12 @@ const pastilles = [
 
     @include breakpoint-up($breakpoint-tablet) {
       margin-inline-start: 0;
+    }
+  }
+
+  .mobile-seulement {
+    @include breakpoint-up($breakpoint-tablet) {
+      display: none;
     }
   }
 
@@ -326,6 +346,14 @@ const pastilles = [
     }
   }
 
+  .lien-boutique {
+    display: none;
+
+    @include breakpoint-up($breakpoint-tablet) {
+      display: list-item;
+    }
+  }
+
   .liens a {
     display: block;
     padding-block: var(--espace-s);
@@ -375,6 +403,12 @@ const pastilles = [
     @include breakpoint-up($breakpoint-tablet) {
       display: none;
     }
+  }
+
+  // Les deux boutons vont ensemble : plus serrés entre eux que le reste du panneau.
+  .actions {
+    display: grid;
+    gap: var(--espace-s);
   }
 
   .reseaux {
