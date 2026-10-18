@@ -34,7 +34,7 @@ const titreEtAdresse = fields.slug({
 export default config({
   storage: import.meta.env.DEV ? { kind: "local" } : { kind: "cloud" },
   // Équipe/projet sur keystatic.cloud (réglages du projet).
-  cloud: { project: "mamcram" },
+  cloud: { project: "mamcram/mam-cram" },
   locale: "fr-FR",
   ui: { brand: { name: "MAM'CRAM" } },
   collections: {
