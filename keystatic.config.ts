@@ -73,6 +73,14 @@ export default config({
       schema: {
         titre: titreEtAdresse,
         date: fields.date({ label: "Date de publication", defaultValue: { kind: "today" }, validation: { isRequired: true } }),
+        debutMarche: fields.date({
+          label: "Premier jour du marché",
+          description: "Seulement pour annoncer un marché : le prochain marché s'affiche en premier. Laisser vide pour une actualité classique.",
+        }),
+        finMarche: fields.date({
+          label: "Dernier jour du marché",
+          description: "Si le marché dure plusieurs jours. Laisser vide s'il n'y a qu'un jour.",
+        }),
         resume: fields.text({ label: "Résumé", multiline: true, validation: { isRequired: true } }),
         photo: photo("actualites"),
         // Corps de l'article, gardé en .md. Mise en forme limitée à ce que le site affiche.

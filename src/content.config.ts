@@ -43,6 +43,10 @@ const actualites = defineCollection({
     z.object({
       titre: z.string(),
       date: z.coerce.date(),
+      // Renseignées seulement pour l'annonce d'un marché : le marché à venir le plus
+      // proche passe en tête. `nullish` car Keystatic peut écrire un champ vide en `null`.
+      debutMarche: z.coerce.date().nullish(),
+      finMarche: z.coerce.date().nullish(),
       resume: z.string(),
       photo: photo(image),
     }),
