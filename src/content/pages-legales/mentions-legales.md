@@ -9,13 +9,13 @@ miseAJour: 2026-10-13
 
 Le site mamcram.fr est édité par **MAM'CRAM**, entreprise artisanale individuelle.
 
-- **Exploitant** : [À COMPLÉTER : prénom et nom de l'exploitant déclaré]
-- **Adresse** : [À COMPLÉTER : adresse professionnelle]
+- **Exploitant** : Jean-Luc Le Roy
+- **Adresse** : Rue des Bougainvilliers, 66410 Villelongue de la Salanque
 - **Téléphone** : 06 74 15 24 12
 - **Email** : mamcram66@orange.fr
-- **SIRET** : [À COMPLÉTER]
-- **Immatriculation** : [À COMPLÉTER : numéro au Répertoire des métiers]
-- **TVA** : [À COMPLÉTER : « TVA non applicable, article 293 B du CGI » si l'entreprise est en franchise en base]
+- **SIRET** : 81484214200022
+- **Immatriculation** : 814 842 142 RM 660
+- **TVA** : FR 47 814 842 142, « TVA non applicable, art. 293 B du CGI ».
 
 ## Direction de la publication
 
