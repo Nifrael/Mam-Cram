@@ -1,6 +1,8 @@
 ---
 titre: Retrouvez-nous au marché de Bazas (33)
-date: 2026-10-24
+date: 2026-10-17
+debutMarche: 2026-10-24
+finMarche: 2026-10-31
 resume: >-
   Venez découvrir nos créations de près et discuter de vos projets avec nous au
   prochain marché, à Bazas, en Gironde les 24 et 31 octobre !
