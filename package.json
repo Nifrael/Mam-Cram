@@ -12,11 +12,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.4.0",
     "@astrojs/react": "^7.0.1",
     "@astrojs/sitemap": "^3.7.4",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",
-    "astro": "^7.3.8",
+    "astro": "^7.4.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
@@ -29,6 +30,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "sass": "^1.104.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.151.1"
   }
 }
