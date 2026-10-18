@@ -4,5 +4,5 @@ resume: Une suspension tressée pour mettre en valeur une plante d'intérieur.
 photos:
   - src: ./suspension-plante/photos/0/src.jpg
     alt: Porte plante en macramé
-personnalisable: true
+personnalisable: false
 misEnAvant: false
