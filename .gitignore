@@ -34,3 +34,6 @@ design/
 
 # Checklist personnelle de mise en ligne
 MISE-EN-LIGNE.md
+
+# Cache local de Wrangler (Cloudflare)
+.wrangler/

@@ -1,6 +1,8 @@
-// ESSAI KEYSTATIC : interface d'édition des collections, en mode local.
-// Keystatic lit et écrit directement les fichiers de src/content/ : ce fichier
-// doit rester d'accord avec les schémas de src/content.config.ts.
+// Interface d'édition des collections (/keystatic). Ce fichier doit rester d'accord
+// avec les schémas de src/content.config.ts.
+// En dev (`npm run dev`), Keystatic écrit directement dans src/content/. En ligne, il
+// passe par Keystatic Cloud : connexion par email, et chaque enregistrement devient
+// un commit sur GitHub, qui relance le build du site.
 import { collection, config, fields } from "@keystatic/core";
 
 // Photo + texte alternatif. Keystatic range chaque photo dans un dossier au nom
@@ -30,7 +32,9 @@ const titreEtAdresse = fields.slug({
 });
 
 export default config({
-  storage: { kind: "local" },
+  storage: import.meta.env.DEV ? { kind: "local" } : { kind: "cloud" },
+  // Équipe/projet sur keystatic.cloud (réglages du projet).
+  cloud: { project: "EQUIPE/PROJET" },
   locale: "fr-FR",
   ui: { brand: { name: "MAM'CRAM" } },
   collections: {

@@ -6,25 +6,30 @@ import { loadEnv } from "vite";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
+import cloudflare from "@astrojs/cloudflare";
 
 // astro.config.mjs est lu avant le build : `astro:env` n'y existe pas encore.
 // loadEnv lit le fichier .env et les variables de l'hébergeur (process.env).
 const { URL_SITE } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
-
-// ESSAI KEYSTATIC (mode local) : l'interface /keystatic n'existe qu'avec `npm run dev`.
-// Le site construit reste 100 % statique, sans React ni adaptateur.
-const enDev = process.argv.includes("dev");
 
 // https://astro.build/config
 export default defineConfig({
   // Adresse du site : sert au sitemap, et plus tard aux URL canoniques.
   site: URL_SITE,
   // Le sitemap liste les pages indexables ; la page de remerciement n'a rien à faire dedans.
-  integrations: [
-    sitemap({ filter: (page) => !page.includes("/contact/merci") }),
-    ...(enDev ? [react(), keystatic()] : []),
-  ],
+  // Keystatic ajoute l'interface /keystatic, faite en React : React n'est chargé
+  // que sur cette page, jamais sur les pages publiques.
+  integrations: [sitemap({ filter: (page) => !page.includes("/contact/merci") }), react(), keystatic()],
+  // Toutes les pages restent générées au build (sortie statique). L'adaptateur ne sert
+  // qu'aux routes de Keystatic (/keystatic, /api/keystatic) qui tournent côté serveur,
+  // dans un Worker Cloudflare : connexion des clients et commits vers GitHub.
+  // `compile` : les images sont optimisées au build, comme avant, sans le service
+  // payant Cloudflare Images.
+  adapter: cloudflare({ imageService: "compile" }),
   vite: {
+    // L'interface Keystatic pèse environ 2,7 Mo : Vite avertit au-delà de 500 ko. Elle n'est
+    // chargée que sur /keystatic, jamais par les visiteurs : on relève le seuil pour elle.
+    build: { chunkSizeWarningLimit: 3000 },
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
