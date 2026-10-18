@@ -2,7 +2,7 @@ import imageParDefaut from "@/assets/images/Hero.jpg";
 
 export const nomDuSite = "MAM'CRAM";
 
-/** Image de partage quand la page n'a pas la sienne. [À VALIDER] provisoire : remplacer par un visuel de marque. */
+/** Image de partage quand la page n'a pas la sienne. */
 export const partageParDefaut = {
   src: imageParDefaut,
   alt: "Création en macramé et bois flotté de MAM'CRAM",

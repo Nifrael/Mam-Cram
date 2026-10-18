@@ -1,0 +1,8 @@
+titre: Décoration murale
+gamme: pieces-maitresses
+resume: Grande tenture nouée sur une branche glanée après les grandes marées.
+photos:
+  - src: ./decoration-murale/photos/0/src.jpg
+    alt: Tête de lit en macramé
+personnalisable: false
+misEnAvant: false

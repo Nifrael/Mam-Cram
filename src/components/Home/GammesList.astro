@@ -1,17 +1,20 @@
 ---
-import CarteGamme from "@/components/Home/CarteGamme.astro";
+import CarteGamme from "@/components/Creations/CarteGamme.astro";
 import type { CollectionEntry } from "astro:content";
 import LienFleche from "@/components/UI/LienFleche.astro";
-import { fetesDeSaison } from "@/data/saisons";
 
-type Props = { gammes: CollectionEntry<"gammes">[] };
+type Props = {
+  gammes: CollectionEntry<"gammes">[];
+  // Gammes non affichées : au moins une, et la dernière case invite à toutes les voir.
+  restantes: number;
+};
 
-const { gammes } = Astro.props;
+const { gammes, restantes } = Astro.props;
 
 const surtitre = "Catalogue de l'atelier";
 const titre = "Nos gammes";
 const accroche =
-  `Des accessoires du quotidien aux pièces architecturales, chaque création est confectionnée avec soin, nœud après nœud. Et, selon les saisons, des thématiques de fête : ${fetesDeSaison}.`; // [À VALIDER] texte rédigé par Claude
+  "Des accessoires du quotidien aux pièces architecturales, chaque création est confectionnée avec soin, nœud après nœud. Et, au fil des saisons, des gammes de fête.";
 ---
 
 <section class="gammes">
@@ -33,6 +36,18 @@ const accroche =
             <CarteGamme gamme={gamme} />
           </li>
         ))
+      }
+      {
+        restantes > 0 && (
+          <li>
+            <a class="toutes" href="/creations/">
+              <span class="toutes__titre">Découvrir toutes nos gammes</span>
+              <span class="toutes__nombre">
+                {restantes} autre{restantes > 1 && "s"} gamme{restantes > 1 && "s"} <span aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+        )
       }
     </ul>
   </div>
@@ -104,5 +119,38 @@ const accroche =
       grid-template-columns: repeat(3, 1fr);
       gap: var(--espace-l);
     }
+  }
+
+  // Carte « toutes nos gammes » : même cadre que les cartes de gamme, sans photo.
+  .toutes {
+    display: grid;
+    place-content: center;
+    gap: var(--espace-s);
+    height: 100%;
+    min-height: 12rem;
+    padding: var(--espace-l);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-action-hover);
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  .toutes__titre {
+    font-family: var(--font-title);
+    font-size: var(--h4);
+  }
+
+  .toutes__nombre {
+    color: var(--color-accent);
+    font-size: var(--base-size);
   }
 </style>

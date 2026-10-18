@@ -1,0 +1,8 @@
+titre: Chauve-Souris
+gamme: halloween
+resume: Chauve-souris d'Halloween en macramé.
+photos:
+  - src: ./chauve-souris/photos/0/src.jpg
+    alt: Chauve souris en macramé
+personnalisable: false
+misEnAvant: false

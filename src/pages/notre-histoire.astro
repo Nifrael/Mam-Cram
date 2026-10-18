@@ -23,6 +23,9 @@ const { Content } = await render(page);
 </Layout>
 
 <style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
   // Structure seulement : la mise en forme attend la maquette validée.
   // Le HTML du Markdown n'a pas les classes du composant : :global() est
   // nécessaire pour l'atteindre, limité aux éléments sous .texte.
@@ -30,11 +33,10 @@ const { Content } = await render(page);
     display: grid;
     gap: var(--espace-m);
     max-width: 50rem;
-    margin-inline: auto;
-    padding-block: var(--espace-l) var(--espace-xl);
+    padding-block-end: var(--espace-xl);
 
     :global(h2) {
-      font-size: var(--h4);
+      font-size: var(--h3);
     }
 
     :global(* + h2) {
@@ -43,6 +45,19 @@ const { Content } = await render(page);
 
     :global(p) {
       color: var(--color-text-secondary);
+    }
+
+    // Photos carrées : pleine largeur sur mobile, la moitié de la colonne au-delà
+    // pour qu'une seule photo ne prenne pas tout l'écran.
+    :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--rayon-m);
+
+      @include breakpoint-up($breakpoint-tablet) {
+        width: 50%;
+      }
     }
   }
 </style>

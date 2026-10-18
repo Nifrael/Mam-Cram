@@ -1,19 +1,21 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { libelleStatut } from "@/lib/objets";
 
 type Props = { objet: CollectionEntry<"objets"> };
 
 const { objet } = Astro.props;
+const { titre, resume, personnalisable } = objet.data;
 const [photo] = objet.data.photos;
-const statut = libelleStatut(objet.data.statut);
 ---
 
 <article class="carte">
-  <Image class="photo" src={photo.src} alt={photo.alt} />
-  <h2 class="titre">{objet.data.titre}</h2>
-  {statut && <p class="statut">{statut}</p>}
+  <div class="visuel">
+    <Image class="photo" src={photo.src} alt={photo.alt} sizes="(min-width: 1152px) 17rem, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" />
+    {personnalisable && <p class="badge">Personnalisable</p>}
+  </div>
+  <h2 class="titre">{titre}</h2>
+  <p class="resume">{resume}</p>
 </article>
 
 <style lang="scss">
@@ -22,23 +24,42 @@ const statut = libelleStatut(objet.data.statut);
 
   .carte {
     display: grid;
+    align-content: start;
     gap: var(--espace-xs);
   }
 
-  .photo {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+  .visuel {
+    position: relative;
     margin-block-end: var(--espace-xs);
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    // Carré : le format des photos prises au téléphone, sans recadrage serré.
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: var(--rayon-m);
+  }
+
+  // Même pastille que sur les cartes de gamme.
+  .badge {
+    position: absolute;
+    inset-block-start: var(--espace-s);
+    inset-inline-start: var(--espace-s);
+    padding: var(--espace-xs) var(--espace-s);
+    background: var(--color-bg-cards);
+    color: var(--color-accent);
+    border-radius: var(--rayon-m);
+    font-size: var(--little-text);
   }
 
   .titre {
     font-size: var(--h5);
   }
 
-  .statut {
+  .resume {
     color: var(--color-text-secondary);
-    font-size: var(--little-text);
+    font-size: var(--base-size);
   }
 </style>

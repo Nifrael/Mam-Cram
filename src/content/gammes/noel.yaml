@@ -1,8 +1,10 @@
 titre: Noël
 badge: Saison
-description: Étoiles, sapins et suspensions de fête en macramé et bois flotté, pour un Noël fait main. [À VALIDER]
+description: >-
+  Étoiles, sapins et suspensions de fête en macramé et bois flotté, pour un Noël
+  fait main.
 photo:
-  src: ./noel/photo.jpg
+  src: ./noel/photo/src.jpg
   alt: Décorations de Noël en macramé
 ordre: 10
-visible: false
+visible: true

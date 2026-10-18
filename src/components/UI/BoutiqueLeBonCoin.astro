@@ -3,35 +3,23 @@ import { reseaux } from "@/data/coordonnees";
 import Bouton from "@/components/UI/Bouton.astro";
 import Icone from "@/components/UI/Icone.astro";
 
-type Props = {
-  // « compacte » : au-dessus des créations, sans titre (le bandeau complet, avec
-  // son titre, reste en bas de page) et avec la phrase sur l'unicité des pièces.
-  variante?: "complete" | "compacte";
-};
-
-const { variante = "complete" } = Astro.props;
-const compacte = variante === "compacte";
-
-// [À VALIDER] textes rédigés par Claude
 const titre = "Une pièce vous plaît ?";
-const description = compacte
-  ? "Chaque pièce est faite main : aucune n'est strictement identique à une autre. Les pièces disponibles sont sur notre boutique Le Bon Coin."
-  : "Nos créations disponibles sont en vente sur notre boutique Le Bon Coin : c'est là-bas que se fait l'achat.";
-const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur Le Bon Coin";
+const description =
+  "Nos créations disponibles sont en vente sur notre boutique Le Bon Coin : c'est là-bas que se fait l'achat.";
 ---
 
-<div class:list={["boutique", { "boutique--compacte": compacte }]}>
+<div class="boutique">
   <span class="pastille">
     <Icone nom="leboncoin" />
   </span>
 
   <div class="textes">
-    {!compacte && <h2 class="titre">{titre}</h2>}
+    <h2 class="titre">{titre}</h2>
     <p class="description">{description}</p>
   </div>
 
-  <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener" variante={compacte ? "secondaire" : "principal"}>
-    {libelleBouton}
+  <Bouton href={reseaux.leboncoin.url} target="_blank" rel="noopener" variante="secondaire">
+    Voir la boutique sur Le Bon Coin
     <span class="visually-hidden">(nouvel onglet)</span>
   </Bouton>
 </div>
@@ -44,7 +32,9 @@ const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur 
     display: grid;
     gap: var(--espace-m);
     justify-items: center;
-    padding: var(--espace-l) var(--espace-m);
+    // Plus discret que l'appel sur-mesure qui le suit : moins de marge, titre et
+    // pastille plus petits, bouton secondaire pour laisser au sur-mesure l'action principale.
+    padding: var(--espace-m);
     background: var(--color-bg-cards);
     border: 1px solid var(--color-border);
     border-radius: var(--rayon-m);
@@ -53,49 +43,24 @@ const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur 
     @include breakpoint-up($breakpoint-desktop) {
       grid-template-columns: auto 1fr auto;
       align-items: center;
-      gap: var(--espace-l);
+      gap: var(--espace-m);
       justify-items: start;
       text-align: start;
-    }
-  }
-
-  // Version compacte : pastille et texte côte à côte dès le mobile, bouton en dessous ;
-  // sur une seule ligne en grand écran, comme le bandeau complet.
-  .boutique--compacte {
-    grid-template-columns: auto 1fr;
-    justify-items: start;
-    gap: var(--espace-s) var(--espace-m);
-    padding: var(--espace-m);
-    margin-block-end: var(--espace-l);
-    text-align: start;
-
-    :global(.bouton) {
-      grid-column: 1 / -1;
-      justify-self: stretch;
-    }
-
-    @include breakpoint-up($breakpoint-desktop) {
-      grid-template-columns: auto 1fr auto;
-
-      :global(.bouton) {
-        grid-column: auto;
-        justify-self: end;
-      }
     }
   }
 
   .pastille {
     display: grid;
     place-items: center;
-    inline-size: 3em;
-    block-size: 3em;
+    inline-size: 2em;
+    block-size: 2em;
     background: var(--color-accent);
     border-radius: var(--rayon-rond);
   }
 
   .pastille :global(.icone) {
-    inline-size: 1.5em;
-    block-size: 1.5em;
+    inline-size: 1em;
+    block-size: 1em;
     color: var(--color-bg-cards);
   }
 
@@ -105,7 +70,7 @@ const libelleBouton = compacte ? "Voir sur Le Bon Coin" : "Voir la boutique sur 
   }
 
   .titre {
-    font-size: var(--h5);
+    font-size: var(--p);
   }
 
   .description {

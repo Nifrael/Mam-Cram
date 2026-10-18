@@ -1,7 +1,10 @@
 titre: Petites Douceurs
 badge: Cadeaux & Enfance
-description: Porte-clés, anges, figurines, fleurs et couronnes nominatives... pour décorer avec délicatesse l'univers des tout-petits.
+description: >-
+  Porte-clés, anges, figurines, fleurs et couronnes nominatives... pour décorer
+  avec délicatesse l'univers des tout-petits.
 photo:
-  src: ./petites-douceurs/photo.jpg
+  src: ./petites-douceurs/photo/src.jpg
   alt: Anges et porte-clés en macramé suspendus à une branche de bois flotté
 ordre: 1
+visible: true

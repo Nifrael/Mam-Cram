@@ -1,7 +1,7 @@
 ---
 import Bouton from "@/components/UI/Bouton.astro";
 import { Image } from "astro:assets";
-import photo from "../../assets/images/Hero.jpg";
+import photo from "../../assets/images/Histoire.jpg";
 
 const surtitre = "Les mains derrière MAM'CRAM";
 const titre = "Un couple de complices, un même plaisir de créer";
@@ -13,16 +13,15 @@ const citation =
   "Chaque morceau de bois flotté raconte les marées avant de trouver son fil.";
 ---
 
-<!-- À VALIDER PAR LE CLIENT : histoire du couple brodée par Claude (pas de récit fourni), à faire relire -->
-
 <section class="histoire" aria-labelledby="titre-histoire">
   <div class="contenu container">
     <figure class="visuel">
       <Image
         class="photo"
         src={photo}
-        alt="Deux artisans nouant une création en macramé dans leur atelier"
+        alt="Hibou en macramé couleur sable suspendu à une branche de bois flotté"
         loading="lazy"
+        sizes="(min-width: 1024px) 36rem, 100vw"
       />
       <figcaption class="citation">
         <blockquote>

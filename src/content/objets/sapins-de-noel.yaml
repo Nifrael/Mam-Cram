@@ -1,0 +1,8 @@
+titre: Sapins de Noël
+gamme: noel
+resume: Petits sapins de Noël pour vos décorations de fin d'année.
+photos:
+  - src: ./sapins-de-noel/photos/0/src.jpg
+    alt: Sapins de Noël en macramé
+personnalisable: false
+misEnAvant: false

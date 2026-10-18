@@ -6,7 +6,10 @@ import EnTetePage from "@/components/UI/EnTetePage.astro";
 import BoutiqueLeBonCoin from "@/components/UI/BoutiqueLeBonCoin.astro";
 import AppelSurMesure from "@/components/UI/AppelSurMesure.astro";
 import CarteObjet from "@/components/Creations/CarteObjet.astro";
+import AutresGammes from "@/components/Creations/AutresGammes.astro";
 import FilAriane from "@/components/UI/FilAriane.astro";
+import LienFleche from "@/components/UI/LienFleche.astro";
+import { reseaux } from "@/data/coordonnees";
 import { gammesAffichees } from "@/lib/gammes";
 import { objetsDeLaGamme } from "@/lib/objets";
 
@@ -16,16 +19,21 @@ export const getStaticPaths = (async () => {
 
   return gammes.map((gamme) => ({
     params: { slug: gamme.id },
-    props: { gamme, objets: objetsDeLaGamme(objets, gamme.id) },
+    props: {
+      gamme,
+      objets: objetsDeLaGamme(objets, gamme.id),
+      autresGammes: gammes.filter((autre) => autre.id !== gamme.id),
+    },
   }));
 }) satisfies GetStaticPaths;
 
 type Props = {
   gamme: CollectionEntry<"gammes">;
   objets: CollectionEntry<"objets">[];
+  autresGammes: CollectionEntry<"gammes">[];
 };
 
-const { gamme, objets } = Astro.props;
+const { gamme, objets, autresGammes } = Astro.props;
 const { titre, description, photo } = gamme.data;
 ---
 
@@ -33,9 +41,11 @@ const { titre, description, photo } = gamme.data;
   <main class="container">
     <FilAriane parent={{ href: "/creations/", texte: "Nos créations" }} courant={titre} />
 
-    <EnTetePage titre={titre} intro={description} />
-
-    <BoutiqueLeBonCoin variante="compacte" />
+    <EnTetePage surtitre="Pièces uniques, faites main" titre={titre} intro={description}>
+      <LienFleche href={reseaux.leboncoin.url} externe slot="action">
+        Voir les pièces disponibles sur Le Bon Coin
+      </LienFleche>
+    </EnTetePage>
 
     {
       objets.length > 0 ? (
@@ -50,6 +60,10 @@ const { titre, description, photo } = gamme.data;
         <p class="vide">De nouvelles pièces arrivent bientôt dans cette gamme.</p>
       )
     }
+
+    <div class="autres">
+      <AutresGammes gammes={autresGammes} />
+    </div>
 
     <div class="boutique">
       <BoutiqueLeBonCoin />
@@ -75,11 +89,19 @@ const { titre, description, photo } = gamme.data;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--espace-xl) var(--espace-l);
     }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .vide {
     color: var(--color-text-secondary);
     text-align: center;
+  }
+
+  .autres {
+    padding-block-start: var(--espace-xl);
   }
 
   .boutique {

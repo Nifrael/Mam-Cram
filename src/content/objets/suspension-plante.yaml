@@ -1,11 +1,8 @@
-# [À VALIDER] Objet d'exemple, à remplacer par les vraies créations.
 titre: Suspension pour plante
 gamme: accessoires-et-utiles
 resume: Une suspension tressée pour mettre en valeur une plante d'intérieur.
 photos:
-  - src: ./suspension-plante/photo-1.jpg
-    alt: Suspension en macramé tenant un pot de plante
-dimensions: Longueur 90 cm
-matieres: [Coton macramé, Bois flotté]
+  - src: ./suspension-plante/photos/0/src.jpg
+    alt: Porte plante en macramé
 personnalisable: true
-statut: disponible
+misEnAvant: false

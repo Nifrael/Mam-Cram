@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import LienFleche from "@/components/UI/LienFleche.astro";
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  gamme: CollectionEntry<"gammes">;
+  // h3 sous une section de l'accueil, h2 directement sous le h1 de la page créations.
+  niveauTitre?: 2 | 3;
+};
+
+const { gamme, niveauTitre = 3 } = Astro.props;
+const Titre = niveauTitre === 2 ? "h2" : "h3";
+---
+
+<article class="carte">
+  <div class="visuel">
+    <Image src={gamme.data.photo.src} alt="" sizes="(min-width: 1024px) 24rem, (min-width: 768px) 50vw, 100vw" />
+    <p class="badge">{gamme.data.badge}</p>
+  </div>
+
+  <Titre class="titre">{gamme.data.titre}</Titre>
+  <p class="description">{gamme.data.description}</p>
+
+  <LienFleche href={`/creations/${gamme.id}/`}>
+    Voir la gamme <span class="visually-hidden">{gamme.data.titre}</span>
+  </LienFleche>
+</article>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .carte {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--espace-s);
+    height: 100%;
+    padding: var(--espace-m);
+    background: var(--color-bg-cards);
+    border: 1px solid var(--color-border);
+    border-radius: var(--rayon-m);
+  }
+
+  .visuel {
+    position: relative;
+    // Format paysage : la photo accompagne le texte sans l'écraser.
+    aspect-ratio: 4 / 3;
+    margin-block-end: var(--espace-s);
+    overflow: hidden;
+    background: var(--color-bg-primary);
+    border-radius: var(--rayon-s);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+    }
+  }
+
+  .badge {
+    position: absolute;
+    inset-block-start: var(--espace-m);
+    inset-inline-start: var(--espace-m);
+    margin: 0;
+    padding: var(--espace-xs) var(--espace-s);
+    background: var(--color-bg-cards);
+    color: var(--color-accent);
+    border-radius: var(--rayon-m);
+    font-size: var(--little-text);
+  }
+
+  .titre {
+    margin: 0;
+    font-size: var(--h4);
+  }
+
+  .description {
+    margin: 0 0 var(--espace-s);
+    color: var(--color-text-secondary);
+    font-size: var(--base-size);
+  }
+
+</style>

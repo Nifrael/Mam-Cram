@@ -1,11 +1,9 @@
 ---
-# [À VALIDER PAR LE CLIENT] Texte rédigé par Claude d'après le RGPD et les usages de la CNIL. Le paragraphe sur Web3Forms s'appuie sur leur contrat de sous-traitance (web3forms.com/dpa, version 1.0 du 13 juillet 2026) : à relire si ce contrat change.
+# Le paragraphe sur Web3Forms s'appuie sur leur contrat de sous-traitance (web3forms.com/dpa, version 1.0 du 13 juillet 2026) : à relire si ce contrat change.
 titre: Politique de confidentialité
 description: "Comment MAM'CRAM utilise les informations que vous envoyez par le formulaire de contact, et quels sont vos droits."
 miseAJour: 2026-10-13
 ---
-
-<!-- À VALIDER PAR LE CLIENT -->
 
 Cette page explique quelles informations nous recueillons sur ce site, pourquoi, et comment vous pouvez exercer vos droits. Elle respecte le règlement général sur la protection des données (RGPD) et la loi « Informatique et Libertés ».
 

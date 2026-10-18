@@ -1,17 +1,17 @@
 ---
-import Icone from "@/components/UI/Icone.astro";
-
 type Props = {
   titre: string;
   accent?: string;
   intro: string;
+  surtitre?: string;
 };
 
-const { titre, accent, intro } = Astro.props;
+const { titre, accent, intro, surtitre } = Astro.props;
 ---
 
 <header class="en-tete">
-  <div class="bloc">
+  <div class="textes">
+    {surtitre && <p class="surtitre">{surtitre}</p>}
     <h1>
       {titre}
       {accent && <> <span class="accent">{accent}</span></>}
@@ -19,30 +19,62 @@ const { titre, accent, intro } = Astro.props;
     <p class="intro">{intro}</p>
   </div>
 
-  {/* Deux éléments, deux animations : le span s'efface au scroll, l'icône rebondit. */}
-  <span class="fleche">
-    <Icone nom="fleche-bas" />
-  </span>
+  {/* Lien secondaire facultatif, à droite du texte sur grand écran. */}
+  {
+    Astro.slots.has("action") && (
+      <div class="action">
+        <slot name="action" />
+      </div>
+    )
+  }
 </header>
 
 <style lang="scss">
   @use "@styles/config/variables" as *;
   @use "@styles/config/mixin" as *;
 
+  // En-tête compact, aligné à gauche comme les sections de l'accueil, et
+  // séparé du contenu par un filet pour que la page respire.
   .en-tete {
     display: grid;
-    grid-template-rows: 1fr auto;
-    align-items: center;
-    justify-items: center;
-    min-height: calc(100dvh - var(--hauteur-entete));
-    padding-block: var(--espace-xl) var(--espace-l);
-    text-align: center;
+    gap: var(--espace-m);
+    padding-block: var(--espace-l);
+    margin-block-end: var(--espace-l);
+    border-bottom: 1px solid var(--color-border);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      padding-block-start: var(--espace-xl);
+      margin-block-end: var(--espace-xl);
+    }
+
+    @include breakpoint-up($breakpoint-desktop) {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: var(--espace-l);
+    }
   }
 
-  .bloc {
+  .textes {
     display: grid;
     gap: var(--espace-s);
-    justify-items: center;
+  }
+
+  .surtitre {
+    color: var(--color-accent);
+    font-size: var(--little-text);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  // Taille --h2 sur mobile pour que les titres longs (page Contact) ne
+  // remplissent pas l'écran, --h1 à partir de la tablette.
+  h1 {
+    font-size: var(--h2);
+
+    @include breakpoint-up($breakpoint-tablet) {
+      font-size: var(--h1);
+    }
   }
 
   .accent {
@@ -55,48 +87,5 @@ const { titre, accent, intro } = Astro.props;
     max-width: 55ch;
     color: var(--color-text-secondary);
     font-size: var(--base-size);
-  }
-
-  .fleche > :global(.icone) {
-    inline-size: 1.5em;
-    block-size: 1.5em;
-    color: var(--color-text-secondary);
-    stroke-width: 1.5;
-    opacity: 50%;
-    animation: rebond 1.6s ease-in-out 1s 3;
-  }
-
-  @keyframes rebond {
-    50% {
-      transform: translateY(var(--espace-s));
-    }
-  }
-
-  @keyframes disparition {
-    to {
-      opacity: 0;
-    }
-  }
-
-  // Fondu lié au scroll, écrit en propriétés détaillées et jamais avec le
-  // raccourci `animation` : au build, le minifieur fusionnait `animation` et
-  // `animation-timeline` en une seule déclaration que les navigateurs rejettent
-  // (animation-timeline n'est pas autorisé dans le raccourci).
-  @supports (animation-timeline: scroll()) {
-    .fleche {
-      animation-name: disparition;
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      animation-timeline: scroll();
-      animation-range: 0 var(--espace-xl);
-    }
-  }
-
-  // Moins d'animations demandé : plus de rebond. Le fondu au scroll reste,
-  // il ne fait rien bouger.
-  @media (prefers-reduced-motion: reduce) {
-    .fleche > :global(.icone) {
-      animation: none;
-    }
   }
 </style>

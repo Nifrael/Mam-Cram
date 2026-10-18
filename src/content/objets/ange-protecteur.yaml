@@ -1,11 +1,8 @@
-# [À VALIDER] Objet d'exemple, à remplacer par les vraies créations.
 titre: Ange protecteur
 gamme: petites-douceurs
-resume: Un petit ange noué à la main, à suspendre au-dessus d'un berceau.
+resume: Un petit ange noué à la main.
 photos:
-  - src: ./ange-protecteur/photo-1.jpg
-    alt: Ange en macramé écru suspendu à un fil
-dimensions: Hauteur 18 cm
-matieres: [Coton macramé, Bois flotté]
-personnalisable: true
-statut: disponible
+  - src: ./ange-protecteur/photos/0/src.jpg
+    alt: Ange en macramé
+personnalisable: false
+misEnAvant: false

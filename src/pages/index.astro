@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { gammesAffichees } from "@/lib/gammes";
+import { gammesAffichees, apercuGammes } from "@/lib/gammes";
 import { actualitesParDate } from "@/lib/actualites";
 import { entreprise, siteWeb, graphe } from "@/lib/donnees-structurees";
 import { nomDuSite } from "@/data/seo";
@@ -12,18 +12,14 @@ import Personnalisation from "@/components/Home/Personnalisation.astro";
 import Histoire from "@/components/Home/Histoire.astro";
 import Actualites from "@/components/Home/Actualites.astro";
 
-const gammes = gammesAffichees(await getCollection("gammes"));
-// Les trois plus récentes seulement ; les autres sont sur la page Actualités.
+const { apercu, restantes } = apercuGammes(gammesAffichees(await getCollection("gammes")));
 const actualites = actualitesParDate(await getCollection("actualites")).slice(0, 3);
 
 const description =
   "Créations artisanales en macramé, bois flotté et matériaux naturels. Pièces uniques faites main, personnalisables sur commande.";
 
-// `site` (URL_SITE) est obligatoire au build : voir le schéma d'environnement.
 const urlSite = new URL("/", Astro.site);
 
-// Description de l'entreprise pour les moteurs de recherche, avec ses réseaux.
-// Valeurs de coordonnees.ts : à remplacer par les vraies avant de passer INDEXATION à true.
 const donneesStructurees = graphe(
   entreprise({
     nom: nomDuSite,
@@ -43,7 +39,7 @@ const donneesStructurees = graphe(
 >
   <main>
     <Hero />
-    <GammesList gammes={gammes} />
+    <GammesList gammes={apercu} restantes={restantes} />
     {actualites.length > 0 && <Actualites actualites={actualites} />}
     <Histoire />
     <Personnalisation />

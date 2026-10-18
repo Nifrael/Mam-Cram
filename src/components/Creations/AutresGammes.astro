@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Bouton from "@/components/UI/Bouton.astro";
+
+type Props = { gammes: CollectionEntry<"gammes">[] };
+
+const { gammes } = Astro.props;
+---
+
+<nav class="autres" aria-labelledby="titre-autres-gammes">
+  <h2 id="titre-autres-gammes" class="titre">Découvrir nos autres gammes</h2>
+  <ul class="liste">
+    {
+      gammes.map((gamme) => (
+        <li>
+          <Bouton href={`/creations/${gamme.id}/`} variante="secondaire">
+            {gamme.data.titre}
+          </Bouton>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style lang="scss">
+  @use "@styles/config/variables" as *;
+  @use "@styles/config/mixin" as *;
+
+  .autres {
+    display: grid;
+    gap: var(--espace-m);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .titre {
+    font-size: var(--h4);
+  }
+
+  // Pastilles qui passent à la ligne selon la place disponible.
+  .liste {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espace-s);
+  }
+</style>

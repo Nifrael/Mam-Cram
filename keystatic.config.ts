@@ -61,19 +61,8 @@ export default config({
           itemLabel: (props) => props.fields.alt.value || "Photo",
           validation: { length: { min: 1 } },
         }),
-        dimensions: fields.text({ label: "Dimensions", validation: { isRequired: true } }),
-        matieres: fields.array(fields.text({ label: "Matière" }), { label: "Matières", itemLabel: (props) => props.value }),
         personnalisable: fields.checkbox({ label: "Personnalisable" }),
         misEnAvant: fields.checkbox({ label: "Mettre en avant", description: "Affichée en tête de sa gamme." }),
-        statut: fields.select({
-          label: "Statut",
-          options: [
-            { label: "Disponible", value: "disponible" },
-            { label: "Sur commande", value: "sur-commande" },
-            { label: "Épuisé", value: "epuise" },
-          ],
-          defaultValue: "disponible",
-        }),
       },
     }),
     actualites: collection({
@@ -84,6 +73,14 @@ export default config({
       schema: {
         titre: titreEtAdresse,
         date: fields.date({ label: "Date de publication", defaultValue: { kind: "today" }, validation: { isRequired: true } }),
+        debutMarche: fields.date({
+          label: "Premier jour du marché",
+          description: "Seulement pour annoncer un marché : le prochain marché s'affiche en premier. Laisser vide pour une actualité classique.",
+        }),
+        finMarche: fields.date({
+          label: "Dernier jour du marché",
+          description: "Si le marché dure plusieurs jours. Laisser vide s'il n'y a qu'un jour.",
+        }),
         resume: fields.text({ label: "Résumé", multiline: true, validation: { isRequired: true } }),
         photo: photo("actualites"),
         // Corps de l'article, gardé en .md. Mise en forme limitée à ce que le site affiche.

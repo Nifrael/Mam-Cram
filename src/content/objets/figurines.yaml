@@ -1,0 +1,8 @@
+titre: Figurines
+gamme: petites-douceurs
+resume: Figurines en macramé.
+photos:
+  - src: ./figurines/photos/0/src.jpg
+    alt: 'Figurines en macramé '
+personnalisable: false
+misEnAvant: false
