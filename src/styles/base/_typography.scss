@@ -45,6 +45,6 @@ a {
 
 @include breakpoint-up($breakpoint-desktop-xxl) {
   :root {
-    --scale: 1.32;
+    --scale: 1.3;
   }
 }
