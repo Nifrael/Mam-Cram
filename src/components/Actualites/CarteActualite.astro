@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { formaterDate, dateIso } from "@/lib/date";
+import { dateAffichee } from "@/lib/actualites";
 import LienFleche from "@/components/UI/LienFleche.astro";
 import Icone from "@/components/UI/Icone.astro";
 
@@ -12,7 +12,8 @@ type Props = {
 };
 
 const { actualite, niveauTitre = 2 } = Astro.props;
-const { titre, date, resume, photo } = actualite.data;
+const { titre, resume, photo } = actualite.data;
+const jour = dateAffichee(actualite);
 const Titre = niveauTitre === 3 ? "h3" : "h2";
 ---
 
@@ -26,7 +27,7 @@ const Titre = niveauTitre === 3 ? "h3" : "h2";
   <div class="corps">
     <p class="date">
       <Icone nom="calendrier" />
-      <time datetime={dateIso(date)}>{formaterDate(date)}</time>
+      <time datetime={jour.iso}>{jour.texte}</time>
     </p>
     <Titre class="titre">{titre}</Titre>
     <p class="resume">{resume}</p>
