@@ -1,11 +1,9 @@
 ---
-# [À VALIDER PAR LE CLIENT] Texte rédigé par Claude à partir du modèle usuel des mentions légales d'un site d'artisan. Chaque [À COMPLÉTER] attend une information que seul le client connaît.
+# Chaque [À COMPLÉTER] attend une information que seul le client connaît.
 titre: Mentions légales
 description: "Mentions légales du site MAM'CRAM : éditeur, hébergeur, propriété intellectuelle et responsabilité."
 miseAJour: 2026-10-13
 ---
-
-<!-- À VALIDER PAR LE CLIENT -->
 
 ## Éditeur du site
 
