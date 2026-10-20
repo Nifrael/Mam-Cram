@@ -11,13 +11,16 @@ MAM'CRAM, c'est nous deux : un couple de complices, quatre mains et beaucoup de 
 
 Chaque nœud est serré à la main, à la bonne tension : assez pour que la création tienne des années, assez souple pour qu'elle garde cette douceur qu'on aime sous les doigts.
 
-![Panier en osier rempli de bobines de cordon de coton aux tons frais : sauge, turquoise, moutarde et écru.](../../assets/images/macrame-2.jpg)
+![Sac en macramé en cours de confection.](../../assets/images/macrame-1.jpg)
+![Sac en macramé terminé.](../../assets/images/macrame-2.jpg)
 
 ## Les matières
 
 Tout commence dans nos paniers, où s'entassent des bobines de coton de toutes les couleurs : des tons chauds, rouille, bordeaux ou camel, et d'autres plus frais, sauge, turquoise ou écru. Nous choisissons un coton de qualité supérieure, doux au toucher et qui garde sa tenue avec le temps.
 
-![Panier en osier rempli de bobines de cordon de coton aux tons chauds : rouille, bordeaux, camel, rouge et lilas.](../../assets/images/macrame-1.jpg)
+![Panier en osier rempli de bobines de cordon de coton aux tons chauds : rouille, bordeaux, camel, rouge et lilas.](../../assets/images/macrame-3.jpg)
+![Panier en osier rempli de bobines de cordon de coton aux tons froids.](../../assets/images/macrame-4.jpg)
+![Panier en osier rempli de bobines de cordon de coton et d'outils de confection.](../../assets/images/macrame-5.jpg)
 
 Le bois, lui, vient de nos balades : bois flotté ramassé sur les grèves catalanes, branches de forêt ou bois de récupération. On le lave, on le laisse sécher, puis on le ponce avant qu'il rejoigne l'atelier. Aucun morceau ne ressemble à un autre, et c'est souvent lui qui décide de la forme de la pièce.
 
