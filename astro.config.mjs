@@ -29,6 +29,10 @@ export default defineConfig({
   // environnement où le mode `local` peut écrire dans src/content/. Avec l'adaptateur,
   // elle tournerait dans workerd (le moteur Cloudflare) et planterait.
   adapter: process.env.NODE_ENV === "development" ? undefined : cloudflare({ imageService: "compile" }),
+  // Le site n'utilise pas les sessions Astro (Keystatic gère sa connexion lui-même).
+  // Sans cette ligne, l'adaptateur Cloudflare réserve une base KV « SESSION » sans
+  // identifiant, ce qui fait échouer les déploiements d'aperçu (branches hors master).
+  session: false,
   vite: {
     // L'interface Keystatic pèse environ 2,7 Mo : Vite avertit au-delà de 500 ko. Elle n'est
     // chargée que sur /keystatic, jamais par les visiteurs : on relève le seuil pour elle.
