@@ -59,5 +59,26 @@ const { Content } = await render(page);
         width: 50%;
       }
     }
+
+    // Photos écrites sur des lignes qui se suivent dans le Markdown : elles tombent dans
+    // le même paragraphe, affiché côte à côte, sur toutes les largeurs.
+    // aspect-ratio + object-fit recadrent chaque photo en carré pour que la rangée
+    // reste alignée même si une photo est en paysage.
+    :global(p:has(> img + img)) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+      gap: var(--espace-s);
+
+      :global(img) {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+
+      // La première photo garde son bord gauche, le recadrage mange la droite.
+      :global(img:first-child) {
+        object-position: left;
+      }
+    }
   }
 </style>
