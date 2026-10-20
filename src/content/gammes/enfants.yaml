@@ -1,0 +1,10 @@
+titre: Enfants
+badge: cadeaux enfants
+description: Cadeaux naissance, arc en ciel, décoration murale chambre  d'enfants
+photo:
+  src: ./enfants/photo/src.jpg
+  alt: >-
+    ensemble coloré d'objets macramé bicolores ( arc en ciel, couronnes
+    personnalisées, pot...)
+ordre: 7
+visible: true
