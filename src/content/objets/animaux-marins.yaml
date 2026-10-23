@@ -1,0 +1,12 @@
+titre: animaux marins
+gamme: creations-marines
+resume: >-
+  Différents animaux marins au  choix ( Etoile, bigorneau, baleine  , poisson,
+  flamands  roses, hippocampe)
+photos:
+  - src: ./animaux-marins/photos/0/src.jpg
+    alt: >-
+      Différents animaux marins au  choix ( Etoile, bigorneau, baleine  ,
+      poisson, flamands  roses, hippocampe)
+personnalisable: false
+misEnAvant: false
