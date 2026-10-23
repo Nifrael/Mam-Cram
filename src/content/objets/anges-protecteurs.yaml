@@ -3,10 +3,6 @@ gamme: petites-douceurs
 resume: Un petit ange noué à la main.
 photos:
   - src: ./anges-protecteurs/photos/0/src.jpg
-    alt: Ange en macramé
-  - src: ./anges-protecteurs/photos/1/src.jpg
-    alt: Anges unicolores et  bicolores
-  - src: ./anges-protecteurs/photos/2/src.jpg
     alt: Anges uni et  bicolores
 personnalisable: false
 misEnAvant: false
