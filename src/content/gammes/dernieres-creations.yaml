@@ -1,0 +1,8 @@
+titre: Dernières créations
+badge: Nouveautés
+description: Dernières créations au  gré des envies et  de  l'inspiration
+photo:
+  src: ./dernieres-creations/photo/src.jpg
+  alt: Dernières créations au  gré des envies et  de  l'inspiration
+ordre: 1
+visible: true
