@@ -6,5 +6,7 @@ photos:
     alt: Ange en macramé
   - src: ./anges-protecteurs/photos/1/src.jpg
     alt: Anges unicolores et  bicolores
+  - src: ./anges-protecteurs/photos/2/src.jpg
+    alt: Anges uni et  bicolores
 personnalisable: false
 misEnAvant: false
