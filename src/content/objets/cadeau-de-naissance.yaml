@@ -1,0 +1,12 @@
+titre: Cadeau de  naissance
+gamme: enfants
+resume: >-
+  Cadeau  composé de  5 pièces de  même  colori. Couronne personnalisé au 
+  prénom, arc en ciel , nuage, Pot à objets, petite  souris
+photos:
+  - src: ./cadeau-de-naissance/photos/0/src.jpg
+    alt: >-
+      Cadeau  composé de  5 pièces de  même  colori. Couronne personnalisé au 
+      prénom, arc en ciel , nuage, Pot à objets, petite  souris
+personnalisable: true
+misEnAvant: false
