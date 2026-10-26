@@ -3,8 +3,6 @@ gamme: petites-douceurs
 resume: Figurines souris en macramé.
 photos:
   - src: ./figurines-petites-souris/photos/0/src.jpg
-    alt: 'Figurines en macramé '
-  - src: ./figurines-petites-souris/photos/1/src.jpg
-    alt: Figurines souris
+    alt: Figurines petites  souris
 personnalisable: false
 misEnAvant: false
