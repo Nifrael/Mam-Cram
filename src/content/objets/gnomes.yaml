@@ -1,0 +1,8 @@
+titre: Gnomes
+gamme: petites-douceurs
+resume: 'Petits Gnomes bicolores '
+photos:
+  - src: ./gnomes/photos/0/src.jpg
+    alt: 'Petits Gnomes bicolores '
+personnalisable: false
+misEnAvant: false
