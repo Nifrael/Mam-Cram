@@ -1,0 +1,8 @@
+titre: oiseaux
+gamme: petites-douceurs
+resume: Oiseaux longues queues (  différentes tailles et  coloris)
+photos:
+  - src: ./oiseaux/photos/0/src.jpg
+    alt: Oiseaux longues queues (  différentes tailles et  coloris)
+personnalisable: false
+misEnAvant: false
