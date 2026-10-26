@@ -1,0 +1,8 @@
+titre: tortues
+gamme: petites-douceurs
+resume: Tortues avec ou sans porte  clés ( différentes tailles et  couleurs)
+photos:
+  - src: ./tortues/photos/0/src.jpg
+    alt: Tortues avec ou sans porte  clés ( différentes tailles et  couleurs)
+personnalisable: false
+misEnAvant: false
