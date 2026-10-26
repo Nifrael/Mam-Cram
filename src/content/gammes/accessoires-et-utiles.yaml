@@ -1,10 +1,12 @@
 titre: Accessoires & Utiles
 badge: Maison & Nomade
 description: >-
-  Sacs, porte-gourdes tressés, nichoirs poétiques, vide-poches et suspensions
+  Sacs, porte gourdes tressés, nichoirs poétiques, vide-poches et suspensions
   pour sublimer vos plantes favorites dans l'habitat...
 photo:
   src: ./accessoires-et-utiles/photo/src.jpg
-  alt: Sac et suspension pour plante en macramé
+  alt: >-
+    Sacs, porte-gourdes tressés, nichoirs poétiques, vide-poches et suspensions
+    diverses
 ordre: 3
 visible: true
