@@ -1,0 +1,8 @@
+titre: Figurines petites souris
+gamme: petites-douceurs
+resume: Petites figurines forme souris
+photos:
+  - src: ./figurines-petites-souris/photos/0/src.jpg
+    alt: Petites figurines souris
+personnalisable: false
+misEnAvant: false
