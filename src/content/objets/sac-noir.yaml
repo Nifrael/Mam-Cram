@@ -1,0 +1,8 @@
+titre: Sac noir
+gamme: dernieres-creations
+resume: 'Elégant  sac noir '
+photos:
+  - src: ./sac-noir/photos/0/src.jpg
+    alt: 'Elégant  sac noir '
+personnalisable: false
+misEnAvant: false
