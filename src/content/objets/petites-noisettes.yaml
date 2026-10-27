@@ -1,0 +1,8 @@
+titre: Petites noisettes
+gamme: noel
+resume: Petites noisettes à suspendre  sur  votre  sapin de  Noël
+photos:
+  - src: ./petites-noisettes/photos/0/src.jpg
+    alt: Petites noisettes à suspendre  sur  votre  sapin de  Noël
+personnalisable: false
+misEnAvant: false
