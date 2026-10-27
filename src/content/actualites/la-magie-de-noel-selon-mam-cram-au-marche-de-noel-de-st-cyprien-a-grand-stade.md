@@ -1,6 +1,6 @@
 ---
 titre: >-
-  La magie de  Noel selon MAM'CRAM au marché de  NOEL de  ST Cyprien ( à Grand
+  La magie de Noel selon MAM'CRAM au marché de NOEL de ST Cyprien ( à Grand
   Stade)
 date: 2026-10-27
 debutMarche: 2026-11-27
