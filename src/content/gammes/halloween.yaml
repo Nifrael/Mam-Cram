@@ -5,4 +5,4 @@ photo:
   src: ./halloween/photo/src.jpg
   alt: Araignées et squelettes en macramé pour Halloween
 ordre: 2
-visible: true
+visible: false
