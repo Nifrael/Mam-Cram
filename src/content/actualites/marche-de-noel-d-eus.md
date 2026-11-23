@@ -7,7 +7,7 @@ resume: >-
   Venez découvrir notre univers en macramé et  bois  flotté pour le plaisir
   d'offrir 
 photo:
-  src: ./marche-de-noel-d-eus/photo/src.jpg
+  src: ./marche-de-noel-d-eus/photo/src.png
   alt: >-
     Venez découvrir notre univers en macramé et  bois  flotté pour le plaisir
     d'offrir 
